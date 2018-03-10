@@ -328,7 +328,7 @@
                 "url": "https://api.github.com/repos/phar-io/version/zipball/a70c0ced4be299a63d32fa96d9281d03e94041df",
                 "reference": "a70c0ced4be299a63d32fa96d9281d03e94041df",
                 "shasum": ""
-            },
+           co },
             "require": {
                 "php": "^5.6 || ^7.0"
             },
