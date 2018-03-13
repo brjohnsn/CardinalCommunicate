@@ -12,7 +12,8 @@ class User {
     private $password;
     private $salt;
 
-    public function __construct($userAttributes){
+    public function __construct($request){
+        $userAttributes = $request->getParsedBody();
         if (isset($userAttributes['username'])){
             $this->username = $userAttributes["username"];
         }

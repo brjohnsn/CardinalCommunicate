@@ -16,7 +16,7 @@ export default class Home extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("#",{username:this.state.username, email:this.state.email, password:this.state.password}).then(()=> {
+        axios.post("http://localhost:8888/Cardinal_cc/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password}).then(()=> {
             this.props.history.push("/Profile")
         })
 

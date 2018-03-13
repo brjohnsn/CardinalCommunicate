@@ -11,11 +11,11 @@ export default class Profile extends Component{
         }
 
     }
-    componentWillMount() {
-        axios.get("http://localhost:8888/forum_backend/public/api/thread/" + this.props.match.params.thread_id).then((response) => {
-            this.setState({username: response.data.username, email: response.data.email})
-        });
-    }
+    // componentWillMount() {
+    //     axios.get("http://localhost:8888/forum_backend/public/api/thread/" + this.props.match.params.thread_id).then((response) => {
+    //         this.setState({username: response.data.username, email: response.data.email})
+    //     });
+    // }
     render(){
         return(
             <div>
