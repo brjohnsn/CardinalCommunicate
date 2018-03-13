@@ -34,7 +34,10 @@ class User {
 
 
     public function addToDatabase(){
-        $hashedPassword = Password::hash($this->password,'12345678901234567890123456789012');
+        if(!isset($this->salt)){
+            $this->salt = Password::generateEncryptionSalt(32);
+        }
+        $hashedPassword = Password::hash($this->password,$this->salt);
         $database = Database::getDatabaseConnection();
         $sql = "INSERT INTO users (username, email, password, salt) VALUES (?,?,?,?)";
         $database->getQueryResult($sql,  array($this->username, $this->email, $hashedPassword, $this->salt));
@@ -46,7 +49,7 @@ class User {
         $result = $database->getQueryResult($sql, [$this->username,])->fetchObject();
 
 
-        $hashedPassword = Password::hash($this->password,'12345678901234567890123456789012');
+        $hashedPassword = Password::hash($this->password,$result->salt);
 
         if($hashedPassword == $result->password){
             $_SESSION['id'] = $result->id;
