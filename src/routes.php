@@ -12,4 +12,5 @@ require_once __DIR__ ."/../controllers/userC.php";
 $app->group('/user', function() use ($app){
    $app->post('/login', 'userC::Login');
    $app->post('/Register', 'userC::Register');
+   $app->get('/Profile', 'userC::getInfo');
 });

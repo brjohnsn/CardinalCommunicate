@@ -11,14 +11,12 @@ export default class Login extends Component{
         }
     }
 
-    onClick(e){
-        e.preventDefault();
-        this.props.history.push("/Login")
-    }
+
     onSubmit(e){
         e.preventDefault();
         axios.post("http://localhost:8888/Cardinal_cc/public/user/login",{username:this.state.username,  password:this.state.password}).then((response)=> {
             console.log(response.data);
+            this.props.history.push("/Profile");
         })
 
     }
@@ -32,7 +30,6 @@ export default class Login extends Component{
                     <h2>Password</h2>
                     <input onChange={(e)=>this.setState({password:e.target.value})} value={this.state.password}/>
                     <input className="button" type="submit" value="submit"/>
-                    <button><Link to='/Profile'>Profile</Link></button>
                 </form>
             </div>
         );

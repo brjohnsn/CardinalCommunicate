@@ -17,7 +17,8 @@ export default class Home extends Component{
     onSubmit(e){
         e.preventDefault();
         axios.post("http://localhost:8888/Cardinal_cc/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password}).then(()=> {
-            this.props.history.push("/Profile")
+            console.log("user created");
+            this.props.history.push("/Login")
         })
 
     }
@@ -34,7 +35,6 @@ export default class Home extends Component{
                     <input onChange={(e)=>this.setState({password:e.target.value})} value={this.state.password}/>
                     <input className="button" type="submit" value="submit"/>
                     <h2>Already have an account? Click here!</h2>
-                    <button><Link to='/Login'>Login</Link></button>
 
                 </form>
             </div>

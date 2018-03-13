@@ -62,6 +62,12 @@ class User {
         }
 
     }
+    public static function getProfile($username){
+        $sql =  $sql = "SELECT * FROM users WHERE username = ?";;
+        $database = Database::getDatabaseConnection();
+        $result = $database->getQueryResult($sql, [$username])->fetchObject();
+        return $result;
+    }
 
 }
 ?>

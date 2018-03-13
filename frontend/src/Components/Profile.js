@@ -6,21 +6,22 @@ export default class Profile extends Component{
     constructor(props){
         super(props);
         this.state = {
-            username: "bob",
-            email: "bob@gmail.com"
+            logedin: "You are logged in!",
+
         }
 
     }
     // componentWillMount() {
-    //     axios.get("http://localhost:8888/forum_backend/public/api/thread/" + this.props.match.params.thread_id).then((response) => {
-    //         this.setState({username: response.data.username, email: response.data.email})
+    //     axios.get("http://localhost:8888/Cardinal_cc/public/user/Profile").then((response) => {
+    //         this.setState({loggedin: response.data})
+    //         console.log(response.data)
     //     });
     // }
     render(){
         return(
             <div>
-                <h1>{this.state.username}</h1>
-                <h1>{this.state.email}</h1>
+                <h1>{this.state.logedin}</h1>
+
             </div>
         )
         }
