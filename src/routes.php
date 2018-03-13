@@ -1,14 +1,15 @@
 <?php
-
+ini_set("display_errors",1);
+error_reporting(E_ALL);
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-// Routes
 
-$app->get('/[{name}]', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
+require_once __DIR__ ."/../controllers/userC.php";
 
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
+
+
+$app->group('/user', function() use ($app){
+   $app->post('/login', 'userC::Login');
+   $app->post('/Register', 'userC::Register');
 });
