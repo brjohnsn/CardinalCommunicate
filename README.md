@@ -10,4 +10,19 @@ php composer.phar update
 ## Start the application
 php composer.phar start
 
+## install React 
+In order to access the developement version of the front end you must first install Node.js in order to have access to the tool we use to run it caled npm or node project manager. You can do so by visiting this website. https://nodejs.org/en/
+
+
+
+After installing Node you must change directory into the file where the frontend code is stored, 
+
+when you are in the file type npm install --save react-router-dom,
+
+following that step type npm install axios
+
+at this point you should be able to type npm start and the frontend should launch.
+
+
+
 
