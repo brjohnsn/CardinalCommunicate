@@ -1,4 +1,4 @@
 <?xml version="1.0" ?>
 <dataset>
-    <users id="100" username="Test1" email="Email1" password="8aca28c64c6634b904a3a3389af10a16ff4ff5b4273dda9ca72f6890d8dc6c73" salt='12345678901234567890123456789012'/>
+    <users id="1" username="InitialUser" password="InitialPassword" email="InitialEmail"  salt='NULL' type="client"/>
 </dataset>

@@ -35,31 +35,22 @@ class UnitTests extends TestCase
         $this->assertSame(2, 1 + 1);
     }
 
-    public function testCreateUserFromArrayOfAttributes(){
-        $userAttributes = [
-            'username' => 'testUserName1',
-            'password' => 'testPassword1',
-            'email' => 'testEmail1',
-        ];
+    public function testAddUserToDatabase(){
+        $userAttributes = ['username' => 'testUsername1',
+                           'password' => 'testPassword1',
+                           'email' => 'testEmail1',
+                           'type' => 'client',
+                           'salt' => 'NULL',
+                          ];
 
         $testUser = new User($userAttributes);
+        $testUser->addToDatabase();
+        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
+        $queryTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
 
-        $this->assertClassHasAttribute(username,User::class);
+        $this->assertTablesEqual($expectedResultTable,$queryTable);
+
+
+
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
