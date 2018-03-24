@@ -59,7 +59,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `salt`, `type`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `salt`, userType) VALUES
 (1, 'InitialUser', 'InitialPassword', 'InitialEmail', 'NULL', 'client'),
 (2, 'testUsername1', 'testPassword1', 'testEmail1', 'NULL', 'client');
 

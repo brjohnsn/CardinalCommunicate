@@ -6,10 +6,10 @@ use \PDO as PDO;
 
 class Database
 {
-    protected static $_databaseConnection;
-    protected $_phpDatabaseObject;
+    private static $_databaseConnection;
+    private static $_phpDatabaseObject;
 
-    protected function __construct()
+    private function __construct()
     {
         $databaseConnectionOptions = array();
         $databaseHost = 'localhost';
@@ -19,10 +19,10 @@ class Database
         $databaseCharSet = 'utf8mb4';
         $dataSourceName = "mysql:host=$databaseHost;dbname=$databaseName;charset=$databaseCharSet";
 
-        $this->_phpDatabaseObject = new PDO($dataSourceName, $databaseUser, $databasePassword, $databaseConnectionOptions);
+        self::$_phpDatabaseObject = new PDO($dataSourceName, $databaseUser, $databasePassword, $databaseConnectionOptions);
     }
 
-    public static function getDatabaseConnection()
+    private static function getConnection()
     {
         if (self::$_databaseConnection === null)
         {
@@ -31,9 +31,26 @@ class Database
         return self::$_databaseConnection;
     }
 
+    public static function addNewUser($userAttributes)
+    {
+        self::getConnection();
+        $sql = "INSERT INTO users (username, password, salt, userType) VALUES (?,?,?,?)";
+        $values = [
+            $userAttributes['username'],
+            $userAttributes['password'],
+            $userAttributes['salt'],
+            $userAttributes['userType'],
+            ];
 
-    public function getQueryResult($sql, $args=[]){
-        $sqlQuery = $this->_phpDatabaseObject->prepare($sql);
+        $result = Database::getSQLQueryResult($sql, $values);
+        return $result;
+    }
+
+
+    public static function getSQLQueryResult($sql, $args=[])
+    {
+        Database::getConnection();
+        $sqlQuery = self::$_phpDatabaseObject->prepare($sql);
         $sqlQuery->execute($args);
         return $sqlQuery;
     }

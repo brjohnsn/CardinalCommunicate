@@ -10,22 +10,15 @@ class User
     private $username;
     private $email;
     private $password;
-    private $type;
+    private $userType;
 
 
     public function __construct($userAttributes)
     {
         $this->username = $userAttributes['username'];
         $this->password = $userAttributes['password'];
-        $this->email = $userAttributes['email'];
-        $this->type = $userAttributes['type'];
         $this->salt = $userAttributes['salt'];
-
-    }
-
-    public function addToDatabase(){
-        $sql = 'INSERT INTO users (username, password, email, type, salt) VALUES (?,?,?,?,?)';
-        $result = Database::getDatabaseConnection()->getQueryResult($sql, [$this->username, $this->password, $this->email, $this->type, $this->salt]);
+        $this->userType = $userAttributes['userType'];
     }
 
 }

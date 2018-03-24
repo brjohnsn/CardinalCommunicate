@@ -36,21 +36,17 @@ class UnitTests extends TestCase
     }
 
     public function testAddUserToDatabase(){
-        $userAttributes = ['username' => 'testUsername1',
-                           'password' => 'testPassword1',
-                           'email' => 'testEmail1',
-                           'type' => 'client',
-                           'salt' => 'NULL',
+        $userAttributes = [
+            'username' => 'testUsername1',
+            'password' => 'testPassword1',
+            'salt' => 'NULL',
+            'userType' => 'client',
                           ];
 
-        $testUser = new User($userAttributes);
-        $testUser->addToDatabase();
+        Database::addNewUser($userAttributes);
+
         $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
-        $queryTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
-
-        $this->assertTablesEqual($expectedResultTable,$queryTable);
-
-
-
+        $actualResultTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
+        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
 }
