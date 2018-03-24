@@ -2,9 +2,7 @@
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
 
-use cc\models\User;
 use cc\models\Database;
-use cc\models\Password;
 
 class UnitTests extends TestCase
 {

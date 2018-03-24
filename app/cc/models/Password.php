@@ -12,7 +12,15 @@ class Password{
     }
 
     public static function generateEncryptionSalt($saltLength){
-        return random_bytes($saltLength);
+        try
+        {
+            $salt = random_bytes($saltLength);
+        }
+        catch (\Exception $e) {
+            die();
+        }
+
+        return $salt;
     }
 
 }

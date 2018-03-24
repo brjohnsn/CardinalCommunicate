@@ -1,16 +1,11 @@
 <?php namespace cc\models;
 
-use cc\models\Database as Database;
-use cc\models\Password;
-
-
 class User
 {
-    private $id;
     private $username;
-    private $email;
     private $password;
     private $userType;
+    private $salt;
 
 
     public function __construct($userAttributes)
