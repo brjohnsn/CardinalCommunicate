@@ -33,12 +33,23 @@ class Database
 
     public static function addNewUser($userAttributes)
     {
+        if(!isset($userAttributes['salt']))
+        {
+            $encryptionSalt = Password::generateEncryptionSalt();
+        }
+        else
+        {
+            $encryptionSalt = $userAttributes['salt'];
+        }
+
+        $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
+
         self::getConnection();
         $sql = "INSERT INTO users (username, password, salt, userType) VALUES (?,?,?,?)";
         $values = [
             $userAttributes['username'],
-            $userAttributes['password'],
-            $userAttributes['salt'],
+            $hashedPassword,
+            $encryptionSalt,
             $userAttributes['userType'],
             ];
 

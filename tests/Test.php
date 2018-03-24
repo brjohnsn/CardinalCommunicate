@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
+use cc\models\Password;
 
 use cc\models\Database;
 
@@ -37,7 +38,7 @@ class UnitTests extends TestCase
         $userAttributes = [
             'username' => 'testUsername1',
             'password' => 'testPassword1',
-            'salt' => 'NULL',
+            'salt' => '01234567890123456789012345678901',
             'userType' => 'client',
                           ];
 
@@ -46,5 +47,11 @@ class UnitTests extends TestCase
         $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
         $actualResultTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
+    }
+
+    public function testHashPassword(){
+        $testSalt = '01234567890123456789012345678901';
+        $hashedPassword = Password::hashPassword('testPassword1', $testSalt);
+        $this->assertEquals('393afd25693c67e0c079038c31b2b4b00d2d7855fb5a88fe842b5239acb5dbe2', $hashedPassword);
     }
 }

@@ -7,7 +7,6 @@ class User
     private $userType;
     private $salt;
 
-
     public function __construct($userAttributes)
     {
         $this->username = $userAttributes['username'];
