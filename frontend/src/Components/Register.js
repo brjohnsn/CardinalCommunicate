@@ -10,17 +10,35 @@ export default class Register extends Component{
             username:"",
             password:"",
             email:"",
-            gender:""
+            gender:"",
+            userStatus:""
         }
+    }
+
+    setGender(e){
+        e.preventDefault();
+        if(this.state.gender == 'male'){
+            document.getElementById('male').checked = false;
+            this.setState({gender:e.target.value})
+        }
+        if(this.state.gender == 'female'){
+            document.getElementById('female').checked = false;
+            this.setState({gender:e.target.value})
+
+        }
+        else{
+            this.setState({gender:e.target.value})
+        }
+
     }
 
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/Cardinal_cc/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password}).then(()=> {
-            console.log("user created");
+        axios.post("http://localhost:8888/Cardinal_cc/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userStatus:this.state.userStatus}).then(()=> {
             this.props.history.push("/Login")
-        })
+        }
+        )
 
     }
     render(){
@@ -42,30 +60,31 @@ export default class Register extends Component{
                     <div className={"genderInput"}>
 
                         <div className={"male"}>
-                            <input type="checkbox" id="male"/>
+                            <input type="checkbox" id="male" value="male" onChange={(e)=>{this.setGender(e)}}/>
                             <label htmlfor="male">Male</label>
                         </div>
 
                         <div className={"female"}>
-                            <input type="checkbox" id="female"/>
+                            <input type="checkbox" id="female" value="female" onChange={(e)=>{this.setGender(e)}}/>
                             <label htmlfor="female">Female</label>
                         </div>
+
                     </div>
 
                     <h1>Are you a client or an interpreter?</h1>
                         <div className={"userTypeCheck"}>
                             <div className={"deafUser"}>
-                                <input type="checkbox" id="deaf"/>
+                                <input type="checkbox" id="deaf" value="Deaf" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
                                 <label for="deaf">Deaf/Hard of Hearing</label>
                             </div>
 
                             <div className={"#"}>
-                                <input type="checkbox" id="#"/>
-                                <label for="#">#</label>
+                                <input type="checkbox" id="other" value="other" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <label for="other">Other</label>
                             </div>
 
                             <div className={"interpreterUser"}>
-                                <input type="checkbox" id="interpreter"/>
+                                <input type="checkbox" id="interpreter" value="interpreter"  onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
                                 <label for="interpreter">Interpreter</label>
                             </div>
                         </div>
@@ -73,6 +92,8 @@ export default class Register extends Component{
                     <input className="button" type="submit" value="submit"/>
                     <h2>Already have an account? Click here!</h2>
                     <Link to={'/Login'}>Login</Link>
+
+
                 </form>
             </div>
         );
