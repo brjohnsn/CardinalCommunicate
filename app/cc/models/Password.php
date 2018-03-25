@@ -20,4 +20,19 @@ class Password{
         return $salt;
     }
 
+    public static function getEncryptionSaltBasedOnUserAttributes($userAttributes)
+    {
+        if(isset($userAttributes['salt']))
+        {
+            $encryptionSalt = $userAttributes['salt'];
+        }
+
+        else
+        {
+            $encryptionSalt = Password::generateEncryptionSalt();
+        }
+
+        return $encryptionSalt;
+    }
+
 }

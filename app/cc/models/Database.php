@@ -33,15 +33,7 @@ class Database
 
     public static function addNewUser($userAttributes)
     {
-        if(!isset($userAttributes['salt']))
-        {
-            $encryptionSalt = Password::generateEncryptionSalt();
-        }
-        else
-        {
-            $encryptionSalt = $userAttributes['salt'];
-        }
-
+        $encryptionSalt = Password::getEncryptionSaltBasedOnUserAttributes($userAttributes);
         $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
 
         self::getConnection();
