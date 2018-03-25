@@ -11,9 +11,11 @@ export default class Register extends Component{
             password:"",
             email:"",
             gender:"",
-            userStatus:""
+            userStatus:"",
+            certification:""
         }
     }
+
 
     setGender(e){
         e.preventDefault();
@@ -32,18 +34,24 @@ export default class Register extends Component{
 
     }
 
+    setInterpreter(e){
+        e.preventDefault();
+        this.setState({userStatus: e.target.value});
+
+    }
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/Cardinal_cc/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userStatus:this.state.userStatus}).then(()=> {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userStatus:this.state.userStatus}).then(()=> {
             this.props.history.push("/Login")
         }
         )
 
     }
     render(){
+        let interpreterToggled = false;
         return(
-            <div>
+            <div style={{}}>
                 <form onSubmit={(e)=>this.onSubmit(e)} style={{marginLeft: "40%"}}>
                     <h1>Welcome! Register here!</h1>
 
@@ -84,12 +92,20 @@ export default class Register extends Component{
                             </div>
 
                             <div className={"interpreterUser"}>
-                                <input type="checkbox" id="interpreter" value="interpreter"  onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <input type="checkbox" id="interpreter" value="interpreter"  onChange={(e)=>{this.setInterpreter(e)}}/>
                                 <label for="interpreter">Interpreter</label>
                             </div>
+                            {
+                                this.state.userStatus == "interpreter" &&
+                                <div className="interpreterCertification">
+                                    <h1>Have a certification?</h1>
+                                    <input id="certification" onChange={(e)=>{this.setState({certification: e.target.value})}} />
+                                    <label for="certification" style={{display: "block"}}>enter here</label>
+                                </div>
+                            }
                         </div>
 
-                    <input className="button" type="submit" value="submit"/>
+                    <input className="button" type="submit" value="submit" style={{marginTop:"40px"}}/>
                     <h2>Already have an account? Click here!</h2>
                     <Link to={'/Login'}>Login</Link>
 
