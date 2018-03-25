@@ -1,7 +1,9 @@
 <?php
+session_start();
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
 use cc\models\Password;
+use cc\models\User;
 
 use cc\models\Database;
 
@@ -53,5 +55,15 @@ class UnitTests extends TestCase
         $testSalt = '01234567890123456789012345678901';
         $hashedPassword = Password::hashPassword('testPassword1', $testSalt);
         $this->assertEquals('393afd25693c67e0c079038c31b2b4b00d2d7855fb5a88fe842b5239acb5dbe2', $hashedPassword);
+    }
+
+    public function testCheckUserCredentialsAreAuthentic()
+    {
+        $username = 'InitialUser';
+        $password = 'InitialPassword';
+        $authenticatedUser = User::getValidUser($username, $password);
+
+        $this->assertNotEquals(false, $authenticatedUser);
+
     }
 }

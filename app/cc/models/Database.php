@@ -49,6 +49,14 @@ class Database
         return $result;
     }
 
+    public static function getUserAttributesByUsername($username)
+    {
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $arguments = [$username];
+        $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
+        return $userAttributes;
+    }
 
     public static function getSQLQueryResult($sql, $args=[])
     {

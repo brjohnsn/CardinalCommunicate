@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
 <dataset>
-    <users id="1" username="InitialUser" password="InitialPassword"  salt='NULL' userType="client"/>
+    <users id="1" username="InitialUser" password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"  salt='01234567890123456789012345678901' userType="client"/>
     <users id="2" username="testUsername1" password="393afd25693c67e0c079038c31b2b4b00d2d7855fb5a88fe842b5239acb5dbe2"  salt='01234567890123456789012345678901' userType="client"/>
 </dataset>
