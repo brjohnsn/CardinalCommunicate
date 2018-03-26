@@ -64,6 +64,24 @@ class UnitTests extends TestCase
         $authenticatedUser = User::getValidUser($username, $password);
 
         $this->assertNotEquals(false, $authenticatedUser);
-
     }
+
+    public function testSignInUser()
+    {
+        $userAttributes = [
+            'username' => 'testUsername1',
+            'password' => 'testPassword1',
+            'salt' => '01234567890123456789012345678901',
+            'userType' => 'client',
+            'id' => '1',
+        ];
+
+        $testUser = new User($userAttributes);
+
+        $testUser->signIn();
+
+        $this->assertEquals('1', $_SESSION['id']);
+        session_destroy();
+    }
+
 }

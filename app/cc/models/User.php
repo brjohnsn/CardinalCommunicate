@@ -6,6 +6,7 @@ class User
     private $password;
     private $userType;
     private $salt;
+    private $userId;
 
     public function __construct($userAttributes)
     {
@@ -13,6 +14,11 @@ class User
         $this->password = $userAttributes['password'];
         $this->salt = $userAttributes['salt'];
         $this->userType = $userAttributes['userType'];
+
+        if (isset($userAttributes['id']))
+        {
+            $this->userId = $userAttributes['id'];
+        }
     }
 
     public static function getValidUser($username, $password)
@@ -29,5 +35,18 @@ class User
         {
             return false;
         }
+    }
+
+    public function signIn()
+    {
+        $_SESSION['id'] = $this->userId;
+        $_SESSION['username'] = $this->username;
+        $_SESSION['password'] = $this->password;
+        $_SESSION['userType'] = $this->userType;
+    }
+
+    public function signOut()
+    {
+        session_destroy();
     }
 }
