@@ -11,7 +11,7 @@ export default class Register extends Component{
             password:"",
             email:"",
             gender:"",
-            userStatus:"",
+            userType:"",
             certification:""
         }
     }
