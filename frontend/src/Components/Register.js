@@ -68,12 +68,12 @@ export default class Register extends Component{
                     <div className={"genderInput"}>
 
                         <div className={"male"}>
-                            <input type="checkbox" id="male" value="male" onChange={(e)=>{this.setGender(e)}}/>
+                            <input type="radio" id="male" value="male" onChange={(e)=>{this.setGender(e)}}/>
                             <label htmlfor="male">Male</label>
                         </div>
 
                         <div className={"female"}>
-                            <input type="checkbox" id="female" value="female" onChange={(e)=>{this.setGender(e)}}/>
+                            <input type="radio" id="female" value="female" onChange={(e)=>{this.setGender(e)}}/>
                             <label htmlfor="female">Female</label>
                         </div>
 
@@ -82,17 +82,17 @@ export default class Register extends Component{
                     <h1>Are you a client or an interpreter?</h1>
                         <div className={"userTypeCheck"}>
                             <div className={"deafUser"}>
-                                <input type="checkbox" id="deaf" value="Deaf" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <input type="radio" id="deaf" value="Deaf" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
                                 <label for="deaf">Deaf/Hard of Hearing</label>
                             </div>
 
                             <div className={"#"}>
-                                <input type="checkbox" id="other" value="other" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <input type="radio" id="other" value="other" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
                                 <label for="other">Other</label>
                             </div>
 
                             <div className={"interpreterUser"}>
-                                <input type="checkbox" id="interpreter" value="interpreter"  onChange={(e)=>{this.setInterpreter(e)}}/>
+                                <input type="radio" id="interpreter" value="interpreter"  onChange={(e)=>{this.setInterpreter(e)}}/>
                                 <label for="interpreter">Interpreter</label>
                             </div>
                             {
