@@ -65,7 +65,7 @@ export default class Register extends Component{
                     <input onChange={(e)=>this.setState({password:e.target.value})}/>
 
                     <h1>What is your gender?</h1>
-                    <div className={"genderInput"} style={{display:"flex", flexDirection: "column"}}>
+                    <div className={"radioButtonWrapper"} style={{display:"flex", flexDirection: "column"}}>
                         <input type="radio" name="gender" value="male" onChange={(e)=>{this.setState({gender:e.target.value})}}/>
                         <label htmlfor="male">Male</label>
                         <input type="radio" name="gender" value="female" onChange={(e)=>{this.setState({gender:e.target.value})}}/>
@@ -73,7 +73,7 @@ export default class Register extends Component{
                     </div>
 
                     <h1>Are you a client or an interpreter?</h1>
-                        <div className={"userTypeCheck"} style={{display:"flex", flexDirection: "column"}}>
+                        <div className={"radioButtonWrapper"} style={{display:"flex", flexDirection: "column"}}>
                                 <input type="radio" name="userType" value="Deaf" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
                                 <label for="deaf">Deaf/Hard of Hearing</label>
                                 <input type="radio" name="userType"  value="other" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
@@ -82,7 +82,7 @@ export default class Register extends Component{
                                 <label for="interpreter">Interpreter</label>
                             {
                                 this.state.userStatus === "interpreter" &&
-                                <div className="interpreterCertification" style={{display:"flex", flexDirection: "column"}}>
+                                <div className="radioButtonWrapper" style={{display:"flex", flexDirection: "column"}}>
                                     <h1>Have a certification?</h1>
                                     <input type="radio" name="certification" value="#"  onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
                                     <label for="interpreter">#</label>
