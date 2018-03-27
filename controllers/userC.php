@@ -1,5 +1,6 @@
 <?php
 use cc\models\User;
+use cc\models\Database;
 
 class userC
 {
@@ -12,8 +13,8 @@ class userC
 
     public static function Register($request, $response)
     {
-        $user = new User($request);
-        $user->addToDatabase();
+        $body = $request->getParsedBody();
+        Database::addNewUser($body);
     }
 
 
