@@ -42,7 +42,8 @@ export default class Register extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userStatus:this.state.userStatus}).then((response)=> {
+        console.log(this.state);
+        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userType:this.state.userType}).then((response)=> {
             console.log(response.data)
             this.props.history.push("/Login")
         }
@@ -74,19 +75,19 @@ export default class Register extends Component{
 
                     <h1>Are you a client or an interpreter?</h1>
                         <div className={"radioButtonWrapper"} style={{display:"flex", flexDirection: "column"}}>
-                                <input type="radio" name="userType" value="Deaf" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <input type="radio" name="userType" value="Deaf" onChange={(e)=>{this.setState({userType: e.target.value})}}/>
                                 <label for="deaf">Deaf/Hard of Hearing</label>
-                                <input type="radio" name="userType"  value="other" onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <input type="radio" name="userType"  value="other" onChange={(e)=>{this.setState({userType: e.target.value})}}/>
                                 <label for="other">Other</label>
-                                <input type="radio" name="userType" value="interpreter"  onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                <input type="radio" name="userType" value="interpreter"  onChange={(e)=>{this.setState({userType: e.target.value})}}/>
                                 <label for="interpreter">Interpreter</label>
                             {
                                 this.state.userStatus === "interpreter" &&
                                 <div className="radioButtonWrapper" style={{display:"flex", flexDirection: "column"}}>
                                     <h1>Have a certification?</h1>
-                                    <input type="radio" name="certification" value="#"  onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                    <input type="radio" name="certification" value="#"  onChange={(e)=>{this.setState({userType: e.target.value})}}/>
                                     <label for="interpreter">#</label>
-                                    <input type="radio" name="certification" value="#"  onChange={(e)=>{this.setState({userStatus: e.target.value})}}/>
+                                    <input type="radio" name="certification" value="#"  onChange={(e)=>{this.setState({userType: e.target.value})}}/>
                                     <label for="#">#</label>
                                     <input id="certification"  type="text" onChange={(e)=>{this.setState({certification: e.target.value})}} />
                                     <label for="certification" style={{display: "block"}}>Enter alternative certification title here.</label>

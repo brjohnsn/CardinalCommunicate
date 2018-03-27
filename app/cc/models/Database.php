@@ -4,6 +4,9 @@ namespace cc\models;
 
 use \PDO as PDO;
 
+error_reporting(E_ALL);
+ini_set("display_errors",1);
+
 class Database
 {
     private static $_databaseConnection;
