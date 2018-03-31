@@ -7,11 +7,11 @@ class userC
     public static function Login($request, $response)
     {
         $body = $request->getParsedBody();
-        echo('output');
-        echo ($body['username']);
-        die();
+//        echo('output');
+//        echo ($body['username']);
+//        die();
         //$user = new User($body);
-        $SignInStatus = User::getValidUser($username, $password);
+        $SignInStatus = User::getValidUser($body['username'], $body['password']);
         return $response->withJson($SignInStatus);
     }
 
