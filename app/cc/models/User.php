@@ -26,10 +26,12 @@ class User
         $matchingUserAttributes = Database::getUserAttributesByUsername($username);
 
         $hashedPassword = Password::hashPassword($password, $matchingUserAttributes['salt']);
+        echo($matchingUserAttributes['salt']);
+
 
         if($hashedPassword === $matchingUserAttributes['password'])
         {
-            return new self($matchingUserAttributes);
+            return true;
         }
         else
         {
