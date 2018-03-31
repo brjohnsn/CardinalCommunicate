@@ -6,7 +6,8 @@ class userC
 {
     public static function Login($request, $response)
     {
-        $user = new User($request);
+        $body = $request->getParsedBody();
+        $user = new User($body);
         $SignInStatus = $user->signIn();
         return $response->withJson($SignInStatus);
     }
