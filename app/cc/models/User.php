@@ -31,7 +31,7 @@ class User
 
         if($hashedPassword === $matchingUserAttributes['password'])
         {
-            return true;
+            return $matchingUserAttributes;
         }
         else
         {
