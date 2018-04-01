@@ -12,7 +12,8 @@ export default class Profile extends Component {
     }
 
     render() {
-        if (this.props.userType === "interpreter") {
+        console.log(this.props.location.userType)
+        if (this.props.location.userType === "interpreter") {
             return (
                 <div>
                     <Interpreter/>
