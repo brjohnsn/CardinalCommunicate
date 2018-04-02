@@ -42,6 +42,7 @@ class UnitTests extends TestCase
             'password' => 'testPassword1',
             'salt' => '01234567890123456789012345678901',
             'userType' => 'client',
+            'gender' => 'male'
                           ];
 
         Database::addNewUser($userAttributes);
