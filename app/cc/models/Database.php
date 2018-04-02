@@ -46,7 +46,6 @@ class Database
             $hashedPassword,
             $encryptionSalt,
             $userAttributes['userType'],
-            $userAttributes['gender'],
             ];
 
         $result = Database::getSQLQueryResult($sql, $values);
