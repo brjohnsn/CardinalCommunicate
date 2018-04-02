@@ -87,6 +87,7 @@ export default class Register extends Component{
                                 this.state.userType === "interpreter" &&
                                 <div className="radioButtonWrapper" style={{display:"flex", flexDirection: "column"}}>
                                     <h1>Have a certification?</h1>
+                                    //move into json file
                                     <input type="radio" name="certification" value="CDI"  onChange={(e)=>{this.setState({certification: e.target.value})}}/>
                                     <label for="certification">CDI</label>
                                     <input type="radio" name="certification" value="CSC"  onChange={(e)=>{this.setState({certification: e.target.value})}}/>

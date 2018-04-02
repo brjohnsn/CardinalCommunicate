@@ -4,6 +4,7 @@ import Client from './Client';
 
 export default class Profile extends Component {
     constructor(props) {
+        //move axios request to here
         super(props);
         this.state = {
             logedin: "You are logged in!",

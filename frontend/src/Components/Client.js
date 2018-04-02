@@ -13,9 +13,9 @@ export default class Client extends Component {
     }
 
     componentWillMount() {
-        axios.get("http://localhost:8888/CardinalCC/public/user/Profile").then((response) => {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username:sessionStorage.getItem('username')}).then((response) => {
             this.setState({username: response.data.username}, );
-            console.log(response.data)
+            console.log(sessionStorage.getItem('username'));
         });
     }
 

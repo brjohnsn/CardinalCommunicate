@@ -15,7 +15,7 @@ export default class Interpreter extends Component {
         }
 
     componentWillMount() {
-        axios.get("http://localhost:8888/CardinalCC/public/user/Profile").then((response) => {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username: sessionStorage.getItem('username')}).then((response) => {
             console.log(response.data);
             this.setState({username: response.data.username, email: response.data.email, certification: response.data.certification, zipcode: response.data.zipcode, phoneNumber: response.data.phoneNumber});
         });

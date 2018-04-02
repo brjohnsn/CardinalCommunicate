@@ -7,11 +7,8 @@ class userC
     public static function Login($request, $response)
     {
         $body = $request->getParsedBody();
-//        echo('output');
-//        echo ($body['username']);
-//        die();
-        //$user = new User($body);
         $SignInStatus = User::getValidUser($body['username'], $body['password']);
+        $_SESSION['username'] = $SignInStatus['username'];
         $SignInStatus = array_map('utf8_encode', $SignInStatus);
         $jsonSignInStatus = json_encode($SignInStatus);
 
@@ -32,8 +29,11 @@ class userC
 
     public static function getInfo($request, $response)
     {
-        $LogedIn= $_SESSION['loggedIn'];
-        return $response->withJson($LogedIn);
+        $body = $request->getParsedBody();
+        $userAttributes = Database::getUserAttributesByUsername($body['username']);
+        $userAttributes = array_map('utf8_encode', $userAttributes);
+        $jsonUserAttributes = json_encode($userAttributes);
+        return $jsonUserAttributes;
     }
 }
 ?>
