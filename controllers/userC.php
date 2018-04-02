@@ -12,7 +12,15 @@ class userC
 //        die();
         //$user = new User($body);
         $SignInStatus = User::getValidUser($body['username'], $body['password']);
-        return $response->withJson($SignInStatus);
+        $SignInStatus = array_map('utf8_encode', $SignInStatus);
+        $jsonSignInStatus = json_encode($SignInStatus);
+
+        return $jsonSignInStatus;
+
+
+
+
+        return $response->withJson($jsonSignInStatus);
     }
 
     public static function Register($request, $response)

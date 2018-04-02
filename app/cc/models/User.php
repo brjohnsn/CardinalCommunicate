@@ -30,7 +30,7 @@ class User
 
         if($hashedPassword === $matchingUserAttributes['password'])
         {
-            return $matchingUserAttributes['userType'];
+            return $matchingUserAttributes;
         }
         else
         {
