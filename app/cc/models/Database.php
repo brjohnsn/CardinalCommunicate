@@ -57,7 +57,6 @@ class Database
         $sql = "SELECT * FROM users WHERE username = ?";
         $arguments = [$username];
         $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
-
         return $userAttributes;
     }
 

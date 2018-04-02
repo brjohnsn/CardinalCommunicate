@@ -11,7 +11,7 @@ export default class Interpreter extends Component {
         }
 
     componentWillMount() {
-        axios.get("http://localhost:8888/Cardinal_cc/public/user/Profile").then((response) => {
+        axios.get("http://localhost:8888/CardinalCC/public/user/Profile").then((response) => {
             this.setState({username: response.data.username})
             console.log(response.data)
         });
@@ -19,9 +19,14 @@ export default class Interpreter extends Component {
 
     render() {
         return (
-            <div>
-                <h1>I am the Interpreter</h1>
-                <p>my name is {this.state.username}</p>
+            <div className="top" style={{display:'flex', flexDirection:"row"}} >
+                <div className="top">
+                    <h1>Welcome back {this.state.username}</h1>
+                </div>
+                <div className="left"></div>
+                <div className="sidebar" style={{backgroundColor:"blue"}}>
+                    <h1>I am the Interpreter</h1>
+                </div>
             </div>
         );
     }

@@ -15,14 +15,14 @@ export default class Profile extends Component {
         console.log(this.props.location.userType)
         if (this.props.location.userType === "interpreter") {
             return (
-                <div>
+                <div style={{backgroundColor:'yellow'}}>
                     <Interpreter/>
                 </div>
             );
         }
         else {
             return (
-                <div>
+                <div style={{backgroundColor:'yellow'}}>
                     <Client/>
                 </div>
             );
