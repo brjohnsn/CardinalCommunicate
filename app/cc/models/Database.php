@@ -40,7 +40,7 @@ class Database
         $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
 
         self::getConnection();
-        $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?,?)";
         $values = [
             $userAttributes['username'],
             $hashedPassword,
@@ -49,8 +49,29 @@ class Database
             ];
 
         $result = Database::getSQLQueryResult($sql, $values);
+
+        if ($userAttributes['userType'] == 'interpreter')
+        {
+            self::addNewInterpreter($userAttributes);
+        }
         return $result;
     }
+
+    public static function addNewInterpreter($interpreterAttributes)
+    {
+        $userAttributes = self::getUserAttributesByUsername($interpreterAttributes['username']);
+
+        $sql = "INSERT INTO interpreters (userId, telephone, zip, certification) VALUES (?,?,?,?)";
+        $values = [$userAttributes['id'],
+            $interpreterAttributes['telephone'],
+            $interpreterAttributes['zip'],
+            $interpreterAttributes['certification'],
+        ];
+
+        $result = Database::getSQLQueryResult($sql, $values);
+        return $result;
+    }
+
 
     public static function getUserAttributesByUsername($username)
     {

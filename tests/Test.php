@@ -42,12 +42,32 @@ class UnitTests extends TestCase
             'password' => 'testPassword1',
             'salt' => '01234567890123456789012345678901',
             'userType' => 'client',
+            'gender' => 'male'
                           ];
 
         Database::addNewUser($userAttributes);
 
         $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
         $actualResultTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
+        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
+    }
+
+    public function testAddInterpreterToDatabase(){
+        $userAttributes = [
+            'username' => 'testInterpreter1',
+            'password' => 'testPassword1',
+            'salt' => '01234567890123456789012345678901',
+            'userType' => 'interpreter',
+            'gender' => 'male',
+            'telephone' => '5555555555',
+            'zip' => '55555',
+            'certification' => 'CDI',
+        ];
+
+        Database::addNewUser($userAttributes);
+
+        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddInterpreterToDatabase.xml')->getTable('interpreters');
+        $actualResultTable = $this->getConnection()->createQueryTable('interpreters', 'SELECT * FROM interpreters');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
 
