@@ -82,6 +82,14 @@ class Database
         return $userAttributes;
     }
 
+    public static function getInterpreterAttributesByUserId($userId){
+        $sql = "SELECT * FROM interpreters WHERE userId = ?";
+        $arguments = [$userId];
+        $interpreterAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+        return $interpreterAttributes;
+
+    }
+
     public static function getSQLQueryResult($sql, $args=[])
     {
         Database::getConnection();

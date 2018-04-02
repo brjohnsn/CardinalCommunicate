@@ -59,8 +59,8 @@ class UnitTests extends TestCase
             'salt' => '01234567890123456789012345678901',
             'userType' => 'interpreter',
             'gender' => 'male',
-            'telephone' => '5555555555',
-            'zip' => '55555',
+            'telephone' => '7654321',
+            'zip' => '54321',
             'certification' => 'CDI',
         ];
 
@@ -79,7 +79,7 @@ class UnitTests extends TestCase
 
     public function testCheckUserCredentialsAreAuthentic()
     {
-        $username = 'InitialUser';
+        $username = 'InitialClient';
         $password = 'InitialPassword';
         $authenticatedUser = User::getValidUser($username, $password);
 
@@ -103,5 +103,27 @@ class UnitTests extends TestCase
         $this->assertEquals('1', $_SESSION['id']);
         session_destroy();
     }
+
+    public function testGetInterpreterAttributesById()
+    {
+        $id = '2';
+        $interpreterAttributes = Database::getInterpreterAttributesByUserId($id);
+
+        $this->assertEquals('1234567', $interpreterAttributes['telephone']);
+
+    }
+//
+//    public function testGetUserAttributesByUsername()
+//    {
+//        $username = 'InitialInterpreter';
+//        echo"\n";
+//        echo"------";
+//        echo"\n";
+//
+//        $userAttributes = Database::getUserAttributesByUsername($username);
+//
+//        $this->assertEquals('1234567', $userAttributes['telephone']);
+//        $this->assertEquals('female', $userAttributes['gender']);
+//    }
 
 }
