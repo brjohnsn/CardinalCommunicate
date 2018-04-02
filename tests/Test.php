@@ -112,18 +112,16 @@ class UnitTests extends TestCase
         $this->assertEquals('1234567', $interpreterAttributes['telephone']);
 
     }
-//
-//    public function testGetUserAttributesByUsername()
-//    {
-//        $username = 'InitialInterpreter';
-//        echo"\n";
-//        echo"------";
-//        echo"\n";
-//
-//        $userAttributes = Database::getUserAttributesByUsername($username);
-//
-//        $this->assertEquals('1234567', $userAttributes['telephone']);
-//        $this->assertEquals('female', $userAttributes['gender']);
-//    }
+
+    public function testGetUserAttributesByUsername()
+    {   echo '----Last test----';
+    echo "\n";
+        $username = 'InitialInterpreter';
+
+        $userAttributes = Database::getUserAttributesByUsername($username);
+
+        $this->assertEquals('1234567', $userAttributes['telephone']);
+        $this->assertEquals('female', $userAttributes['gender']);
+    }
 
 }

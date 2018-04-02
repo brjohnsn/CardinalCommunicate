@@ -79,6 +79,16 @@ class Database
         $sql = "SELECT * FROM users WHERE username = ?";
         $arguments = [$username];
         $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
+        if ($userAttributes['userType'] == 'interpreter')
+        {
+            $interpreterAttributes = self::getInterpreterAttributesByUserId($userAttributes['id']);
+            echo 'Called';
+            if ($interpreterAttributes != null)
+            {
+                $userAttributes = array_merge($userAttributes, $interpreterAttributes);
+            }
+        }
         return $userAttributes;
     }
 
