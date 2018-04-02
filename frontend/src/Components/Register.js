@@ -12,7 +12,9 @@ export default class Register extends Component{
             email:"",
             gender:"",
             userType:"",
-            certification:""
+            certification:"",
+            phoneNumber:"",
+            zipcode:""
         }
     }
 
@@ -80,8 +82,9 @@ export default class Register extends Component{
                                 <label for="other">Other</label>
                                 <input type="radio" name="userType" value="interpreter"  onChange={(e)=>{this.setState({userType: e.target.value})}}/>
                                 <label for="interpreter">Interpreter</label>
+
                             {
-                                this.state.userStatus === "interpreter" &&
+                                this.state.userType === "interpreter" &&
                                 <div className="radioButtonWrapper" style={{display:"flex", flexDirection: "column"}}>
                                     <h1>Have a certification?</h1>
                                     <input type="radio" name="certification" value="CDI"  onChange={(e)=>{this.setState({certification: e.target.value})}}/>
@@ -139,6 +142,15 @@ export default class Register extends Component{
 
                                     <input id="certification"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({certification: e.target.value})}} />
                                     <label for="certification" style={{display: "block"}}>Enter alternative certification title here.</label>
+
+                                    <h1>Telephone Number</h1>
+                                    <input id="Phone"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({certification: e.target.value})}} />
+                                    <label for="Phone"  style={{display: "block"}}>Enter phone number here.</label>
+
+                                    <h1>Zipcode</h1>
+                                    <input id="address"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({certification: e.target.value})}} />
+                                    <label for="adress"  style={{display: "block"}}>Enter zipcode here.</label>
+
                                 </div>
                             }
                         </div>

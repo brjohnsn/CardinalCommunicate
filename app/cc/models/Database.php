@@ -40,12 +40,13 @@ class Database
         $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
 
         self::getConnection();
-        $sql = "INSERT INTO users (username, password, salt, userType) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?)";
         $values = [
             $userAttributes['username'],
             $hashedPassword,
             $encryptionSalt,
             $userAttributes['userType'],
+            $userAttributes['gender'],
             ];
 
         $result = Database::getSQLQueryResult($sql, $values);

@@ -21,7 +21,7 @@ export default class Interpreter extends Component {
         return (
             <div className="top" style={{display:'flex', flexDirection:"row"}} >
                 <div className="top">
-                    <h1>Welcome back {this.state.username}</h1>
+                    <h1>Welcome back  Interpreter{this.state.username}</h1>
                 </div>
                 <div className="left"></div>
                 <div className="sidebar" style={{backgroundColor:"blue"}}>

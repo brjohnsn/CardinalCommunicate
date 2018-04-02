@@ -23,6 +23,7 @@ class User
 
     public static function getValidUser($username, $password)
     {
+
         $matchingUserAttributes = Database::getUserAttributesByUsername($username);
 
         $hashedPassword = Password::hashPassword($password, $matchingUserAttributes['salt']);

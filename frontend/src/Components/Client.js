@@ -12,7 +12,7 @@ export default class Client extends Component {
 
     componentWillMount() {
         axios.get("http://localhost:8888/CardinalCC/public/user/Profile").then((response) => {
-            this.setState({username: response.data.username})
+            this.setState({username: response.data.username});
             console.log(response.data)
         });
     }
@@ -20,7 +20,7 @@ export default class Client extends Component {
     render() {
         return (
             <div>
-                <h1 style={{textAlign:'center'}}>Welcome back {this.state.username}</h1>
+                <h1 style={{textAlign:'center'}}>Welcome back Client {this.state.username}</h1>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
 
                     <div style={{backgroundColor:'blue'}}>I am  where the picture will go</div>
