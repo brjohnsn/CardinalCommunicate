@@ -19,7 +19,7 @@ export default class Login extends Component{
             if(response.data.userType === null){
                 return;
             }
-            console.log(response.data);
+            console.log(response.data.userType);
             sessionStorage.setItem('username', response.data.username);
 
             this.props.history.push({

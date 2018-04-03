@@ -16,7 +16,7 @@ export default class Profile extends Component {
         console.log(this.props);
         if (this.props.location.userType === "interpreter") {
             return (
-                <div style={{backgroundColor:'yellow'}}>
+                <div style={{backgroundColor:'blue'}}>
                     <Interpreter/>
                 </div>
             );

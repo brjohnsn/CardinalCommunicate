@@ -44,7 +44,7 @@ export default class Register extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userType:this.state.userType}).then((response)=> {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userType:this.state.userType, telephone:this.state.phoneNumber, certification: this.state.certification, zip:this.state.zipcode}).then((response)=> {
             console.log(this.state);
             this.props.history.push("/Login")
         }
@@ -145,11 +145,11 @@ export default class Register extends Component{
                                     <label for="certification" style={{display: "block"}}>Enter alternative certification title here.</label>
 
                                     <h1>Telephone Number</h1>
-                                    <input id="Phone"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({certification: e.target.value})}} />
+                                    <input id="Phone"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({phoneNumber: e.target.value})}} />
                                     <label for="Phone"  style={{display: "block"}}>Enter phone number here.</label>
 
                                     <h1>Zipcode</h1>
-                                    <input id="address"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({certification: e.target.value})}} />
+                                    <input id="address"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({zipcode: e.target.value})}} />
                                     <label for="adress"  style={{display: "block"}}>Enter zipcode here.</label>
 
                                 </div>
