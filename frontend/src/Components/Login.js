@@ -15,11 +15,9 @@ export default class Login extends Component{
     onSubmit(e){
         e.preventDefault();
         axios.post("http://localhost:8888/CardinalCC/public/user/login",{username:this.state.userName,  password:this.state.password}).then((response)=> {
-            console.log(response.data);
             if(response.data.userType === null){
                 return;
             }
-            console.log(response.data.userType);
             sessionStorage.setItem('username', response.data.username);
 
             this.props.history.push({

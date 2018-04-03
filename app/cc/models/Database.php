@@ -62,11 +62,12 @@ class Database
     {
         $userAttributes = self::getUserAttributesByUsername($interpreterAttributes['username']);
 
-        $sql = "INSERT INTO interpreters (userId, telephone, zip, certification) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO interpreters (userId, telephone, zip, certification, email) VALUES (?,?,?,?,?)";
         $values = [$userAttributes['id'],
             $interpreterAttributes['telephone'],
             $interpreterAttributes['zip'],
             $interpreterAttributes['certification'],
+            $interpreterAttributes['email']
         ];
 
         $result = Database::getSQLQueryResult($sql, $values);

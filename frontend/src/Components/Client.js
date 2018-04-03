@@ -25,8 +25,8 @@ export default class Client extends Component {
                 <h1 style={{textAlign:'center'}}>Welcome back {this.state.username}</h1>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
 
-                    <div style={{backgroundColor:'blue', height:'200px'}}>I am  where the picture will go</div>
-                    <div style={{textAlign:'center', width:'25%', margin: 'auto', backgroundColor: 'purple'}}>
+                    <div style={{height:'200px'}}>I am  where the picture will go</div>
+                    <div style={{textAlign:'center', width:'25%', margin: 'auto' }}>
                         <h1>bio</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et erat et leo efficitur posuere. Proin blandit tincidunt egestas. Vivamus cursus eleifend blandit. Pellentesque ac finibus est. Aliquam sed purus vel ante ultrices malesuada. Morbi mi nunc, vehicula vestibulum nunc ut, sollicitudin laoreet neque. Nunc quis posuere enim. Integer nisl magna, aliquam ut tristique eu, eleifend a urna.
 
@@ -38,7 +38,7 @@ export default class Client extends Component {
 
                             Sed tortor massa, fermentum vitae condimentum non, vulputate nec risus. Nam in mi purus. Duis non convallis ante. Maecenas vitae faucibus diam. Fusce in tincidunt nisi. Sed eget me</p>
                     </div>
-                    <div className="sidebar" style={{backgroundColor:"blue", width:'20%', height:'100vh'}}>
+                    <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh'}}>
                         <ul>
                             <h2>Dashboard</h2>
                             <li>Edit Profile</li>

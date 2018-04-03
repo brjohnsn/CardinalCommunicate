@@ -18,29 +18,6 @@ export default class Register extends Component{
         }
     }
 
-    //
-    // setGender(e){
-    //     e.preventDefault();
-    //     if(this.state.gender == 'male'){
-    //         // document.getElementById('male').checked = false;
-    //
-    //     }
-    //     if(this.state.gender == 'female'){
-    //         // document.getElementById('female').checked = false;
-    //         this.setState({gender:e.target.value})
-    //
-    //     }
-    //     else{
-    //         this.setState({gender:e.target.value})
-    //     }
-    //
-    // }
-
-    setInterpreter(e){
-        e.preventDefault();
-        this.setState({userStatus: e.target.value});
-
-    }
 
     onSubmit(e){
         e.preventDefault();
