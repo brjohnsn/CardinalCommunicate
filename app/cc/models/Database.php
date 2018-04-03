@@ -76,10 +76,7 @@ class Database
 
     public static function getUserAttributesByUsername($username)
     {
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $arguments = [$username];
-        $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
-
+        $userAttributes = self::getUniversalUserAttributesByUsername($username);
         if ($userAttributes['userType'] == 'interpreter')
         {
             $interpreterAttributes = self::getInterpreterAttributesByUserId($userAttributes['id']);
@@ -88,10 +85,20 @@ class Database
         return $userAttributes;
     }
 
+    public static function getUniversalUserAttributesByUsername($username)
+    {$sql = "SELECT * FROM users WHERE username = ?";
+        $arguments = [$username];
+        $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
+        return $userAttributes;
+
+    }
+
     public static function getInterpreterAttributesByUserId($userId){
         $sql = "SELECT * FROM interpreters WHERE userId = ?";
         $arguments = [$userId];
         $interpreterAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
         if (empty($interpreterAttributes))
         {
             $interpreterAttributes=[];

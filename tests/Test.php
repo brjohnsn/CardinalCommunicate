@@ -124,4 +124,13 @@ class UnitTests extends TestCase
         $this->assertEquals('female', $userAttributes['gender']);
     }
 
+    public function testGetUniversalUserAttributesByUsername()
+    {
+        $username = "InitialInterpreter";
+        $universalUserAttributes = Database::getUniversalUserAttributesByUsername($username);
+
+        $this->assertEquals('2', $universalUserAttributes['id']);
+
+    }
+
 }
