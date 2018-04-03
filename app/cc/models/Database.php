@@ -83,11 +83,7 @@ class Database
         if ($userAttributes['userType'] == 'interpreter')
         {
             $interpreterAttributes = self::getInterpreterAttributesByUserId($userAttributes['id']);
-            echo 'Called';
-            if ($interpreterAttributes != null)
-            {
-                $userAttributes = array_merge($userAttributes, $interpreterAttributes);
-            }
+            $userAttributes = array_merge($userAttributes, $interpreterAttributes);
         }
         return $userAttributes;
     }
@@ -96,6 +92,10 @@ class Database
         $sql = "SELECT * FROM interpreters WHERE userId = ?";
         $arguments = [$userId];
         $interpreterAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+        if (empty($interpreterAttributes))
+        {
+            $interpreterAttributes=[];
+        }
         return $interpreterAttributes;
 
     }
