@@ -114,8 +114,7 @@ class UnitTests extends TestCase
     }
 
     public function testGetUserAttributesByUsername()
-    {   echo '----Last test----';
-    echo "\n";
+    {
         $username = 'InitialInterpreter';
 
         $userAttributes = Database::getUserAttributesByUsername($username);
@@ -132,5 +131,6 @@ class UnitTests extends TestCase
         $this->assertEquals('2', $universalUserAttributes['id']);
 
     }
+
 
 }

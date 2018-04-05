@@ -30,14 +30,13 @@ export default class Interpreter extends Component {
                     <div style={{height:'200px'}}>I am  where the picture will go</div>
                     <div style={{textAlign:'center', width:'25%', margin: 'auto'}}>
                         <h1>bio</h1>
-                        <p>Hi! my name is {this.state.username}. I am an interpreter. I have a {this.state.certification}. If you wish to contact me to schedual a n appointment my email is {this.state.email}. If it is more convenient here is my phone number ({this.state.phoneNumber}). Please contact me with any questions.</p>
+                        <p>Hi! my name is {this.state.username}. I am an interpreter. I have a {this.state.certification}. If you wish to contact me to schedual an appointment my phone number ({this.state.phoneNumber}). Please contact me with any questions.</p>
                     </div>
                     <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh'}}>
                         <ul>
                             <h2>Dashboard</h2>
                             <li>Edit Profile</li>
-                            <li>Search Interpreters</li>
-                            <li>Find Interpreters Near Me</li>
+                            <li>View Event Requests</li>
                         </ul>
                     </div>
 

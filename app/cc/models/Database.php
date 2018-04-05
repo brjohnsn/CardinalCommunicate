@@ -62,12 +62,11 @@ class Database
     {
         $userAttributes = self::getUserAttributesByUsername($interpreterAttributes['username']);
 
-        $sql = "INSERT INTO interpreters (userId, telephone, zip, certification, email) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO interpreters (userId, telephone, zip, certification) VALUES (?,?,?,?)";
         $values = [$userAttributes['id'],
             $interpreterAttributes['telephone'],
             $interpreterAttributes['zip'],
-            $interpreterAttributes['certification'],
-            $interpreterAttributes['email']
+            $interpreterAttributes['certification']
         ];
 
         $result = Database::getSQLQueryResult($sql, $values);
@@ -106,6 +105,29 @@ class Database
         }
         return $interpreterAttributes;
 
+    }
+
+    public static function addNewEvent($eventAttributes)
+    {
+        self::getConnection();
+        $sql = "INSERT INTO events (eventName, 
+                                    eventZipCode, 
+                                    eventStartUnixTimestamp, 
+                                    eventEndUnixTimestamp, 
+                                    eventClientId,
+                                    eventInterpreterId
+                                    ) 
+                                    VALUES (?,?,?,?,?,?)";
+        $values = [
+            $eventAttributes['eventName'],
+            $eventAttributes['eventZipCode'],
+            $eventAttributes['eventStartUnixTimestamp'],
+            $eventAttributes['eventEndUnixTimestamp'],
+            $eventAttributes['eventClientId'],
+            $eventAttributes['eventInterpreterId'],
+        ];
+        $result = Database::getSQLQueryResult($sql, $values);
+        return $result;
     }
 
     public static function getSQLQueryResult($sql, $args=[])

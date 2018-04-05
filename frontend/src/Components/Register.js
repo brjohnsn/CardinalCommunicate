@@ -21,7 +21,7 @@ export default class Register extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, email:this.state.email, password:this.state.password, gender:this.state.gender, userType:this.state.userType, telephone:this.state.phoneNumber, certification: this.state.certification, zip:this.state.zipcode}).then((response)=> {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, password:this.state.password, gender:this.state.gender, userType:this.state.userType, telephone:this.state.phoneNumber, certification: this.state.certification, zip:this.state.zipcode}).then((response)=> {
             console.log(this.state);
             this.props.history.push("/Login")
         }
