@@ -41,8 +41,8 @@ export default class Client extends Component {
                     <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh'}}>
                         <ul>
                             <h2>Dashboard</h2>
-                            <li>Edit Profile</li>
-                            <li>Search Interpreters</li>
+                            <li><Link to={'/Settings'}>Edit Profile</Link></li>
+                            <li><Link to={'/Search'}>Search Interpreters</Link></li>
                             <li>Find Interpreters Near Me</li>
                         </ul>
                     </div>
