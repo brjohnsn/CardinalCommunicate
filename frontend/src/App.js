@@ -5,6 +5,12 @@ import Login from './Screens/Login';
 import Profile from './Screens/Profile';
 import Register from './Screens/Register';
 import Header from './Components/Header';
+import Settings from './Components/Settings';
+import Search from './Components/Search';
+import Map from './Components/Map';
+import Event from './Components/Event';
+
+
 
 
 //import routes
