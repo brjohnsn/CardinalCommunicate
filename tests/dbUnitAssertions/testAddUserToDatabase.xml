@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <dataset>
-    <users id="100" username="Test1" email="Email1" password="8aca28c64c6634b904a3a3389af10a16ff4ff5b4273dda9ca72f6890d8dc6c73" salt='12345678901234567890123456789012'/>
-    <users id='101' username='User2' email='Email2' password='8aca28c64c6634b904a3a3389af10a16ff4ff5b4273dda9ca72f6890d8dc6c73' salt='12345678901234567890123456789012'/>
+    <users id="1" username="InitialClient" password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"  salt='01234567890123456789012345678901' userType="client" gender="male"/>
+    <users id="2" username="InitialInterpreter" password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"  salt='01234567890123456789012345678901' userType="interpreter" gender="female"/>a
+    <users id="3" username="testUsername1" password="393afd25693c67e0c079038c31b2b4b00d2d7855fb5a88fe842b5239acb5dbe2"  salt='01234567890123456789012345678901' userType="client" gender="male"/>
 </dataset>

@@ -6,7 +6,7 @@ export default class Login extends Component{
     constructor(props){
         super(props);
         this.state = {
-            username:"",
+            userName:"",
             password:"",
         }
     }
@@ -14,9 +14,16 @@ export default class Login extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/Cardinal_cc/public/user/login",{username:this.state.username,  password:this.state.password}).then((response)=> {
-            console.log(response.data);
-            this.props.history.push("/Profile");
+        axios.post("http://localhost:8888/CardinalCC/public/user/login",{username:this.state.userName,  password:this.state.password}).then((response)=> {
+            if(response.data.userType === null){
+                return;
+            }
+            sessionStorage.setItem('username', response.data.username);
+
+            this.props.history.push({
+                pathname:"/Profile",
+                userType:response.data.userType
+            });
         })
 
     }
@@ -26,12 +33,14 @@ export default class Login extends Component{
                 <form onSubmit={(e)=>this.onSubmit(e)} style={{marginLeft:"40%"}}>
                     <h1>Login</h1>
                     <h2>Username</h2>
-                    <input onChange={(e)=>this.setState({username:e.target.value})} value={this.state.username}/>
+                    <input onChange={(e)=>this.setState({userName:e.target.value})} />
                     <h2>Password</h2>
-                    <input onChange={(e)=>this.setState({password:e.target.value})} value={this.state.password}/>
+                    <input onChange={(e)=>this.setState({password:e.target.value})} />
                     <input className="button" type="submit" value="submit"/>
                 </form>
+
             </div>
         );
     }
 }
+
