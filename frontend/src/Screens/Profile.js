@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Interpreter from './Interpreter';
-import Client from './Client';
+import Interpreter from '../Components/Interpreter';
+import Client from '../Components/Client';
 
 export default class Profile extends Component {
     constructor(props) {
