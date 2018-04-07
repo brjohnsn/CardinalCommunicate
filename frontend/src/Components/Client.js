@@ -6,37 +6,50 @@ export default class Client extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            email:"",
+            events:"",
 
         }
     }
 
-    componentWillMount() {
-        axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username:sessionStorage.getItem('username')}).then((response) => {
-            this.setState({username: response.data.username}, );
-            console.log(sessionStorage.getItem('username'));
-        });
-    }
+    // componentWillMount() {
+    //     axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username:sessionStorage.getItem('username')}).then((response) => {
+    //
+    //     });
+    // }
 
     render() {
         return (
             <div>
-                <h1 style={{textAlign:'center'}}>Welcome back {this.state.username}</h1>
+                <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
 
                     <div style={{height:'200px'}}>I am  where the picture will go</div>
                     <div style={{textAlign:'center', width:'25%', margin: 'auto' }}>
-                        <h1>bio</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et erat et leo efficitur posuere. Proin blandit tincidunt egestas. Vivamus cursus eleifend blandit. Pellentesque ac finibus est. Aliquam sed purus vel ante ultrices malesuada. Morbi mi nunc, vehicula vestibulum nunc ut, sollicitudin laoreet neque. Nunc quis posuere enim. Integer nisl magna, aliquam ut tristique eu, eleifend a urna.
+                        <h1>Events:</h1>
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Interpreter</th>
+                                <th>Event Name</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                            </tr>
+                            {this.state.events.map((event)=>{
+                                return(
+                                    <tr>
+                                        <th>{event.date}</th>
+                                        <th>{event.location}</th>
+                                        <th>{event.interpreter}</th>
+                                        <th>{event.name}</th>
+                                        <th>{event.status}</th>
+                                        <th>{event.description}</th>
+                                    </tr>
+                                );
+                            })
+                            }
 
-                            Nunc id odio vitae massa venenatis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque vel massa eget nisl malesuada facilisis ut in arcu. Quisque porta ultrices est et vestibulum. Cras ac pharetra eros, a rutrum purus. Curabitur lacinia malesuada tellus id viverra. Ut semper porta faucibus. Vestibulum semper augue non tortor rhoncus fermentum. Donec imperdiet enim eget odio rutrum gravida. Aenean fermentum ante non dictum pulvinar.
-
-                            Nunc ut leo ac felis ornare imperdiet sit amet sed mauris. Ut vitae laoreet risus, a interdum lorem. Maecenas gravida nisl vitae felis hendrerit, dignissim ullamcorper mi fringilla. Integer tempor congue finibus. Cras consectetur vel purus eget euismod. Morbi mattis nulla sit amet ante consequat tincidunt. Morbi consectetur arcu ac tortor volutpat, in semper magna venenatis. Morbi non dolor nec eros dapibus vulputate.
-
-                            Aliquam varius condimentum malesuada. Suspendisse sagittis, sapien in viverra sollicitudin, nibh tellus varius ex, ac commodo orci ante a nisl. Aliquam tempus pellentesque nisi, vel consectetur turpis convallis in. Curabitur massa mauris, fermentum ac varius nec, facilisis vitae velit. Donec sed nibh semper, fermentum metus quis, tristique quam. Ut fermentum metus et sodales viverra. Ut eget ornare sapien.
-
-                            Sed tortor massa, fermentum vitae condimentum non, vulputate nec risus. Nam in mi purus. Duis non convallis ante. Maecenas vitae faucibus diam. Fusce in tincidunt nisi. Sed eget me</p>
+                        </table>
                     </div>
                     <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh'}}>
                         <ul>
