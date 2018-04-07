@@ -10,6 +10,8 @@ export default class Map extends Component{
         }
     }
     render(){
-        return();
+        return(
+            <div>hey</div>
+        );
     }
 }
