@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 22, 2018 at 11:41 PM
+-- Generation Time: Apr 08, 2018 at 03:42 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -25,20 +25,52 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `eventId` int(32) NOT NULL,
+  `eventName` varchar(64) NOT NULL,
+  `eventDescription` mediumtext,
+  `eventVenueName` varchar(255) DEFAULT NULL,
+  `eventAddress1` varchar(255) DEFAULT NULL,
+  `eventAddress2` varchar(255) DEFAULT NULL,
+  `eventCity` varchar(255) DEFAULT NULL,
+  `eventState` varchar(255) DEFAULT NULL,
+  `eventZip` int(5) NOT NULL,
+  `eventStartUnixTimestamp` int(16) NOT NULL,
+  `eventStatus` varchar(255) DEFAULT NULL,
+  `eventClientId` int(11) NOT NULL,
+  `eventInterpreterId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueName`, `eventAddress1`, `eventAddress2`, `eventCity`, `eventState`, `eventZip`, `eventStartUnixTimestamp`, `eventStatus`, `eventClientId`, `eventInterpreterId`) VALUES
+(1, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1530541800, 'Test Event Status', 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `interpreters`
 --
 
 CREATE TABLE `interpreters` (
-  `id` int(8) NOT NULL,
-  `zip` int(5) NOT NULL
+  `interpreterId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `zip` varchar(255) NOT NULL,
+  `certification` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `interpreters`
 --
 
-INSERT INTO `interpreters` (`id`, `zip`) VALUES
-(1, 0);
+INSERT INTO `interpreters` (`interpreterId`, `userId`, `telephone`, `zip`, `certification`) VALUES
+(1, 2, '1234567', '12345', 'CDI');
 
 -- --------------------------------------------------------
 
@@ -47,31 +79,38 @@ INSERT INTO `interpreters` (`id`, `zip`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(8) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `salt` varchar(32) NOT NULL,
-  `type` char(16) NOT NULL
+  `id` int(11) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `salt` varbinary(255) DEFAULT NULL,
+  `userType` varchar(32) NOT NULL,
+  `gender` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `salt`, userType) VALUES
-(1, 'InitialUser', 'InitialPassword', 'InitialEmail', 'NULL', 'client'),
-(2, 'testUsername1', 'testPassword1', 'testEmail1', 'NULL', 'client');
+INSERT INTO `users` (`id`, `username`, `password`, `salt`, `userType`, `gender`) VALUES
+(1, 'InitialClient', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'client', 'male'),
+(2, 'InitialInterpreter', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'interpreter', 'female');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`eventId`);
+
+--
 -- Indexes for table `interpreters`
 --
 ALTER TABLE `interpreters`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`interpreterId`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- Indexes for table `users`
@@ -84,20 +123,20 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `eventId` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `interpreters`
+--
+ALTER TABLE `interpreters`
+  MODIFY `interpreterId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `interpreters`
---
-ALTER TABLE `interpreters`
-  ADD CONSTRAINT `interpreters_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
-COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

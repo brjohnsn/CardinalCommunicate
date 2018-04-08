@@ -1,8 +1,37 @@
 <?xml version="1.0" ?>
 <dataset>
-    <users id="1" username="InitialClient" password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"  salt='01234567890123456789012345678901' userType="client" gender="male"/>
-    <users id="2" username="InitialInterpreter" password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"  salt='01234567890123456789012345678901' userType="interpreter" gender="female"/>
-    <interpreters interpreterId="1" userId="2" telephone="1234567" zip="12345" certification="CDI"/>
-    <events eventId="1" eventName="InitialEvent" eventZipCode="55555" eventStartUnixTimestamp="1530541800" eventEndUnixTimestamp="1530543600" eventClientId="1" eventInterpreterId="1"/>
-
+    <users id="1"
+           username="InitialClient"
+           password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"
+           salt='01234567890123456789012345678901'
+           userType="client"
+           gender="male"
+    />
+    <users id="2"
+           username="InitialInterpreter"
+           password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"
+           salt='01234567890123456789012345678901'
+           userType="interpreter"
+           gender="female"
+    />
+    <interpreters interpreterId="1"
+                  userId="2"
+                  telephone="1234567"
+                  zip="12345"
+                  certification="CDI"
+    />
+    <events eventId="1"
+            eventName="InitialEvent"
+            eventDescription="TestDescription"
+            eventVenueName="TestEventVenueName"
+            eventAddress1="Test Address 1"
+            eventAddress2="Test Address 2"
+            eventCity="Test Event City"
+            eventState="TS"
+            eventZip="55555"
+            eventStartUnixTimestamp="1530541800"
+            eventStatus="Test Event Status"
+            eventClientId="1"
+            eventInterpreterId="1"
+    />
 </dataset>
