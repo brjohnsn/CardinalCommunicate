@@ -56,7 +56,7 @@ export default class Client extends Component {
                             <h2>Dashboard</h2>
                             <li><Link to={'/Settings'}>Edit Profile</Link></li>
                             <li><Link to={'/Search'}>Search Interpreters</Link></li>
-                            <li>Find Interpreters Near Me</li>
+                            <li><Link to={'/Map/'+this.props.userInfo.username}>Find Interpreters Near Me</Link></li>
                         </ul>
                     </div>
 

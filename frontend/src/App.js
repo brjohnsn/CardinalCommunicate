@@ -5,10 +5,11 @@ import Login from './Screens/Login';
 import Profile from './Screens/Profile';
 import Register from './Screens/Register';
 import Header from './Components/Header';
-import Settings from './Components/Settings';
-import Search from './Components/Search';
-import Map from './Components/Map';
+import Search from './Screens/Search';
+import Map from './Screens/Map';
 import Event from './Components/Event';
+import Settings from './Screens/Settings';
+
 
 
 
@@ -25,10 +26,10 @@ export default class App extends Component{
                     <Route exact path="/Login" component={Login}/>
                     <Route exact path="/Register" component={Register}/>
                     <Route exact path="/Profile" component={Profile}/>
-                    <Route exact pathe="/Settings" component={Settings}/>
+                    <Route exact path="/Settings" component={Settings}/>
                     <Route exact path ="/Search" component={Search}/>
-                    <Route exact path ="/Map" component={Map}/>
-                    <Route exact path ="Event" component={Event}/>
+                    <Route exact path ="/Map/:username" component={Map}/>
+                    <Route exact path ="/Event" component={Event}/>
             </Switch>
             </div>
         );
