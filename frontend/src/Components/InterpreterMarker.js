@@ -8,8 +8,11 @@ export default class InterpreterMarker extends Component {
     // field is null after the axios request. If it is then it sets the state of the value that dictates what interpreter is chosen and
     //provides some cue(such as filling out the textbox or dropdown menue for choice) that the interpreter has been chosen
     render() {
+        const interpreterPoint={backgroundColor:'red'};
+        const interpreterPointHover={backgroundColor:'blue'};
+        const style = this.props.hover ? interpreterPoint : interpreterPointHover;
         return(
-            <div>hey</div>
+            <div style={style}>hey</div>
         );
     }
 }
