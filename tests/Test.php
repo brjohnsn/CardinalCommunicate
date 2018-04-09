@@ -133,28 +133,35 @@ class UnitTests extends TestCase
 
     }
 
-
-
-    public function testAddEventToDatabase()
+    public function testGetClientEventsByClientId()
     {
-        echo mktime(13,0,0,7,2,2018);
-        $eventAttributes = [
-            'eventName' => 'testEvent1',
-            'eventZipCode' => '55555',
-            'eventStartUnixTimestamp' => mktime(14,30,0,7,2,2018),
-            'eventEndUnixTimestamp' => mktime(13,0,0,7,2,2018),
-            'eventClientId' => '1',
-            'eventInterpreterId' => '1',
-
-    ];
-
-        Database::addNewEvent($eventAttributes);
+        $clientEvents = Database::getClientEventsByClientId('1');
+        var_dump($clientEvents);
 
 
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
-        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
-        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
 
     }
+
+//    public function testAddEventToDatabase()
+//    {
+//        echo mktime(13,0,0,7,2,2018);
+//        $eventAttributes = [
+//            'eventName' => 'testEvent1',
+//            'eventZipCode' => '55555',
+//            'eventStartUnixTimestamp' => mktime(14,30,0,7,2,2018),
+//            'eventEndUnixTimestamp' => mktime(13,0,0,7,2,2018),
+//            'eventClientId' => '1',
+//            'eventInterpreterId' => '1',
+//
+//    ];
+//
+//        Database::addNewEvent($eventAttributes);
+//
+//
+//        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
+//        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
+//        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
+//
+//    }
 
 }

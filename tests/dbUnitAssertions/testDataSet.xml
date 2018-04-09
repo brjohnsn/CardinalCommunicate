@@ -35,6 +35,20 @@
             eventClientId="1"
             eventInterpreterId="1"
     />
+    <events eventId="2"
+            eventName="InitialEvent"
+            eventDescription="TestDescription"
+            eventVenueName="TestEventVenueName"
+            eventAddress1="Test Address 1"
+            eventAddress2="Test Address 2"
+            eventCity="Test Event City"
+            eventState="TS"
+            eventZip="55555"
+            eventStartUnixTimestamp="1530541800"
+            eventStatus="Test Event Status"
+            eventClientId="1"
+            eventInterpreterId="1"
+    />
 
     
 </dataset>

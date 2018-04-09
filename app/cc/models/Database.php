@@ -67,28 +67,9 @@ class Database
         $values = [$userAttributes['id'],
             $interpreterAttributes['telephone'],
             $interpreterAttributes['zip'],
-            $interpreterAttributes['certification']
+            $interpreterAttributes['certification']];
 
-    public static function addNewEvent($eventAttributes)
-    {
-        self::getConnection();
-        $sql = "INSERT INTO events (eventName, 
-                                    eventZipCode, 
-                                    eventStartUnixTimestamp, 
-                                    eventEndUnixTimestamp, 
-                                    eventClientId,
-                                    eventInterpreterId
-                                    ) 
-                                    VALUES (?,?,?,?,?,?)";
-        $values = [
-            $eventAttributes['eventName'],
-            $eventAttributes['eventZipCode'],
-            $eventAttributes['eventStartUnixTimestamp'],
-            $eventAttributes['eventEndUnixTimestamp'],
-            $eventAttributes['eventClientId'],
-            $eventAttributes['eventInterpreterId'],
 
-        ];
 
         $result = Database::getSQLQueryResult($sql, $values);
         return $result;
@@ -156,6 +137,36 @@ class Database
         $sqlQuery = self::$_phpDatabaseObject->prepare($sql);
         $sqlQuery->execute($args);
         return $sqlQuery;
+    }
+
+    public static function getClientEventsByClientId($clientId)
+    {
+        $sql = "SELECT * FROM events WHERE eventClientId = 1";
+        $values = [$clientId];
+
+        $queryResults = Database::getSQLQueryResult($sql, $values);
+
+        $clientEvents = [];
+
+       foreach ($queryResults as $queryResult) {
+           $clientEvent = [
+               'eventId' => $queryResult['eventId'],
+               'eventName' => $queryResult['eventName'],
+               'eventDescription' => $queryResult['eventDescription'],
+               'eventVenueName' => $queryResult['eventVenueName'],
+               'eventAddress1' => $queryResult['eventAddress1'],
+               'eventAddress2' => $queryResult['eventAddress2'],
+               'eventCity' => $queryResult['eventCity'],
+               'eventState' => $queryResult['eventState'],
+               'eventZip' => $queryResult['eventZip'],
+               'eventClientId' => $queryResult['eventClientId'],
+               'eventInterpreerId' => $queryResult['eventInterpreterId'],
+               ];
+
+           array_push($clientEvents, $clientEvent);
+       }
+
+        return $clientEvents;
     }
 
 }
