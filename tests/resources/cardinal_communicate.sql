@@ -55,7 +55,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `userType`, `gender`) VALUES
+INSERT INTO `users` (userId, `username`, `password`, `salt`, `userType`, `gender`) VALUES
 (1, 'InitialUser', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'client', 'male');
 
 --
@@ -73,7 +73,7 @@ ALTER TABLE `interpreters`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (userId);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -88,7 +88,7 @@ ALTER TABLE `interpreters`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY userId int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

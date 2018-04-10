@@ -27,7 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `events`
 --
-
+CREATE DATABASE `cardinal_communicate`;
+USE cardinal_communicate;
 CREATE TABLE `events` (
   `eventId` int(32) NOT NULL,
   `eventName` varchar(64) NOT NULL,
@@ -47,7 +48,7 @@ CREATE TABLE `events` (
 --
 -- Dumping data for table `events`
 --
-
+USE cardinal_communicate;
 INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueName`, `eventAddress1`, `eventAddress2`, `eventCity`, `eventState`, `eventZip`, `eventStartUnixTimestamp`, `eventStatus`, `eventClientId`, `eventInterpreterId`) VALUES
 (1, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1530541800, 'Test Event Status', 1, 1);
 
@@ -56,7 +57,7 @@ INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueNam
 --
 -- Table structure for table `interpreters`
 --
-
+USE cardinal_communicate;
 CREATE TABLE `interpreters` (
   `interpreterId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -77,7 +78,7 @@ INSERT INTO `interpreters` (`interpreterId`, `userId`, `telephone`, `zip`, `cert
 --
 -- Table structure for table `users`
 --
-
+USE cardinal_communicate;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
@@ -130,6 +131,7 @@ ALTER TABLE `events`
 --
 -- AUTO_INCREMENT for table `interpreters`
 --
+
 ALTER TABLE `interpreters`
   MODIFY `interpreterId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --

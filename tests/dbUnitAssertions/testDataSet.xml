@@ -30,7 +30,8 @@
             eventCity="Test Event City"
             eventState="TS"
             eventZip="55555"
-            eventStartUnixTimestamp="1530541800"
+            eventStartUnixTimestamp="1523328593"
+
             eventStatus="Test Event Status"
             eventClientId="1"
             eventInterpreterId="1"
@@ -44,7 +45,7 @@
             eventCity="Test Event City"
             eventState="TS"
             eventZip="55555"
-            eventStartUnixTimestamp="1530541800"
+            eventStartUnixTimestamp="1523328593"
             eventStatus="Test Event Status"
             eventClientId="1"
             eventInterpreterId="1"
