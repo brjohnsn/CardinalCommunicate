@@ -25,19 +25,19 @@ export default class Client extends Component {
                                 <th>Status</th>
                                 <th>Description</th>
                             </tr>
-                            {this.props.userInfo.events.map((event)=>{
-                                return(
-                                    <tr>
-                                        <th>{event.date}</th>
-                                        <th>{event.location}</th>
-                                        <th>{event.interpreter}</th>
-                                        <th>{event.name}</th>
-                                        <th>{event.status}</th>
-                                        <th>{event.description}</th>
-                                    </tr>
-                                );
-                            })
-                            }
+                            {/*{this.props.userInfo.events.map((event)=>{*/}
+                                {/*return(*/}
+                                    {/*<tr>*/}
+                                        {/*<th>{event.date}</th>*/}
+                                        {/*<th>{event.location}</th>*/}
+                                        {/*<th>{event.interpreter}</th>*/}
+                                        {/*<th>{event.name}</th>*/}
+                                        {/*<th>{event.status}</th>*/}
+                                        {/*<th>{event.description}</th>*/}
+                                    {/*</tr>*/}
+                                {/*);*/}
+                            {/*})*/}
+                            {/*}*/}
 
                         </table>
                     </div>
