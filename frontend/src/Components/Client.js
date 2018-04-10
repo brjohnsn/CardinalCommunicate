@@ -5,17 +5,7 @@ import {Link} from 'react-router-dom';
 export default class Client extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            events:"",
-
-        }
     }
-
-    // componentWillMount() {
-    //     axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username:sessionStorage.getItem('username')}).then((response) => {
-    //
-    //     });
-    // }
 
     render() {
         return (
@@ -35,19 +25,19 @@ export default class Client extends Component {
                                 <th>Status</th>
                                 <th>Description</th>
                             </tr>
-                            {/*{this.state.events.map((event)=>{*/}
-                                {/*return(*/}
-                                    {/*<tr>*/}
-                                        {/*<th>{event.date}</th>*/}
-                                        {/*<th>{event.location}</th>*/}
-                                        {/*<th>{event.interpreter}</th>*/}
-                                        {/*<th>{event.name}</th>*/}
-                                        {/*<th>{event.status}</th>*/}
-                                        {/*<th>{event.description}</th>*/}
-                                    {/*</tr>*/}
-                                {/*);*/}
-                            {/*})*/}
-                            {/*}*/}
+                            {this.props.userInfo.events.map((event)=>{
+                                return(
+                                    <tr>
+                                        <th>{event.date}</th>
+                                        <th>{event.location}</th>
+                                        <th>{event.interpreter}</th>
+                                        <th>{event.name}</th>
+                                        <th>{event.status}</th>
+                                        <th>{event.description}</th>
+                                    </tr>
+                                );
+                            })
+                            }
 
                         </table>
                     </div>
@@ -56,7 +46,7 @@ export default class Client extends Component {
                             <h2>Dashboard</h2>
                             <li><Link to={'/Settings'}>Edit Profile</Link></li>
                             <li><Link to={'/Search'}>Search Interpreters</Link></li>
-                            <li><Link to={'/Map/'+this.props.userInfo.username}>Find Interpreters Near Me</Link></li>
+                            <li><Link to={'/Map/'+this.props.userInfo}>Find Interpreters Near Me</Link></li>
                         </ul>
                     </div>
 
