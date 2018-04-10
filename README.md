@@ -1,3 +1,5 @@
+##Authors: Chris Savage, Damon Perkins, Matthew Schymik, Noah Shirey
+
 # This project requires a local hosting environment with Apache2 and a MYSQL database configured. PHP 7 and Composer are required.
 
 ## Install the required files

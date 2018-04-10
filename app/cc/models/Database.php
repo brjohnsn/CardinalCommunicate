@@ -58,6 +58,7 @@ class Database
         return $result;
     }
 
+
     public static function addNewInterpreter($interpreterAttributes)
     {
         $userAttributes = self::getUserAttributesByUsername($interpreterAttributes['username']);
@@ -67,12 +68,31 @@ class Database
             $interpreterAttributes['telephone'],
             $interpreterAttributes['zip'],
             $interpreterAttributes['certification']
+
+    public static function addNewEvent($eventAttributes)
+    {
+        self::getConnection();
+        $sql = "INSERT INTO events (eventName, 
+                                    eventZipCode, 
+                                    eventStartUnixTimestamp, 
+                                    eventEndUnixTimestamp, 
+                                    eventClientId,
+                                    eventInterpreterId
+                                    ) 
+                                    VALUES (?,?,?,?,?,?)";
+        $values = [
+            $eventAttributes['eventName'],
+            $eventAttributes['eventZipCode'],
+            $eventAttributes['eventStartUnixTimestamp'],
+            $eventAttributes['eventEndUnixTimestamp'],
+            $eventAttributes['eventClientId'],
+            $eventAttributes['eventInterpreterId'],
+
         ];
 
         $result = Database::getSQLQueryResult($sql, $values);
         return $result;
     }
-
 
     public static function getUserAttributesByUsername($username)
     {
