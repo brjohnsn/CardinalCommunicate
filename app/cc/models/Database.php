@@ -69,24 +69,24 @@ class Database
             $interpreterAttributes['zip'],
             $interpreterAttributes['certification']
 
-    public static function addNewEvent($eventAttributes)
-    {
-        self::getConnection();
-        $sql = "INSERT INTO events (eventName, 
-                                    eventZipCode, 
-                                    eventStartUnixTimestamp, 
-                                    eventEndUnixTimestamp, 
-                                    eventClientId,
-                                    eventInterpreterId
-                                    ) 
-                                    VALUES (?,?,?,?,?,?)";
-        $values = [
-            $eventAttributes['eventName'],
-            $eventAttributes['eventZipCode'],
-            $eventAttributes['eventStartUnixTimestamp'],
-            $eventAttributes['eventEndUnixTimestamp'],
-            $eventAttributes['eventClientId'],
-            $eventAttributes['eventInterpreterId'],
+//    public static function addNewEvent($eventAttributes)
+//    {
+//        self::getConnection();
+//        $sql = "INSERT INTO events (eventName,
+//                                    eventZipCode,
+//                                    eventStartUnixTimestamp,
+//                                    eventEndUnixTimestamp,
+//                                    eventClientId,
+//                                    eventInterpreterId
+//                                    )
+//                                    VALUES (?,?,?,?,?,?)";
+//        $values = [
+//            $eventAttributes['eventName'],
+//            $eventAttributes['eventZipCode'],
+//            $eventAttributes['eventStartUnixTimestamp'],
+//            $eventAttributes['eventEndUnixTimestamp'],
+//            $eventAttributes['eventClientId'],
+//            $eventAttributes['eventInterpreterId'],
 
         ];
 
