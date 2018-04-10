@@ -31,6 +31,7 @@ export default class Map extends Component{
         zoom: 11
     };
 
+
     render() {
         return (
             <div style={{width:'300px', height:'300px'}}>
@@ -42,6 +43,9 @@ export default class Map extends Component{
                 defaultZoom={this.props.zoom}
             >
                 <InterpreterMarker
+                    lat={60}
+                    lng={22}/>
+                <ClientMarker
                     lat={60}
                     lng={22}/>
             </GoogleMapReact>
