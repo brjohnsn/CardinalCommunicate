@@ -34,8 +34,9 @@ export default class Map extends Component{
 
 
     render() {
+        console.log(this.props.location.userInfo);
         return (
-            <div style={{width:'300px', height:'300px'}}>
+            <div style={{width:'100vw', height:'100vh'}}>
                 <h1>map</h1>
                 <button onClick={(e)=>{this.convertAddress()}}>hello</button>
             <GoogleMapReact

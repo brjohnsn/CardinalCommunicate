@@ -12,7 +12,7 @@ export default class InterpreterMarker extends Component {
         const interpreterPointHover={backgroundColor:'blue'};
         const style = this.props.hover ? interpreterPoint : interpreterPointHover;
         return(
-            <div onclick={(e)=>console.log('hey')} style={{width:"20%", height:"20%"}}>
+            <div  style={{width:"20%", height:"20%"}}>
                 <img src="http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-Picture.png" style={{height:'30px', width:'30px'}}/>
             </div>
         );
