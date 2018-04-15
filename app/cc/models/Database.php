@@ -141,7 +141,7 @@ class Database
 
     public static function getClientEventsByClientId($clientId)
     {
-        $sql = "SELECT * FROM events WHERE eventClientId = 1";
+        $sql = "SELECT * FROM events WHERE eventClientId = ?";
         $values = [$clientId];
 
         $queryResults = Database::getSQLQueryResult($sql, $values);
