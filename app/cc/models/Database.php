@@ -139,8 +139,14 @@ class Database
         return $sqlQuery;
     }
 
-    public static function getClientEventDataByClientId($clientId)
+    public static function getClientEventDataByClientUsername($clientUsername)
     {
+        $sql = "SELECT id FROM users WHERE username = ?";
+        $values = [$clientUsername];
+        $queryResults = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
+        $clientId = $queryResults['id'];
+
+
         $sql = "SELECT * FROM events WHERE eventClientId = ?";
         $values = [$clientId];
         $queryResults = Database::getSQLQueryResult($sql, $values);

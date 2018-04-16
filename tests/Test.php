@@ -133,9 +133,9 @@ class UnitTests extends TestCase
 
     }
 
-    public function testGetClientEventsByClientId()
+    public function testGetClientEventsByClientUsername()
     {
-        $clientEvents = Database::getClientEventDataByClientId('1');
+        $clientEvents = Database::getClientEventDataByClientUsername('InitialClient');
 
         $this->assertEquals(2, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);
