@@ -139,45 +139,51 @@ class Database
         return $sqlQuery;
     }
 
-    public static function getClientEventsByClientId($clientId)
+    public static function getClientEventDataByClientId($clientId)
     {
         $sql = "SELECT * FROM events WHERE eventClientId = ?";
         $values = [$clientId];
-
         $queryResults = Database::getSQLQueryResult($sql, $values);
 
+        $clientEvents = self::createListOfClientEvents($queryResults);
+
+        return $clientEvents;
+    }
+
+    private static function createListOfClientEvents($events)
+    {
         $clientEvents = [];
+        foreach ($events as $event) {
 
-       foreach ($queryResults as $queryResult) {
+            $sql = "SELECT username FROM users WHERE id = ?";
+            $values = [$event['eventInterpreterId'],
+            ];
 
-           $sql ="SELECT username FROM users WHERE id = ?";
-           $values = [$queryResult['eventInterpreterId'],
-               ];
+            $eventInterpreter = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
 
-           $queryResults = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
+            $interpreterUsername = $eventInterpreter['username'];
 
-           $interpreterUsername = $queryResults['username'];
+            $clientEvent = [
+                'eventId' => $event['eventId'],
+                'eventName' => $event['eventName'],
+                'eventDate' => date("m/d/y", $event['eventStartUnixTimestamp']),
+                'eventTime' => date("g:i A", $event['eventStartUnixTimestamp']),
+                'eventDescription' => $event['eventDescription'],
+                'eventVenueName' => $event['eventVenueName'],
+                'eventAddress1' => $event['eventAddress1'],
+                'eventAddress2' => $event['eventAddress2'],
+                'eventCity' => $event['eventCity'],
+                'eventState' => $event['eventState'],
+                'eventZip' => $event['eventZip'],
+                'eventClientId' => $event['eventClientId'],
+                'eventInterpreterId' => $event['eventInterpreterId'],
+                'eventInterpreterFirstName' => $interpreterUsername,
+                'eventInterpreterLastName' => $interpreterUsername,
+            ];
 
-           $clientEvent = [
-               'eventId' => $queryResult['eventId'],
-               'eventName' => $queryResult['eventName'],
-               'eventDate' => date("m/d/y", $queryResult['eventStartUnixTimestamp']),
-               'eventTime' => date("g:i A", $queryResult['eventStartUnixTimestamp']),
-               'eventDescription' => $queryResult['eventDescription'],
-               'eventVenueName' => $queryResult['eventVenueName'],
-               'eventAddress1' => $queryResult['eventAddress1'],
-               'eventAddress2' => $queryResult['eventAddress2'],
-               'eventCity' => $queryResult['eventCity'],
-               'eventState' => $queryResult['eventState'],
-               'eventZip' => $queryResult['eventZip'],
-               'eventClientId' => $queryResult['eventClientId'],
-               'eventInterpreterId' => $queryResult['eventInterpreterId'],
-               'eventInterpreterFirstName' => $interpreterUsername,
-               'eventInterpreterLastName' => $interpreterUsername,
-               ];
+            array_push($clientEvents, $clientEvent);
 
-           array_push($clientEvents, $clientEvent);
-       }
+        }
 
         return $clientEvents;
     }
