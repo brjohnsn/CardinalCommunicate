@@ -31,8 +31,19 @@ class userC
     {
         $body = $request->getParsedBody();
         $userAttributes = Database::getUserAttributesByUsername($body['username']);
+        $userEvents = Database::getClientEventDataByClientUsername($body['username']);
+
+        foreach ($userEvents as $userEvent)
+        {$userEvent = array_map('utf8_encode', $userEvent);
+        }
+
+        $userEvents = json_encode($userEvents);
+
         $userAttributes = array_map('utf8_encode', $userAttributes);
         $jsonUserAttributes = json_encode($userAttributes);
+
+        $jsonUserAttributes = json_encode(array_merge(json_decode($jsonUserAttributes, true), json_decode($userEvents, true)));
+
         return $jsonUserAttributes;
     }
 }
