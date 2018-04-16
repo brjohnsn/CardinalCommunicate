@@ -149,9 +149,20 @@ class Database
         $clientEvents = [];
 
        foreach ($queryResults as $queryResult) {
+
+           $sql ="SELECT username FROM users WHERE id = ?";
+           $values = [$queryResult['eventInterpreterId'],
+               ];
+
+           $queryResults = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
+
+           $interpreterUsername = $queryResults['username'];
+
            $clientEvent = [
                'eventId' => $queryResult['eventId'],
                'eventName' => $queryResult['eventName'],
+               'eventDate' => date("m/d/y", $queryResult['eventStartUnixTimestamp']),
+               'eventTime' => date("g:i A", $queryResult['eventStartUnixTimestamp']),
                'eventDescription' => $queryResult['eventDescription'],
                'eventVenueName' => $queryResult['eventVenueName'],
                'eventAddress1' => $queryResult['eventAddress1'],
@@ -160,7 +171,9 @@ class Database
                'eventState' => $queryResult['eventState'],
                'eventZip' => $queryResult['eventZip'],
                'eventClientId' => $queryResult['eventClientId'],
-               'eventInterpreerId' => $queryResult['eventInterpreterId'],
+               'eventInterpreterId' => $queryResult['eventInterpreterId'],
+               'eventInterpreterFirstName' => $interpreterUsername,
+               'eventInterpreterLastName' => $interpreterUsername,
                ];
 
            array_push($clientEvents, $clientEvent);

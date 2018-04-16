@@ -139,6 +139,8 @@ class UnitTests extends TestCase
 
         $this->assertEquals(2, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);
+
+        var_dump($clientEvents);
     }
 
 //    public function testAddEventToDatabase()

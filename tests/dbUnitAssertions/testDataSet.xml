@@ -34,7 +34,7 @@
 
             eventStatus="Test Event Status"
             eventClientId="1"
-            eventInterpreterId="1"
+            eventInterpreterId="2"
     />
     <events eventId="2"
             eventName="InitialEvent"
@@ -48,7 +48,7 @@
             eventStartUnixTimestamp="1523328593"
             eventStatus="Test Event Status"
             eventClientId="1"
-            eventInterpreterId="1"
+            eventInterpreterId="2"
     />
     <events eventId="3"
             eventName="Event3"
