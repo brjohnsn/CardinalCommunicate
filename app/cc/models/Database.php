@@ -92,6 +92,7 @@ class Database
 
 
         $result = Database::getSQLQueryResult($sql, $values);
+
         return $result;
     }
 
@@ -103,6 +104,7 @@ class Database
             $interpreterAttributes = self::getInterpreterAttributesByUserId($userAttributes['id']);
             $userAttributes = array_merge($userAttributes, $interpreterAttributes);
         }
+
         return $userAttributes;
     }
 
@@ -171,9 +173,9 @@ class Database
         $values = [$clientId];
         $queryResults = Database::getSQLQueryResult($sql, $values);
 
-        $clientEvents = self::createListOfClientEvents($queryResults);
+        $clientEventsList = self::createListOfClientEvents($queryResults);
 
-        return $clientEvents;
+        return $clientEventsList;
     }
 
     private static function createListOfClientEvents($events)
