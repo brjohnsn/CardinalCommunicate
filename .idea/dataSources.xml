@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cardinal_communicate@localhost" uuid="85dc2e15-e24a-4035-b5a9-3b556caae4eb">
+    <data-source source="LOCAL" name="@localhost" uuid="e2385895-86e7-49b1-92cc-d3c9a7de38c1">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/cardinal_communicate</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:8889</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

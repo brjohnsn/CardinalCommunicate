@@ -133,28 +133,38 @@ class UnitTests extends TestCase
 
     }
 
-
-
-    public function testAddEventToDatabase()
+    public function testGetClientEventsByClientUsername()
     {
-        echo mktime(13,0,0,7,2,2018);
-        $eventAttributes = [
-            'eventName' => 'testEvent1',
-            'eventZipCode' => '55555',
-            'eventStartUnixTimestamp' => mktime(14,30,0,7,2,2018),
-            'eventEndUnixTimestamp' => mktime(13,0,0,7,2,2018),
-            'eventClientId' => '1',
-            'eventInterpreterId' => '1',
+        $clientEvents = Database::getClientEventDataByClientUsername('InitialClient');
 
-    ];
+        $this->assertEquals(2, sizeof($clientEvents));
+        $this->assertEquals('1', $clientEvents[0]['eventId']);
 
-        Database::addNewEvent($eventAttributes);
-
-
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
-        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
-        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
-
+        var_dump($clientEvents);
     }
+
+//    public function testAddEventToDatabase()
+//    {
+//        echo mktime(13,0,0,7,2,2018);
+//        // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
+//        //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
+//        echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
+//        $eventAttributes = [
+//            'eventName' => 'testEvent1',
+//            'eventZipCode' => '55555',
+//            'eventStartUnixTimestamp' => date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00')),
+//            'eventEndUnixTimestamp' => date('JUL 2 2018 2:17 PM', strtotime('2018-07-02 02:17:00 ')),
+//            'eventClientId' => '1',
+//            'eventInterpreterId' => '1',
+//
+//    ];
+//
+//        Database::addNewEvent($eventAttributes);
+//
+//        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
+//        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
+//        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
+//
+//    }
 
 }
