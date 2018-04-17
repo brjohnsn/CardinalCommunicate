@@ -46,7 +46,7 @@ class ModelTest extends TestCase
             'gender' => 'male'
                           ];
 
-        Database::addNewUser($userAttributes);
+        User::addNewUser($userAttributes);
 
         $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
         $actualResultTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
@@ -65,7 +65,7 @@ class ModelTest extends TestCase
             'certification' => 'CDI',
         ];
 
-        Database::addNewUser($userAttributes);
+        User::addNewUser($userAttributes);
 
         $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testAddInterpreterToDatabase.xml')->getTable('interpreters');
         $actualResultTable = $this->getConnection()->createQueryTable('interpreters', 'SELECT * FROM interpreters');

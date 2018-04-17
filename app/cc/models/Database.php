@@ -25,7 +25,7 @@ class Database
         self::$_phpDatabaseObject = new PDO($dataSourceName, $databaseUser, $databasePassword, $databaseConnectionOptions);
     }
 
-    private static function getConnection()
+    public static function getConnection()
     {
         if (self::$_databaseConnection === null)
         {
@@ -34,47 +34,10 @@ class Database
         return self::$_databaseConnection;
     }
 
-    public static function addNewUser($userAttributes)
-    {
-        $encryptionSalt = Password::getEncryptionSaltBasedOnUserAttributes($userAttributes);
-        $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
-
-        self::getConnection();
-        $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?,?)";
-        $values = [
-            $userAttributes['username'],
-            $hashedPassword,
-            $encryptionSalt,
-            $userAttributes['userType'],
-            $userAttributes['gender']
-            ];
-
-        $result = Database::getSQLQueryResult($sql, $values);
-
-        if ($userAttributes['userType'] == 'interpreter')
-        {
-            self::addNewInterpreter($userAttributes);
-        }
-        return $result;
-    }
-
-
-    public static function addNewInterpreter($interpreterAttributes)
-    {
-        $userAttributes = self::getUserAttributesByUsername($interpreterAttributes['username']);
-
-        $sql = "INSERT INTO interpreters (userId, telephone, zip, certification) VALUES (?,?,?,?)";
-        $values = [$userAttributes['id'],
-            $interpreterAttributes['telephone'],
-            $interpreterAttributes['zip'],
-            $interpreterAttributes['certification']];
 
 
 
-        $result = Database::getSQLQueryResult($sql, $values);
 
-        return $result;
-    }
 
     public static function getUserAttributesByUsername($username)
     {

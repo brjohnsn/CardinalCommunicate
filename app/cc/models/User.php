@@ -21,6 +21,30 @@ class User
         }
     }
 
+    public static function addNewUser($userAttributes)
+    {
+        $encryptionSalt = Password::getEncryptionSaltBasedOnUserAttributes($userAttributes);
+        $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
+
+        Database::getConnection();
+        $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?,?)";
+        $values = [
+            $userAttributes['username'],
+            $hashedPassword,
+            $encryptionSalt,
+            $userAttributes['userType'],
+            $userAttributes['gender']
+        ];
+
+        $result = Database::getSQLQueryResult($sql, $values);
+
+        if ($userAttributes['userType'] == 'interpreter')
+        {
+            Interpreter::addNewInterpreter($userAttributes);
+        }
+        return $result;
+    }
+
     public static function getValidUser($username, $password)
     {
 

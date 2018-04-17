@@ -23,7 +23,7 @@ class userC
     public static function Register($request, $response)
     {
         $body = $request->getParsedBody();
-        Database::addNewUser($body);
+        User::addNewUser($body);
     }
 
 
