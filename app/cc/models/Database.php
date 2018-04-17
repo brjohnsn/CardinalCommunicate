@@ -35,16 +35,12 @@ class Database
     }
 
 
-
-
-
-
     public static function getUserAttributesByUsername($username)
     {
         $userAttributes = self::getUniversalUserAttributesByUsername($username);
         if ($userAttributes['userType'] == 'interpreter')
         {
-            $interpreterAttributes = self::getInterpreterAttributesByUserId($userAttributes['id']);
+            $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
             $userAttributes = array_merge($userAttributes, $interpreterAttributes);
         }
 
@@ -60,18 +56,7 @@ class Database
 
     }
 
-    public static function getInterpreterAttributesByUserId($userId){
-        $sql = "SELECT * FROM interpreters WHERE userId = ?";
-        $arguments = [$userId];
-        $interpreterAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
 
-        if (empty($interpreterAttributes))
-        {
-            $interpreterAttributes=[];
-        }
-        return $interpreterAttributes;
-
-    }
 
     public static function addNewEvent($eventAttributes)
     {

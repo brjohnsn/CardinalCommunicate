@@ -7,6 +7,7 @@
  */
 
 namespace cc\models;
+use PDO;
 
 
 class Interpreter
@@ -26,5 +27,18 @@ class Interpreter
         $result = Database::getSQLQueryResult($sql, $values);
 
         return $result;
+    }
+
+    public static function getInterpreterAttributesByUserId($userId){
+        $sql = "SELECT * FROM interpreters WHERE userId = ?";
+        $arguments = [$userId];
+        $interpreterAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($interpreterAttributes))
+        {
+            $interpreterAttributes=[];
+        }
+        return $interpreterAttributes;
+
     }
 }

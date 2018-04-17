@@ -109,7 +109,7 @@ class ModelTest extends TestCase
     public function testGetInterpreterAttributesById()
     {
         $id = '2';
-        $interpreterAttributes = Database::getInterpreterAttributesByUserId($id);
+        $interpreterAttributes = \cc\models\Interpreter::getInterpreterAttributesByUserId($id);
 
         $this->assertEquals('1234567', $interpreterAttributes['telephone']);
 
