@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
 use cc\models\Password;
 use cc\models\User;
+use cc\models\Client;
 
 use cc\models\Database;
 
@@ -136,7 +137,7 @@ class ModelTest extends TestCase
 
     public function testGetClientEventsByClientUsername()
     {
-        $clientEvents = Database::getClientEventDataByClientUsername('InitialClient');
+        $clientEvents = Client::getClientEventDataByClientUsername('InitialClient');
 
         $this->assertEquals(2, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);

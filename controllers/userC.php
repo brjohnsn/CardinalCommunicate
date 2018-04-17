@@ -1,6 +1,7 @@
 <?php
 use cc\models\User;
 use cc\models\Database;
+use cc\models\Client;
 
 class userC
 {
@@ -31,7 +32,7 @@ class userC
     {
         $body = $request->getParsedBody();
         $userAttributes = User::getUserAttributesByUsername($body['username']);
-        $userEvents = Database::getClientEventDataByClientUsername($body['username']);
+        $userEvents = Client::getClientEventDataByClientUsername($body['username']);
 
         foreach ($userEvents as $userEvent)
         {$userEvent = array_map('utf8_encode', $userEvent);
