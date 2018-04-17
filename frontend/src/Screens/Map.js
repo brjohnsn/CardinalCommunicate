@@ -4,6 +4,7 @@ import {GOOGLE_MAPS_API_KEY} from '../conf/config';
 import ClientMarker from '../Components/ClientMarker';
 import InterpreterMarker from '../Components/InterpreterMarker';
 import axios from "axios/index";
+import interpreters from "../assets/testJson/testInterpreters";
 
 export default class Map extends Component{
     constructor(props){
@@ -20,9 +21,8 @@ export default class Map extends Component{
         //     this.setState({interpreterAddresses: response.data});
         // });
     }
-    convertAddress(){
-        let address = '113 N. Redwood, Muncie IN 47304';
-        axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key="+GOOGLE_MAPS_API_KEY).then((response) => {
+    convertAddress(address){
+        axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY).then((response) => {
             //change zipcode to zip
             console.log(response.data);
     });
@@ -31,19 +31,29 @@ export default class Map extends Component{
         center: {lat: 60, lng: 22},
         zoom: 11
     };
-
-
+    addressTest(){
+        interpreters.interpreters.map((interpreter)=>{
+            var address = (this.convertAddress(interpreter.interpreterAddress));
+            console.log(address);
+            }
+        )
+    }
     render() {
-        console.log(this.props.location.userInfo);
         return (
             <div style={{width:'100vw', height:'100vh'}}>
                 <h1>map</h1>
-                <button onClick={(e)=>{this.convertAddress()}}>hello</button>
+                <button onClick={(e)=>{this.addressTest()}}>hello</button>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY}}
                 defaultCenter={this.props.center}
                 defaultZoom={this.props.zoom}
             >
+                {interpreters.interpreters.map((interpreter)=>{
+                    this.convertAddress(interpreter.interpreterAddress)}).then((response)=>{
+                    <InterpreterMarker
+                        lat={response.results[0].geometry.location.lat}
+                        lng={response.results[0].geometry.location.lng}/>
+                })}
                 <InterpreterMarker
                     lat={60}
                     lng={22}/>
