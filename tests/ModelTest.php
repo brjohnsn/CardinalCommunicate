@@ -7,7 +7,7 @@ use cc\models\User;
 
 use cc\models\Database;
 
-class UnitTests extends TestCase
+class ModelTest extends TestCase
 {
     use TestCaseTrait;
 
@@ -28,7 +28,7 @@ class UnitTests extends TestCase
 
     //Initialize DBUnit dataset
     protected function getDataSet(){
-        return $this->createFlatXMLDataSet('dbUnitAssertions/testDataSet.xml');
+        return $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testDataSet.xml');
     }
 
 
@@ -48,7 +48,7 @@ class UnitTests extends TestCase
 
         Database::addNewUser($userAttributes);
 
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
+        $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
         $actualResultTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
@@ -67,7 +67,7 @@ class UnitTests extends TestCase
 
         Database::addNewUser($userAttributes);
 
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddInterpreterToDatabase.xml')->getTable('interpreters');
+        $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testAddInterpreterToDatabase.xml')->getTable('interpreters');
         $actualResultTable = $this->getConnection()->createQueryTable('interpreters', 'SELECT * FROM interpreters');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }

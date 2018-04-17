@@ -8,11 +8,11 @@
 
 namespace Tests;
 
-//use TestEndPoints;
+//use EndPointsTest;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp;
 
-class TestEndPoints extends TestCase
+class EndPointsTest extends TestCase
 {
     public function testEndpoint_UserRegister()
     {
