@@ -17,16 +17,29 @@ class Event
                                     eventZip, 
                                     eventStartUnixTimestamp, 
                                     eventClientId,
-                                    eventInterpreterId
+                                    eventInterpreterId,
+                                    eventAddress1,
+                                    eventStatus,
+                                    eventState,
+                                    eventEndUnixTimeStamp,
+                                    eventVenueName,
+                                    eventDescription,
+                                    eventCity
                                     ) 
-                                    VALUES (?,?,?,?,?)";
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         $values = [
             $eventAttributes['eventName'],
-            $eventAttributes['eventZipCode'],
+            $eventAttributes['eventZip'],
             $eventAttributes['eventStartUnixTimestamp'],
             $eventAttributes['eventEndUnixTimestamp'],
             $eventAttributes['eventClientId'],
             $eventAttributes['eventInterpreterId'],
+            $eventAttributes['eventAddress1'],
+            $eventAttributes['eventStatus'],
+            $eventAttributes['eventState'],
+            $eventAttributes['eventCity'],
+            $eventAttributes['eventVenueName'],
+            $eventAttributes['eventDescription']
         ];
         $result = Database::getSQLQueryResult($sql, $values);
         return $result;

@@ -1,7 +1,22 @@
 <?xml version="1.0" ?>
 <dataset>
 
-    <events eventId="0" eventName="InitialEvent" eventZipCode="55555" eventStartUnixTimestamp="1530541800" eventEndUnixTimestamp="1530543600" eventClientId="1" eventInterpreterId="1"/>
-    <events eventId="1" eventName="testEvent1" eventZipCode="55555" eventStartUnixTimestamp="1530541800" eventEndUnixTimestamp="1530536400" eventClientId="1" eventInterpreterId="1"/>
+    <events eventId="3"
+            eventName="Event3"
+            eventDescription="TestDescription"
+            eventVenueName="TestEventVenueName"
+            eventAddress1="Test Address 1"
+            eventCity="Test Event City"
+            eventState="TS"
+            eventZip="55555"
+            eventStartUnixTimestamp="1523328593"
+            eventEndUnixTimestamp="1530536400"
+            eventStatus="Test Event Status"
+            eventClientId="1"
+            eventInterpreterId="1"
+    />
+
+
+
 
 </dataset>
