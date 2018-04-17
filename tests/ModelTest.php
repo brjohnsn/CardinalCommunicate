@@ -152,18 +152,24 @@ class ModelTest extends TestCase
         //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
         echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
         $eventAttributes = [
-            'eventName' => 'Event3',
-            'eventZip' => '55555',
-            'eventStartUnixTimestamp' => date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00')),
-            'eventEndUnixTimestamp' => date('JUL 2 2018 2:17 PM', strtotime('2018-07-02 02:17:00 ')),
-            'eventClientId' => '1',
-            'eventInterpreterId' => '1',
-            'eventStatus' => 'Approved',
-            'eventDescription' => 'Test Event City',
+            'eventName' => 'Event4',
+            'eventDescription' => 'TestDescription',
             'eventVenueName'=> 'Test',
             'eventAddress1' => 'TestTEst',
             'eventCity' => 'eventCity',
-            'eventState' => 'eventState',
+            'eventState' => 'TS',
+            'eventZip' => '44444',
+            'eventStartUnixTimestamp' => '1',
+            'eventEndUnixTimestamp' => '1',
+            'eventStatus' => 'Approved',
+            'eventClientId' => '1',
+            'eventInterpreterId' => '1',
+
+
+
+
+
+
 
 
 
@@ -172,8 +178,8 @@ class ModelTest extends TestCase
         \cc\models\Event::addNewEvent($eventAttributes);
 
 
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
-        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT eventName, eventZip, eventStartUnixTimestamp, eventEndUnixTimeStamp, eventClientId, eventInterpreterId, eventAddress1, eventStatus, eventState, eventCity, eventVenueName, eventDescription FROM events');
+        $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ .'/dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
+        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
 
     }

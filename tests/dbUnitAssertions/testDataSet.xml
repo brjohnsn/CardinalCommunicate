@@ -21,20 +21,6 @@
                   zip="12345"
                   certification="CDI"
     />
-    <events eventId="3"
-            eventName="Event3"
-            eventDescription="TestDescription"
-            eventVenueName="TestEventVenueName"
-            eventAddress1="Test Address 1"
-            eventCity="Test Event City"
-            eventState="TS"
-            eventZip="55555"
-            eventStartUnixTimestamp="1523328593"
-            eventEndUnixTimestamp="1530536400"
-            eventStatus="Test Event Status"
-            eventClientId="1"
-            eventInterpreterId="1"
-    />
     <events eventId="1"
             eventName="InitialEvent"
             eventDescription="TestDescription"
@@ -65,9 +51,18 @@
             eventClientId="1"
             eventInterpreterId="2"
     />
-
-
-
-
-    
+    <events eventId="3"
+            eventName="Event3"
+            eventDescription="TestDescription"
+            eventVenueName="TestEventVenueName"
+            eventAddress1="Test Address 1"
+            eventCity="Test Event City"
+            eventState="TS"
+            eventZip="55555"
+            eventStartUnixTimestamp="1523328593"
+            eventEndUnixTimestamp="1530536400"
+            eventStatus="Test Event Status"
+            eventClientId="1"
+            eventInterpreterId="1"
+    />
 </dataset>
