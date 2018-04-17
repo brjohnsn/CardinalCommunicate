@@ -22,8 +22,6 @@ class Interpreter
             $interpreterAttributes['zip'],
             $interpreterAttributes['certification']];
 
-
-
         $result = Database::getSQLQueryResult($sql, $values);
 
         return $result;
@@ -39,6 +37,5 @@ class Interpreter
             $interpreterAttributes=[];
         }
         return $interpreterAttributes;
-
     }
 }

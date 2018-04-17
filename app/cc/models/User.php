@@ -27,7 +27,6 @@ class User
         $encryptionSalt = Password::getEncryptionSaltBasedOnUserAttributes($userAttributes);
         $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
 
-
         $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?,?)";
         $values = [
             $userAttributes['username'],
@@ -48,11 +47,8 @@ class User
 
     public static function getValidUser($username, $password)
     {
-
         $matchingUserAttributes = User::getUserAttributesByUsername($username);
-
         $hashedPassword = Password::hashPassword($password, $matchingUserAttributes['salt']);
-
 
         if($hashedPassword === $matchingUserAttributes['password'])
         {
@@ -77,14 +73,12 @@ class User
         session_destroy();
     }
 
-
     public static function getUniversalUserAttributesByUsername($username)
     {$sql = "SELECT * FROM users WHERE username = ?";
         $arguments = [$username];
         $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
 
         return $userAttributes;
-
     }
 
     public static function getUserAttributesByUsername($username)
@@ -95,7 +89,6 @@ class User
             $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
             $userAttributes = array_merge($userAttributes, $interpreterAttributes);
         }
-
         return $userAttributes;
     }
 }

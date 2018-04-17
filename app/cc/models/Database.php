@@ -34,15 +34,6 @@ class Database
         return self::$_databaseConnection;
     }
 
-
-
-
-
-
-
-
-
-
     public static function getSQLQueryResult($sql, $args=[])
     {
         Database::getConnection();

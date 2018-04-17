@@ -6,7 +6,6 @@ use cc\models\Password;
 use cc\models\User;
 use cc\models\Client;
 
-use cc\models\Database;
 
 class ModelTest extends TestCase
 {

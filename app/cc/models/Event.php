@@ -14,13 +14,12 @@ class Event
     public static function addNewEvent($eventAttributes)
     {
         $sql = "INSERT INTO events (eventName, 
-                                    eventZipCode, 
+                                    eventZip, 
                                     eventStartUnixTimestamp, 
-                                    eventEndUnixTimestamp, 
                                     eventClientId,
                                     eventInterpreterId
                                     ) 
-                                    VALUES (?,?,?,?,?,?)";
+                                    VALUES (?,?,?,?,?)";
         $values = [
             $eventAttributes['eventName'],
             $eventAttributes['eventZipCode'],

@@ -36,10 +36,9 @@ class Client
 
             $sql = "SELECT username FROM users WHERE id = ?";
             $values = [$event['eventInterpreterId'],
-            ];
+                      ];
 
             $eventInterpreter = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
-
             $interpreterUsername = $eventInterpreter['username'];
 
             $clientEvent = [
@@ -61,9 +60,7 @@ class Client
             ];
 
             array_push($clientEvents, $clientEvent);
-
         }
-
         return $clientEvents;
     }
 
