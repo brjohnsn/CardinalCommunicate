@@ -4,10 +4,10 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
 use cc\models\Password;
 use cc\models\User;
+use cc\models\Client;
 
-use cc\models\Database;
 
-class UnitTests extends TestCase
+class ModelTest extends TestCase
 {
     use TestCaseTrait;
 
@@ -28,8 +28,9 @@ class UnitTests extends TestCase
 
     //Initialize DBUnit dataset
     protected function getDataSet(){
-        return $this->createFlatXMLDataSet('dbUnitAssertions/testDataSet.xml');
+        return $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testDataSet.xml');
     }
+
 
     //Begin project unit tests
     public function testPHPUnitIsRunningWithTrivialAssertion(){
@@ -45,9 +46,9 @@ class UnitTests extends TestCase
             'gender' => 'male'
                           ];
 
-        Database::addNewUser($userAttributes);
+        User::addNewUser($userAttributes);
 
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
+        $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testAddUserToDatabase.xml')->getTable('users');
         $actualResultTable = $this->getConnection()->createQueryTable('users', 'SELECT * FROM users');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
@@ -64,9 +65,9 @@ class UnitTests extends TestCase
             'certification' => 'CDI',
         ];
 
-        Database::addNewUser($userAttributes);
+        User::addNewUser($userAttributes);
 
-        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddInterpreterToDatabase.xml')->getTable('interpreters');
+        $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ . '/dbUnitAssertions/testAddInterpreterToDatabase.xml')->getTable('interpreters');
         $actualResultTable = $this->getConnection()->createQueryTable('interpreters', 'SELECT * FROM interpreters');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
@@ -108,7 +109,7 @@ class UnitTests extends TestCase
     public function testGetInterpreterAttributesById()
     {
         $id = '2';
-        $interpreterAttributes = Database::getInterpreterAttributesByUserId($id);
+        $interpreterAttributes = \cc\models\Interpreter::getInterpreterAttributesByUserId($id);
 
         $this->assertEquals('1234567', $interpreterAttributes['telephone']);
 
@@ -118,7 +119,7 @@ class UnitTests extends TestCase
     {
         $username = 'InitialInterpreter';
 
-        $userAttributes = Database::getUserAttributesByUsername($username);
+        $userAttributes = User::getUserAttributesByUsername($username);
 
         $this->assertEquals('1234567', $userAttributes['telephone']);
         $this->assertEquals('female', $userAttributes['gender']);
@@ -127,7 +128,7 @@ class UnitTests extends TestCase
     public function testGetUniversalUserAttributesByUsername()
     {
         $username = "InitialInterpreter";
-        $universalUserAttributes = Database::getUniversalUserAttributesByUsername($username);
+        $universalUserAttributes = User::getUniversalUserAttributesByUsername($username);
 
         $this->assertEquals('2', $universalUserAttributes['id']);
 
@@ -135,36 +136,52 @@ class UnitTests extends TestCase
 
     public function testGetClientEventsByClientUsername()
     {
-        $clientEvents = Database::getClientEventDataByClientUsername('InitialClient');
+        $clientEvents = Client::getClientEventDataByClientUsername('InitialClient');
 
-        $this->assertEquals(2, sizeof($clientEvents));
+        $this->assertEquals(3, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);
 
-        var_dump($clientEvents);
+        //var_dump($clientEvents);
     }
 
-//    public function testAddEventToDatabase()
-//    {
-//        echo mktime(13,0,0,7,2,2018);
-//        // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
-//        //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
-//        echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
-//        $eventAttributes = [
-//            'eventName' => 'testEvent1',
-//            'eventZipCode' => '55555',
-//            'eventStartUnixTimestamp' => date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00')),
-//            'eventEndUnixTimestamp' => date('JUL 2 2018 2:17 PM', strtotime('2018-07-02 02:17:00 ')),
-//            'eventClientId' => '1',
-//            'eventInterpreterId' => '1',
-//
-//    ];
-//
-//        Database::addNewEvent($eventAttributes);
-//
-//        $expectedResultTable = $this->createFlatXMLDataSet('dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
-//        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
-//        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
-//
-//    }
+
+    public function testAddEventToDatabase()
+    {
+        echo mktime(13,0,0,7,2,2018);
+        // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
+        //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
+        echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
+        $eventAttributes = [
+            'eventName' => 'Event4',
+            'eventDescription' => 'TestDescription',
+            'eventVenueName'=> 'Test',
+            'eventAddress1' => 'TestTEst',
+            'eventCity' => 'eventCity',
+            'eventState' => 'TS',
+            'eventZip' => '44444',
+            'eventStartUnixTimestamp' => '1',
+            'eventEndUnixTimestamp' => '1',
+            'eventStatus' => 'Approved',
+            'eventClientId' => '1',
+            'eventInterpreterId' => '1',
+
+
+
+
+
+
+
+
+
+    ];
+
+        \cc\models\Event::addNewEvent($eventAttributes);
+
+
+        $expectedResultTable = $this->createFlatXMLDataSet(__DIR__ .'/dbUnitAssertions/testAddEventToDatabase.xml')->getTable('events');
+        $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
+        $this->assertTablesEqual($expectedResultTable,$actualResultTable);
+
+    }
 
 }

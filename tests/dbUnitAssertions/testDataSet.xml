@@ -31,7 +31,7 @@
             eventState="TS"
             eventZip="55555"
             eventStartUnixTimestamp="1523914200"
-
+            eventEndUnixTimestamp="1530536400"
             eventStatus="Test Event Status"
             eventClientId="1"
             eventInterpreterId="2"
@@ -45,7 +45,8 @@
             eventCity="Test Event City"
             eventState="TS"
             eventZip="55555"
-            eventStartUnixTimestamp="1523389500000"
+            eventStartUnixTimestamp="1523914200"
+            eventEndUnixTimestamp="1530536400"
             eventStatus="Test Event Status"
             eventClientId="1"
             eventInterpreterId="2"
@@ -55,15 +56,13 @@
             eventDescription="TestDescription"
             eventVenueName="TestEventVenueName"
             eventAddress1="Test Address 1"
-            eventAddress2="Test Address 2"
             eventCity="Test Event City"
             eventState="TS"
             eventZip="55555"
             eventStartUnixTimestamp="1523328593"
+            eventEndUnixTimestamp="1530536400"
             eventStatus="Test Event Status"
-            eventClientId="2"
-            eventInterpreterId="2"
+            eventClientId="1"
+            eventInterpreterId="1"
     />
-
-    
 </dataset>

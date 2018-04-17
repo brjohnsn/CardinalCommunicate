@@ -1,6 +1,7 @@
 <?php
 use cc\models\User;
 use cc\models\Database;
+use cc\models\Client;
 
 class userC
 {
@@ -23,15 +24,15 @@ class userC
     public static function Register($request, $response)
     {
         $body = $request->getParsedBody();
-        Database::addNewUser($body);
+        User::addNewUser($body);
     }
 
 
     public static function getInfo($request, $response)
     {
         $body = $request->getParsedBody();
-        $userAttributes = Database::getUserAttributesByUsername($body['username']);
-        $userEvents = Database::getClientEventDataByClientUsername($body['username']);
+        $userAttributes = User::getUserAttributesByUsername($body['username']);
+        $userEvents = Client::getClientEventDataByClientUsername($body['username']);
 
         foreach ($userEvents as $userEvent)
         {$userEvent = array_map('utf8_encode', $userEvent);

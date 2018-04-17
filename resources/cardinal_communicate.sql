@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 08, 2018 at 03:42 PM
+-- Generation Time: Apr 17, 2018 at 11:22 PM
 -- Server version: 5.6.34-log
--- PHP Version: 7.1.5
+-- PHP Version: 7.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -27,8 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `events`
 --
-CREATE DATABASE `cardinal_communicate`;
-USE cardinal_communicate;
+
 CREATE TABLE `events` (
   `eventId` int(32) NOT NULL,
   `eventName` varchar(64) NOT NULL,
@@ -40,6 +39,7 @@ CREATE TABLE `events` (
   `eventState` varchar(255) DEFAULT NULL,
   `eventZip` int(5) NOT NULL,
   `eventStartUnixTimestamp` int(16) NOT NULL,
+  `eventEndUnixTimestamp` int(16) DEFAULT NULL,
   `eventStatus` varchar(255) DEFAULT NULL,
   `eventClientId` int(11) NOT NULL,
   `eventInterpreterId` int(11) DEFAULT NULL
@@ -48,16 +48,19 @@ CREATE TABLE `events` (
 --
 -- Dumping data for table `events`
 --
-USE cardinal_communicate;
-INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueName`, `eventAddress1`, `eventAddress2`, `eventCity`, `eventState`, `eventZip`, `eventStartUnixTimestamp`, `eventStatus`, `eventClientId`, `eventInterpreterId`) VALUES
-(1, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1530541800, 'Test Event Status', 1, 1);
+
+INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueName`, `eventAddress1`, `eventAddress2`, `eventCity`, `eventState`, `eventZip`, `eventStartUnixTimestamp`, `eventEndUnixTimestamp`, `eventStatus`, `eventClientId`, `eventInterpreterId`) VALUES
+(1, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1523914200, 1530536400, 'Test Event Status', 1, 2),
+(2, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1523914200, 1530536400, 'Test Event Status', 1, 2),
+(3, 'Event3', 'TestDescription', 'TestEventVenueName', 'Test Address 1', NULL, 'Test Event City', 'TS', 55555, 1523328593, 1530536400, 'Test Event Status', 1, 1),
+(4, 'Event4', 'TestDescription', 'Test', 'TestTEst', NULL, 'eventCity', 'TS', 44444, 1, 1, 'Approved', 1, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `interpreters`
 --
-USE cardinal_communicate;
+
 CREATE TABLE `interpreters` (
   `interpreterId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -78,7 +81,7 @@ INSERT INTO `interpreters` (`interpreterId`, `userId`, `telephone`, `zip`, `cert
 --
 -- Table structure for table `users`
 --
-USE cardinal_communicate;
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
@@ -127,11 +130,10 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `eventId` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eventId` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `interpreters`
 --
-
 ALTER TABLE `interpreters`
   MODIFY `interpreterId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
