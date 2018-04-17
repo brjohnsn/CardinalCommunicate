@@ -41,28 +41,7 @@ class Database
 
 
 
-    public static function addNewEvent($eventAttributes)
-    {
-        self::getConnection();
-        $sql = "INSERT INTO events (eventName, 
-                                    eventZipCode, 
-                                    eventStartUnixTimestamp, 
-                                    eventEndUnixTimestamp, 
-                                    eventClientId,
-                                    eventInterpreterId
-                                    ) 
-                                    VALUES (?,?,?,?,?,?)";
-        $values = [
-            $eventAttributes['eventName'],
-            $eventAttributes['eventZipCode'],
-            $eventAttributes['eventStartUnixTimestamp'],
-            $eventAttributes['eventEndUnixTimestamp'],
-            $eventAttributes['eventClientId'],
-            $eventAttributes['eventInterpreterId'],
-        ];
-        $result = Database::getSQLQueryResult($sql, $values);
-        return $result;
-    }
+
 
     public static function getSQLQueryResult($sql, $args=[])
     {
