@@ -30,7 +30,7 @@ class userC
     public static function getInfo($request, $response)
     {
         $body = $request->getParsedBody();
-        $userAttributes = Database::getUserAttributesByUsername($body['username']);
+        $userAttributes = User::getUserAttributesByUsername($body['username']);
         $userEvents = Database::getClientEventDataByClientUsername($body['username']);
 
         foreach ($userEvents as $userEvent)

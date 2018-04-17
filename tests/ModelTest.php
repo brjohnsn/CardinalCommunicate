@@ -119,7 +119,7 @@ class ModelTest extends TestCase
     {
         $username = 'InitialInterpreter';
 
-        $userAttributes = Database::getUserAttributesByUsername($username);
+        $userAttributes = User::getUserAttributesByUsername($username);
 
         $this->assertEquals('1234567', $userAttributes['telephone']);
         $this->assertEquals('female', $userAttributes['gender']);

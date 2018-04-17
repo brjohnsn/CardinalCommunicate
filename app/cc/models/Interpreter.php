@@ -14,7 +14,7 @@ class Interpreter
 {
     public static function addNewInterpreter($interpreterAttributes)
     {
-        $userAttributes = Database::getUserAttributesByUsername($interpreterAttributes['username']);
+        $userAttributes = User::getUserAttributesByUsername($interpreterAttributes['username']);
 
         $sql = "INSERT INTO interpreters (userId, telephone, zip, certification) VALUES (?,?,?,?)";
         $values = [$userAttributes['id'],

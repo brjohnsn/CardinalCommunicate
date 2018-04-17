@@ -49,7 +49,7 @@ class User
     public static function getValidUser($username, $password)
     {
 
-        $matchingUserAttributes = Database::getUserAttributesByUsername($username);
+        $matchingUserAttributes = User::getUserAttributesByUsername($username);
 
         $hashedPassword = Password::hashPassword($password, $matchingUserAttributes['salt']);
 
@@ -85,5 +85,17 @@ class User
 
         return $userAttributes;
 
+    }
+
+    public static function getUserAttributesByUsername($username)
+    {
+        $userAttributes = User::getUniversalUserAttributesByUsername($username);
+        if ($userAttributes['userType'] == 'interpreter')
+        {
+            $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
+            $userAttributes = array_merge($userAttributes, $interpreterAttributes);
+        }
+
+        return $userAttributes;
     }
 }

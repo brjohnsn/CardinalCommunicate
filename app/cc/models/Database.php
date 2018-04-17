@@ -35,17 +35,7 @@ class Database
     }
 
 
-    public static function getUserAttributesByUsername($username)
-    {
-        $userAttributes = User::getUniversalUserAttributesByUsername($username);
-        if ($userAttributes['userType'] == 'interpreter')
-        {
-            $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
-            $userAttributes = array_merge($userAttributes, $interpreterAttributes);
-        }
 
-        return $userAttributes;
-    }
 
 
 
