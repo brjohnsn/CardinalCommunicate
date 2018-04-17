@@ -26,7 +26,7 @@ class User
         $encryptionSalt = Password::getEncryptionSaltBasedOnUserAttributes($userAttributes);
         $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
 
-        Database::getConnection();
+
         $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?,?)";
         $values = [
             $userAttributes['username'],

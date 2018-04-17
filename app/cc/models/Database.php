@@ -25,7 +25,7 @@ class Database
         self::$_phpDatabaseObject = new PDO($dataSourceName, $databaseUser, $databasePassword, $databaseConnectionOptions);
     }
 
-    public static function getConnection()
+    private static function getConnection()
     {
         if (self::$_databaseConnection === null)
         {
