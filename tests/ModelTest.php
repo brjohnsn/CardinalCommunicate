@@ -128,7 +128,7 @@ class ModelTest extends TestCase
     public function testGetUniversalUserAttributesByUsername()
     {
         $username = "InitialInterpreter";
-        $universalUserAttributes = Database::getUniversalUserAttributesByUsername($username);
+        $universalUserAttributes = User::getUniversalUserAttributesByUsername($username);
 
         $this->assertEquals('2', $universalUserAttributes['id']);
 

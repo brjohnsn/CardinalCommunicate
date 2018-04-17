@@ -37,7 +37,7 @@ class Database
 
     public static function getUserAttributesByUsername($username)
     {
-        $userAttributes = self::getUniversalUserAttributesByUsername($username);
+        $userAttributes = User::getUniversalUserAttributesByUsername($username);
         if ($userAttributes['userType'] == 'interpreter')
         {
             $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
@@ -47,14 +47,7 @@ class Database
         return $userAttributes;
     }
 
-    public static function getUniversalUserAttributesByUsername($username)
-    {$sql = "SELECT * FROM users WHERE username = ?";
-        $arguments = [$username];
-        $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
 
-        return $userAttributes;
-
-    }
 
 
 

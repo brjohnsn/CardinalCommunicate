@@ -1,5 +1,6 @@
 <?php namespace cc\models;
 
+use PDO;
 class User
 {
     private $username;
@@ -74,5 +75,15 @@ class User
     public function signOut()
     {
         session_destroy();
+    }
+
+
+    public static function getUniversalUserAttributesByUsername($username)
+    {$sql = "SELECT * FROM users WHERE username = ?";
+        $arguments = [$username];
+        $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
+        return $userAttributes;
+
     }
 }
