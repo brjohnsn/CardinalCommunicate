@@ -1,0 +1,39 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Chris
+ * Date: 4/16/2018
+ * Time: 8:08 PM
+ */
+
+namespace Tests;
+
+//use TestEndPoints;
+use PHPUnit\Framework\TestCase;
+use GuzzleHttp;
+
+class TestEndPoints extends TestCase
+{
+    public function testEndpoint_UserRegister()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/Register', array('form_params' => array('username'=>'TestCaseUser', 'password'=>'InitialPassword', 'userType'=>'Client', 'gender'=>'male',)));
+        $this->assertEquals('', $response->getBody());
+    }
+
+    public function testEndpoint_UserLogin()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/login', array('form_params' => array('username'=>'InitialClient', 'password'=>'InitialPassword')));
+        $responseArray = json_decode($response->getBody());
+        $this->assertEquals('InitialClient', $responseArray->username);
+    }
+
+    public function testEndpoint_UserProfile()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/Profile', array('form_params' => array('username'=>'InitialClient')));
+        $responseArray = json_decode($response->getBody());
+        $this->assertEquals('1', $responseArray->id);
+    }
+}

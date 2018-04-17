@@ -31,6 +31,7 @@ class UnitTests extends TestCase
         return $this->createFlatXMLDataSet('dbUnitAssertions/testDataSet.xml');
     }
 
+
     //Begin project unit tests
     public function testPHPUnitIsRunningWithTrivialAssertion(){
         $this->assertSame(2, 1 + 1);
@@ -140,8 +141,9 @@ class UnitTests extends TestCase
         $this->assertEquals(2, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);
 
-        var_dump($clientEvents);
+        //var_dump($clientEvents);
     }
+
 
 //    public function testAddEventToDatabase()
 //    {
