@@ -5,26 +5,17 @@ import {Link} from 'react-router-dom';
 export default class Client extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            events:"",
-
-        }
     }
 
-    // componentWillMount() {
-    //     axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username:sessionStorage.getItem('username')}).then((response) => {
-    //
-    //     });
-    // }
-
-    render() {
+    render(){
+        console.log(this.props.userInfo);
         return (
-            <div>
+            <div style = {{backgroundColor: 'rgb(230,230,230)', borderRadius: '60px'}}>
                 <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
 
                     <div style={{height:'200px'}}>I am  where the picture will go</div>
-                    <div style={{textAlign:'center', width:'25%', margin: 'auto' }}>
+                    <div style={{textAlign:'center', width:'25%', margin: 'auto', backgroundColor: 'rgb(200,200,200)', height: '400px', width: '450px', borderRadius: '40px'}}>
                         <h1>Events:</h1>
                         <table>
                             <tr>
@@ -35,7 +26,8 @@ export default class Client extends Component {
                                 <th>Status</th>
                                 <th>Description</th>
                             </tr>
-                            {/*{this.state.events.map((event)=>{*/}
+                            
+                            {/*{this.props.userInfo.events.map((event)=>{*/}
                                 {/*return(*/}
                                     {/*<tr>*/}
                                         {/*<th>{event.date}</th>*/}
@@ -49,14 +41,29 @@ export default class Client extends Component {
                             {/*})*/}
                             {/*}*/}
 
+                            {this.props.events.events.map((event)=>{
+                                return(
+                                    <tr style={{border:'1px solid black'}}>
+                                        <th>{event.eventDate}</th>
+                                        <th>{event.eventVenueName}</th>
+                                        <th>{event.interpreterFirstName + event.interpreterLastName}</th>
+                                        <th>{event.name}</th>
+                                        <th>{event.eventStatus}</th>
+                                        <th>{event.eventDescription}</th>
+                                    </tr>
+                                );
+                            })
+                            }
+
+
                         </table>
                     </div>
-                    <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh'}}>
+                    <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh', borderRadius: '20px'}}>
                         <ul>
                             <h2>Dashboard</h2>
                             <li><Link to={'/Settings'}>Edit Profile</Link></li>
                             <li><Link to={'/Search'}>Search Interpreters</Link></li>
-                            <li>Find Interpreters Near Me</li>
+                            <li><Link to={{pathname: '/Map/', userInfo:this.props.userInfo}}>Find Interpreters Near Me</Link></li>
                         </ul>
                     </div>
 

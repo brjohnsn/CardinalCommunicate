@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Interpreter from '../Components/Interpreter';
 import Client from '../Components/Client';
 import axios from "axios/index";
+import events from "../assets/testJson/testEvents"
 
 export default class Profile extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class Profile extends Component {
         });
     }
 
-    render() {
+    render(){
         if (this.props.location.userType === "interpreter") {
             return (
                 <div>
@@ -31,7 +32,7 @@ export default class Profile extends Component {
         else {
             return (
                 <div>
-                    <Client userInfo={this.state.userInfo}/>
+                    <Client userInfo={this.state.userInfo} events={events}/>
                 </div>
             );
 
