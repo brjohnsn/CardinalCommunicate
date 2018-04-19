@@ -42,6 +42,13 @@ class ModelTest extends TestCase
             'username' => 'testUsername1',
             'password' => 'testPassword1',
             'salt' => '01234567890123456789012345678901',
+            'firstName' => 'Added',
+            'lastName' => 'Individual',
+            'address1' => '123 Main Street',
+            'address2' => 'Apartment 9',
+            'city' => 'Anywhere',
+            'state' => 'NY',
+            'zip' => '33333',
             'userType' => 'client',
             'gender' => 'male'
                           ];
@@ -59,9 +66,15 @@ class ModelTest extends TestCase
             'password' => 'testPassword1',
             'salt' => '01234567890123456789012345678901',
             'userType' => 'interpreter',
+            'firstName' => 'Test',
+            'lastName' => 'Interpreter',
+            'address1' => '456',
+            'address2' => 'Suite 4',
+            'city' => 'Anywhere',
+            'state' => 'NY',
+            'zip' => '33333',
             'gender' => 'male',
             'telephone' => '7654321',
-            'zip' => '54321',
             'certification' => 'CDI',
         ];
 
