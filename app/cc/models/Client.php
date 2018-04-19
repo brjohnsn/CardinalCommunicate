@@ -64,4 +64,39 @@ class Client
         return $clientEvents;
     }
 
+    public static function findInterpretersByCriteria($criteria)
+    {
+        $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId";
+        $args = [];
+
+        if($criteria['certification'] != '')
+        {
+            $sql .= " WHERE (certification = ?) AND";
+            array_push($args, $criteria['certification']);
+        }
+
+        if($criteria['gender'] != '')
+        {
+            $sql .= "  (gender = ?) AND";
+            array_push($args, $criteria['gender']);
+        }
+
+        if($criteria['state'] != '')
+        {
+            $sql .= "  (state = ?)";
+            array_push($args, $criteria['state']);
+        }
+
+        //$sql = "SELECT users.firstName, users.lastName FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE users.userType = 'interpreter'";
+        var_dump($sql);
+        var_dump($args);
+
+        $searchResults = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
+
+        var_dump($searchResults);
+        die();
+
+
+    }
+
 }

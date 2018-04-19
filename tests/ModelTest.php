@@ -61,6 +61,7 @@ class ModelTest extends TestCase
     }
 
     public function testAddInterpreterToDatabase(){
+
         $userAttributes = [
             'username' => 'testInterpreter1',
             'password' => 'testPassword1',
@@ -171,10 +172,10 @@ class ModelTest extends TestCase
 
     public function testAddEventToDatabase()
     {
-        echo mktime(13,0,0,7,2,2018);
+        //echo mktime(13,0,0,7,2,2018);
         // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
         //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
-        echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
+        //echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
         $eventAttributes = [
             'eventName' => 'Event4',
             'eventDescription' => 'TestDescription',
@@ -188,15 +189,6 @@ class ModelTest extends TestCase
             'eventStatus' => 'Approved',
             'eventClientId' => '1',
             'eventInterpreterId' => '1',
-
-
-
-
-
-
-
-
-
     ];
 
         \cc\models\Event::addNewEvent($eventAttributes);
@@ -207,5 +199,17 @@ class ModelTest extends TestCase
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
 
     }
+
+
+    public function testFindInterpretersByCriteria()
+    {
+        $criteria=['certification' => 'CDI',
+                 'gender' => 'female',
+                 'state' => 'IA',
+                 ];
+
+        Client::findInterpretersByCriteria($criteria);
+    }
+
 
 }
