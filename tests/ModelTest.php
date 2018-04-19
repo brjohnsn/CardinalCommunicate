@@ -200,6 +200,12 @@ class ModelTest extends TestCase
 
     }
 
+    public function testGetUserIdByUsername()
+    {
+        $userId = Client::getUserIdByUsername("InitialClient");
+        $this->assertEquals('1', $userId);
+    }
+
 
     public function testFindInterpretersByCriteria()
     {

@@ -14,10 +14,7 @@ class Client
 {
     public static function getClientEventDataByClientUsername($clientUsername)
     {
-        $sql = "SELECT id FROM users WHERE username = ?";
-        $values = [$clientUsername];
-        $queryResults = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
-        $clientId = $queryResults['id'];
+        $clientId = self::getUserIdByUsername($clientUsername);
 
 
         $sql = "SELECT * FROM events WHERE eventClientId = ?";
@@ -27,6 +24,15 @@ class Client
         $clientEventsList = self::createListOfClientEvents($queryResults);
 
         return $clientEventsList;
+    }
+
+    public static function getUserIdByUsername($clientUsername)
+    {
+        $sql = "SELECT id FROM users WHERE username = ?";
+        $values = [$clientUsername];
+        $queryResults = Database::getSQLQueryResult($sql, $values)->fetch(PDO::FETCH_ASSOC);
+        $clientId = $queryResults['id'];
+        return $clientId;
     }
 
     private static function createListOfClientEvents($events)
@@ -93,8 +99,7 @@ class Client
 
         $searchResults = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
 
-        var_dump($searchResults);
-        die();
+
 
 
     }
