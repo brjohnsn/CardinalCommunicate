@@ -5,6 +5,13 @@
            username="InitialClient"
            password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"
            salt='01234567890123456789012345678901'
+           firstName = 'Initial'
+           lastName = 'Client'
+           address1 = '123 Main Street'
+           address2 = ''
+           city = 'Everywhere'
+           state = 'IA'
+           zip = '11111'
            userType="client"
            gender="male"
     />
@@ -12,6 +19,13 @@
            username="InitialInterpreter"
            password="b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97"
            salt='01234567890123456789012345678901'
+           firstName = 'Initial'
+           lastName = 'Interpreter'
+           address1 = '123 Main Street'
+           address2 = 'Apartment 2'
+           city = 'Everywhere'
+           state = 'IA'
+           zip = '22222'
            userType="interpreter"
            gender="female"
     />

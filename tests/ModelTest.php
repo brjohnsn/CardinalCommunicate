@@ -42,6 +42,13 @@ class ModelTest extends TestCase
             'username' => 'testUsername1',
             'password' => 'testPassword1',
             'salt' => '01234567890123456789012345678901',
+            'firstName' => 'Added',
+            'lastName' => 'Individual',
+            'address1' => '123 Main Street',
+            'address2' => 'Apartment 9',
+            'city' => 'Anywhere',
+            'state' => 'NY',
+            'zip' => '33333',
             'userType' => 'client',
             'gender' => 'male'
                           ];
@@ -54,14 +61,21 @@ class ModelTest extends TestCase
     }
 
     public function testAddInterpreterToDatabase(){
+
         $userAttributes = [
             'username' => 'testInterpreter1',
             'password' => 'testPassword1',
             'salt' => '01234567890123456789012345678901',
             'userType' => 'interpreter',
+            'firstName' => 'Test',
+            'lastName' => 'Interpreter',
+            'address1' => '456',
+            'address2' => 'Suite 4',
+            'city' => 'Anywhere',
+            'state' => 'NY',
+            'zip' => '33333',
             'gender' => 'male',
             'telephone' => '7654321',
-            'zip' => '54321',
             'certification' => 'CDI',
         ];
 
@@ -144,13 +158,24 @@ class ModelTest extends TestCase
         //var_dump($clientEvents);
     }
 
+    public function testGetAllInterpreterAddressInformation()
+    {
+
+        $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterAddresses();
+
+
+        $this->assertEquals(1, sizeOf($interpreterAddresses));
+        $this->assertEquals('InitialInterpreter', $interpreterAddresses[0]['username']);
+
+    }
+
 
     public function testAddEventToDatabase()
     {
-        echo mktime(13,0,0,7,2,2018);
+        //echo mktime(13,0,0,7,2,2018);
         // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
         //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
-        echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
+        //echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
         $eventAttributes = [
             'eventName' => 'Event4',
             'eventDescription' => 'TestDescription',
@@ -164,15 +189,6 @@ class ModelTest extends TestCase
             'eventStatus' => 'Approved',
             'eventClientId' => '1',
             'eventInterpreterId' => '1',
-
-
-
-
-
-
-
-
-
     ];
 
         \cc\models\Event::addNewEvent($eventAttributes);
@@ -183,5 +199,23 @@ class ModelTest extends TestCase
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
 
     }
+
+    public function testGetUserIdByUsername()
+    {
+        $userId = Client::getUserIdByUsername("InitialClient");
+        $this->assertEquals('1', $userId);
+    }
+
+
+    public function testFindInterpretersByCriteria()
+    {
+        $criteria=['certification' => 'CDI',
+                 'gender' => 'female',
+                 'state' => 'IA',
+                 ];
+
+        Client::findInterpretersByCriteria($criteria);
+    }
+
 
 }

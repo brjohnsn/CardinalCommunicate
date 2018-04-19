@@ -27,13 +27,20 @@ class User
         $encryptionSalt = Password::getEncryptionSaltBasedOnUserAttributes($userAttributes);
         $hashedPassword = Password::hashPassword($userAttributes['password'], $encryptionSalt);
 
-        $sql = "INSERT INTO users (username, password, salt, userType, gender) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO users (username, password, salt, firstName, lastName, address1, address2, city, state, zip, userType, gender) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         $values = [
             $userAttributes['username'],
             $hashedPassword,
             $encryptionSalt,
+            $userAttributes['firstName'],
+            $userAttributes['lastName'],
+            $userAttributes['address1'],
+            $userAttributes['address2'],
+            $userAttributes['city'],
+            $userAttributes['state'],
+            $userAttributes['zip'],
             $userAttributes['userType'],
-            $userAttributes['gender']
+            $userAttributes['gender'],
         ];
 
         $result = Database::getSQLQueryResult($sql, $values);
@@ -77,6 +84,10 @@ class User
     {$sql = "SELECT * FROM users WHERE username = ?";
         $arguments = [$username];
         $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
+
+        $userAddress = $userAttributes['address1'] . ',' . $userAttributes['city'] . ',' . $userAttributes['state'] . ',' . $userAttributes['zip'];
+
+        $userAttributes['address'] = $userAddress;
 
         return $userAttributes;
     }
