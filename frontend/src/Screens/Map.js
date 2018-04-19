@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+/*import React, {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {GOOGLE_MAPS_API_KEY} from '../conf/config';
 import ClientMarker from '../Components/ClientMarker';
@@ -66,4 +66,4 @@ export default class Map extends Component{
     }
 }
 
-
+*/
