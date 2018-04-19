@@ -17,7 +17,6 @@ class EndPointsTest extends TestCase
     use GuzzleHttp\Psr7\MessageTrait;
     public function testEndpoint_UserRegister()
     {
-
         $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
         $response = $http->request('POST', 'user/Register', array('form_params' => array('username'=>'TestCaseUser', 'password'=>'InitialPassword', 'firstName'=>'Endpoint', 'lastName'=>'Added', 'address1'=>'123 Main Street', 'address2'=>'Suite 98', 'city'=>'Whoville', 'state'=>'GR', 'zip'=>'99999', 'userType'=>'Client', 'gender'=>'male',)));
         $this->assertEquals('', $response->getBody());

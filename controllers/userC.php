@@ -34,17 +34,8 @@ class userC
         $userAttributes = User::getUserAttributesByUsername($body['username']);
         $userEvents = Client::getClientEventDataByClientUsername($body['username']);
 
-        foreach ($userEvents as $userEvent)
-        {$userEvent = array_map('utf8_encode', $userEvent);
-        }
-
-        $userEvents = json_encode($userEvents);
-
-        $userAttributes = array_map('utf8_encode', $userAttributes);
+        $userAttributes['userEvents']=$userEvents;
         $jsonUserAttributes = json_encode($userAttributes);
-
-        $jsonUserAttributes = json_encode(array_merge(json_decode($jsonUserAttributes, true), json_decode($userEvents, true)));
-
         return $jsonUserAttributes;
     }
 }

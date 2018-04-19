@@ -23,6 +23,7 @@ class Client
 
         $clientEventsList = self::createListOfClientEvents($queryResults);
 
+
         return $clientEventsList;
     }
 
