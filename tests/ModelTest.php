@@ -157,6 +157,17 @@ class ModelTest extends TestCase
         //var_dump($clientEvents);
     }
 
+    public function testGetAllInterpreterAddressInformation()
+    {
+
+        $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterAddresses();
+
+
+        $this->assertEquals(1, sizeOf($interpreterAddresses));
+        $this->assertEquals('InitialInterpreter', $interpreterAddresses[0]['username']);
+
+    }
+
 
     public function testAddEventToDatabase()
     {
