@@ -100,6 +100,7 @@ class User
             $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
             $userAttributes = array_merge($userAttributes, $interpreterAttributes);
         }
+
         return $userAttributes;
     }
 }
