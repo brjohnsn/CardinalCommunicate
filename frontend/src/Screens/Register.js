@@ -24,7 +24,6 @@ export default class Register extends Component{
         }
     }
 
-
     onSubmit(e){
         e.preventDefault();
         axios.post("http://localhost:8888/CardinalCC/public/user/Register",{
@@ -201,3 +200,4 @@ export default class Register extends Component{
         );
     }
 }
+

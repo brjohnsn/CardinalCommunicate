@@ -25,19 +25,19 @@ export default class Interpreter extends Component {
                                 <th>Status</th>
                                 <th>Description</th>
                             </tr>
-                            {/*{this.props.userInfo.events.map((event)=>{*/}
-                            {/*return(*/}
-                            {/*<tr>*/}
-                            {/*<th>{event.date}</th>*/}
-                            {/*<th>{event.location}</th>*/}
-                            {/*<th>{event.interpreter}</th>*/}
-                            {/*<th>{event.name}</th>*/}
-                            {/*<th>{event.status}</th>*/}
-                            {/*<th>{event.description}</th>*/}
-                            {/*</tr>*/}
-                            {/*);*/}
-                            {/*})*/}
-                            {/*}*/}
+                            {this.props.userEvents.map((event)=>{
+                                return(
+                                    <tr style={{border:'1px solid black'}}>
+                                        <th>{event.eventDate}</th>
+                                        <th>{event.eventVenueName}</th>
+                                        <th>{event.interpreterFirstName + event.interpreterLastName}</th>
+                                        <th>{event.name}</th>
+                                        <th>{event.eventStatus}</th>
+                                        <th>{event.eventDescription}</th>
+                                    </tr>
+                                );
+                            })
+                            }
 
                         </table>
                     </div>

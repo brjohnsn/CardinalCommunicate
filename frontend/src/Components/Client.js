@@ -7,8 +7,9 @@ export default class Client extends Component {
         super(props);
     }
 
+
     render(){
-        console.log(this.props.userInfo);
+        console.log(this.props.userInfo.userEvents);
         return (
             <div style = {{backgroundColor: 'rgb(230,230,230)', borderRadius: '60px'}}>
                 <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>
@@ -27,21 +28,9 @@ export default class Client extends Component {
                                 <th>Description</th>
                             </tr>
                             
-                            {/*{this.props.userInfo.events.map((event)=>{*/}
-                                {/*return(*/}
-                                    {/*<tr>*/}
-                                        {/*<th>{event.date}</th>*/}
-                                        {/*<th>{event.location}</th>*/}
-                                        {/*<th>{event.interpreter}</th>*/}
-                                        {/*<th>{event.name}</th>*/}
-                                        {/*<th>{event.status}</th>*/}
-                                        {/*<th>{event.description}</th>*/}
-                                    {/*</tr>*/}
-                                {/*);*/}
-                            {/*})*/}
-                            {/*}*/}
 
-                            {this.props.events.events.map((event)=>{
+
+                            {this.props.userEvents.map((event)=>{
                                 return(
                                     <tr style={{border:'1px solid black'}}>
                                         <th>{event.eventDate}</th>
