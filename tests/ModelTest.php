@@ -161,7 +161,7 @@ class ModelTest extends TestCase
     public function testGetAllInterpreterAddressInformation()
     {
 
-        $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterAddresses();
+        $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterMappingData();
 
 
         $this->assertEquals(1, sizeOf($interpreterAddresses));

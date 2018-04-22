@@ -39,22 +39,21 @@ class Interpreter
         return $interpreterAttributes;
     }
 
-    public static function getAllInterpreterAddresses(){
+    public static function getAllInterpreterMappingData(){
         $sql = "SELECT * FROM users WHERE userType = 'interpreter'";
         $interpreterAddresses = Database::getSQLQueryResult($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        $resultArray=[];
+        $allInterpreterMappingData=[];
         foreach($interpreterAddresses as $interpreterAddress)
         {
             $addressString = User::createAddressStringFromAddressAttributes($interpreterAddress);
-
-            $temp=['username' => $interpreterAddress['username'],
+            $currentInterpreterMappingData=['username' => $interpreterAddress['username'],
                    'address' => $addressString,
                    'address2' => $interpreterAddress['address2'],
                    'userId' => $interpreterAddress['id']];
 
-            array_push($resultArray,$temp);
+            array_push($allInterpreterMappingData,$currentInterpreterMappingData);
         }
-        return $resultArray;
+        return $allInterpreterMappingData;
     }
 }
