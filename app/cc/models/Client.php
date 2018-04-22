@@ -94,11 +94,10 @@ class Client
             array_push($args, $criteria['state']);
         }
 
-        //$sql = "SELECT users.firstName, users.lastName FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE users.userType = 'interpreter'";
-        var_dump($sql);
-        var_dump($args);
 
-        $searchResults = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
+
+        $searchResults = Database::getSQLQueryResult($sql, $args)->fetchAll();
+        return $searchResults;
 
 
 

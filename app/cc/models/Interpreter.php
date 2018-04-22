@@ -14,17 +14,17 @@ class Interpreter
 {
     public static function addNewInterpreter($interpreterAttributes)
     {
-        $userAttributes = User::getUserAttributesByUsername($interpreterAttributes['username']);
+        $newInterpreterUserAttributes = User::getUserAttributesByUsername($interpreterAttributes['username']);
 
         $sql = "INSERT INTO interpreters (userId, telephone, zip, certification) VALUES (?,?,?,?)";
-        $values = [$userAttributes['id'],
+        $values = [$newInterpreterUserAttributes['id'],
             $interpreterAttributes['telephone'],
             $interpreterAttributes['zip'],
             $interpreterAttributes['certification']];
 
-        $result = Database::getSQLQueryResult($sql, $values);
+        $querySuccessStatus = Database::getSQLQueryResult($sql, $values);
 
-        return $result;
+        return $querySuccessStatus;
     }
 
     public static function getInterpreterAttributesByUserId($userId){
@@ -39,42 +39,22 @@ class Interpreter
         return $interpreterAttributes;
     }
 
-    public static function getAllInterpreterAddresses(){
+    public static function getAllInterpreterMappingData(){
+        //TODO break the search for all interpreter user attributes into a separate method?
+
         $sql = "SELECT * FROM users WHERE userType = 'interpreter'";
+        $allInterpreterUserAttributes = Database::getSQLQueryResult($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        $interpreterAddresses = Database::getSQLQueryResult($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-        $resultArray=[];
-        foreach($interpreterAddresses as $interpreterAddress)
+        $allInterpreterMappingData=[];
+        foreach($allInterpreterUserAttributes as $interpreterAttributes)
         {
+            $currentInterpreterMappingData=['username' => $interpreterAttributes['username'],
+                   'address' => User::createAddressStringFromAddressAttributes($interpreterAttributes),
+                   'address2' => $interpreterAttributes['address2'],
+                   'userId' => $interpreterAttributes['id']];
 
-            $addressString = $interpreterAddress['address1'] . ',' .
-                            $interpreterAddress['city'] . ',' .
-                            $interpreterAddress['state']. ',' .
-                            $interpreterAddress['zip'];
-
-
-            $temp=['username' => $interpreterAddress['username'],
-                   'address' => $addressString,
-                    'address2' => $interpreterAddress['address2'],
-                    'userId' => $interpreterAddress['id']];
-
-            array_push($resultArray,$temp);
-
-
+            array_push($allInterpreterMappingData,$currentInterpreterMappingData);
         }
-
-        return $resultArray;
-
-
-
-
-
-
-
-
-
-
-
+        return $allInterpreterMappingData;
     }
 }

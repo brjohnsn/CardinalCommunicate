@@ -15,4 +15,5 @@ $app->group('/user', function() use ($app){
    $app->post('/login', 'userC::Login');
    $app->post('/Register', 'userC::Register');
    $app->post('/Profile', 'userC::getInfo');
+   $app->post('/Interpreters', 'userC::getInterpreterMappingData');
 });

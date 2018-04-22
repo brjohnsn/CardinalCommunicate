@@ -85,10 +85,8 @@ class User
         $arguments = [$username];
         $userAttributes = Database::getSQLQueryResult($sql, $arguments)->fetch(PDO::FETCH_ASSOC);
 
-        $userAddress = $userAttributes['address1'] . ',' . $userAttributes['city'] . ',' . $userAttributes['state'] . ',' . $userAttributes['zip'];
-
+        $userAddress = self::createAddressStringFromAddressAttributes($userAttributes);
         $userAttributes['address'] = $userAddress;
-
         return $userAttributes;
     }
 
@@ -102,5 +100,12 @@ class User
         }
 
         return $userAttributes;
+    }
+
+    public static function createAddressStringFromAddressAttributes($addressAttributes)
+    {
+        $addressString = $addressAttributes['address1'] . ',' . $addressAttributes['city'] . ',' . $addressAttributes['state'] . ',' . $addressAttributes['zip'];
+        return $addressString;
+
     }
 }
