@@ -73,35 +73,42 @@ class Client
 
     public static function findInterpretersByCriteria($criteria)
     {
-        $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId";
+        var_dump($criteria);
+        $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE (certification LIKE ?) AND (gender LIKE ?) AND (state LIKE ?)";
         $args = [];
 
-        if($criteria['certification'] != '')
+        if($criteria['certification'] != "")
         {
-            $sql .= " WHERE (certification = ?) AND";
+            //$sql .= " WHERE (certification = ?) AND";
             array_push($args, $criteria['certification']);
         }
-
-        if($criteria['gender'] != '')
+        else
         {
-            $sql .= "  (gender = ?) AND";
+            array_push($args, "%");
+        }
+
+        if($criteria['gender'] != "")
+        {
+            //$sql .= "";
             array_push($args, $criteria['gender']);
         }
-
-        if($criteria['state'] != '')
+        else
         {
-            $sql .= "  (state = ?)";
-            array_push($args, $criteria['state']);
+            array_push($args, "%");
         }
 
-
+        if($criteria['state'] != "")
+        {
+            //$sql .= "  (state = ?)";
+            array_push($args, "*");
+        }
+        else
+        {
+            array_push($args, "%");
+        }
 
         $searchResults = Database::getSQLQueryResult($sql, $args)->fetchAll();
         return $searchResults;
-
-
-
-
     }
 
 }
