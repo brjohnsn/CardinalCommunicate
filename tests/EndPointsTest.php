@@ -37,4 +37,7 @@ class EndPointsTest extends TestCase
         $responseArray = json_decode($response->getBody());
         $this->assertEquals('1', $responseArray->id);
     }
+
+    //TODO Write endpoint test for /Interpreters
+    //getInterpreterMappingData
 }

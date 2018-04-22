@@ -32,11 +32,18 @@ class userC
     {
         $body = $request->getParsedBody();
         $userAttributes = User::getUserAttributesByUsername($body['username']);
-        $userEvents = Client::getClientEventDataByClientUsername($body['username']);
 
-        $userAttributes['userEvents']=$userEvents;
+        $userAttributes['userEvents']=Client::getClientEventDataByClientUsername($body['username']);
         $jsonUserAttributes = json_encode($userAttributes);
         return $jsonUserAttributes;
+    }
+
+    public static function getInterpreterMappingData($request, $response)
+    {
+
+        $interpreterMappingData = \cc\models\Interpreter::getAllInterpreterMappingData();
+        $jsonInterpreterMappingData = json_encode($interpreterMappingData);
+        return $jsonInterpreterMappingData;
     }
 }
 ?>

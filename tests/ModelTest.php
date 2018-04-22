@@ -161,7 +161,7 @@ class ModelTest extends TestCase
     public function testGetAllInterpreterAddressInformation()
     {
 
-        $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterAddresses();
+        $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterMappingData();
 
 
         $this->assertEquals(1, sizeOf($interpreterAddresses));
@@ -214,7 +214,25 @@ class ModelTest extends TestCase
                  'state' => 'IA',
                  ];
 
-        Client::findInterpretersByCriteria($criteria);
+        $actualSearchResults = Client::findInterpretersByCriteria($criteria);
+
+
+        $this->assertEquals($actualSearchResults[0]['username'], "InitialInterpreter");
+    }
+
+    public function testCreateAddressStringFromAddressAttributes()
+    {
+        $addressAttributes=[
+            "address1" => "address1",
+            "city" => "city",
+            "state" => "state",
+            "zip" => "zip",
+        ];
+
+        $actualAddressString = User::createAddressStringFromAddressAttributes($addressAttributes);
+        $expectedAddressString ="address1,city,state,zip";
+        $this->assertEquals($expectedAddressString, $actualAddressString);
+
     }
 
 
