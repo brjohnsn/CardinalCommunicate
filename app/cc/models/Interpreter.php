@@ -41,40 +41,20 @@ class Interpreter
 
     public static function getAllInterpreterAddresses(){
         $sql = "SELECT * FROM users WHERE userType = 'interpreter'";
-
         $interpreterAddresses = Database::getSQLQueryResult($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         $resultArray=[];
         foreach($interpreterAddresses as $interpreterAddress)
         {
-
-            $addressString = $interpreterAddress['address1'] . ',' .
-                            $interpreterAddress['city'] . ',' .
-                            $interpreterAddress['state']. ',' .
-                            $interpreterAddress['zip'];
-
+            $addressString = User::createAddressStringFromAddressAttributes($interpreterAddress);
 
             $temp=['username' => $interpreterAddress['username'],
                    'address' => $addressString,
-                    'address2' => $interpreterAddress['address2'],
-                    'userId' => $interpreterAddress['id']];
+                   'address2' => $interpreterAddress['address2'],
+                   'userId' => $interpreterAddress['id']];
 
             array_push($resultArray,$temp);
-
-
         }
-
         return $resultArray;
-
-
-
-
-
-
-
-
-
-
-
     }
 }

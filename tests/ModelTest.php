@@ -217,5 +217,20 @@ class ModelTest extends TestCase
         Client::findInterpretersByCriteria($criteria);
     }
 
+    public function testCreateAddressStringFromAddressAttributes()
+    {
+        $addressAttributes=[
+            "address1" => "address1",
+            "city" => "city",
+            "state" => "state",
+            "zip" => "zip",
+        ];
+
+        $actualAddressString = User::createAddressStringFromAddressAttributes($addressAttributes);
+        $expectedAddressString ="address1,city,state,zip";
+        $this->assertEquals($expectedAddressString, $actualAddressString);
+
+    }
+
 
 }
