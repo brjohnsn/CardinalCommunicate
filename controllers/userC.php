@@ -45,5 +45,17 @@ class userC
         $jsonInterpreterMappingData = json_encode($interpreterMappingData);
         return $jsonInterpreterMappingData;
     }
+
+    public static function searchForInterpreter($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $searchCriteria=['certification' => $body['certification'],
+                         'gender' => $body['gender'],
+                         'state' => $body['state'],
+        ];
+        $searchResults = Client::findInterpretersByCriteria($searchCriteria);
+        $jsonSearchResults = json_encode($searchResults);
+        return $jsonSearchResults;
+    }
 }
 ?>
