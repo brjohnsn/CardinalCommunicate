@@ -214,7 +214,10 @@ class ModelTest extends TestCase
                  'state' => 'IA',
                  ];
 
-        Client::findInterpretersByCriteria($criteria);
+        $actualSearchResults = Client::findInterpretersByCriteria($criteria);
+
+
+        $this->assertEquals($actualSearchResults[0]['username'], "InitialInterpreter");
     }
 
     public function testCreateAddressStringFromAddressAttributes()
