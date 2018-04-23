@@ -233,4 +233,16 @@ class ModelTest extends TestCase
         $expectedAddressString ="address1,city,state,zip";
         $this->assertEquals($expectedAddressString, $actualAddressString);
     }
+
+    public function testRequestInterpreterForEvent()
+    {
+        $requestInformation = ['eventId' => '1',
+                               'interpreterUsername' => 'InitialInterpreter',
+            ];
+
+        $eventUpdateStatus = Client::requestInterpreterForEvent($requestInformation);
+
+        $this->assertEquals('00000', $eventUpdateStatus);
+
+    }
 }

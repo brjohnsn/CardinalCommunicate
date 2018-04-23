@@ -110,4 +110,24 @@ class Client
         return $searchResults;
     }
 
+    public static function requestInterpreterForEvent($requestInformation)
+    {
+        $eventId = $requestInformation['eventId'];
+        $interpreterUsername = $requestInformation['interpreterUsername'];
+
+        $sql = "SELECT id FROM users WHERE username = ?";
+        $args=[$interpreterUsername];
+        $result = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
+        $interpreterId = $result['id'];
+
+        $sql = "UPDATE events SET eventInterpreterId = ?, eventStatus = ? WHERE eventId LIKE ?";
+        $args = [$interpreterId, "Pending", $eventId];
+
+        $eventUpdateStatus = Database::getSQLQueryResult($sql, $args)->errorCode();
+
+        return $eventUpdateStatus;
+    }
+    
+
+
 }

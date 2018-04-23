@@ -18,4 +18,5 @@ $app->group('/user', function() use ($app){
    $app->post('/Interpreters', 'userC::getInterpreterMappingData');
    $app->post('/Search', 'userC::searchForInterpreter');
    $app->post('/add-event', 'userC::addEvent');
+   $app->post('/request-interpreter', 'userC::requestInterpreter');
 });

@@ -60,6 +60,11 @@ class EndPointsTest extends TestCase
         $this->assertEquals("00000", $eventCreationStatus);
     }
 
+    public function testEndPoint_requestInterpreter()
+    {
+        ;
+    }
+
     //TODO Write endpoint test for /Interpreters
     //getInterpreterMappingData
 }

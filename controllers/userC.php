@@ -66,5 +66,13 @@ class userC
         return $jsonEventCreationStatus;
     }
 
+    public static function requestInterpreter($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventUpdateStatus = Client::requestInterpreterForEvent($body);
+        $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
+        return $jsonEventUpdateStatus;
+    }
+
 }
 ?>
