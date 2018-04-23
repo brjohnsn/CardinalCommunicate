@@ -47,7 +47,7 @@ class Event
             $eventAttributes['eventZip'],
             $eventStartUnixTimestamp,
             $eventEndUnixTimestamp,
-            $eventAttributes['eventStatus'],
+            "None",
             $eventAttributes['eventClientId'],
             $eventAttributes['eventInterpreterId'],
         ];

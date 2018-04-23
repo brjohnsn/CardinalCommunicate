@@ -54,7 +54,7 @@
             eventZip="44444"
             eventStartUnixTimestamp="1533051000"
             eventEndUnixTimestamp="1533056400"
-            eventStatus="Approved"
+            eventStatus="None"
             eventClientId="1"
             eventInterpreterId="1"
     />
