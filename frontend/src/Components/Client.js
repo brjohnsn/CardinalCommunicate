@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 
+
 export default class Client extends Component {
     constructor(props) {
         super(props);
     }
 
-
     render(){
-        console.log(this.props.userInfo.userEvents);
+        console.log(this.props.userEvents);
         return (
             <div style = {{backgroundColor: 'rgb(230,230,230)', borderRadius: '60px'}}>
                 <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>

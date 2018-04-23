@@ -5,15 +5,22 @@ import ClientMarker from '../Components/ClientMarker';
 import InterpreterMarker from '../Components/InterpreterMarker';
 import axios from "axios/index";
 import interpreters from "../assets/testJson/testInterpreters";
+import {K_SIZE} from './hoverStyles';
+import controllable from 'react-controllable'
+
+
 
 export default class Map extends Component{
     constructor(props){
         super(props);
         this.state={
             interpreterInfo: [],
-            interpreterSearchResults:[]
+            interpreterSearchResults:[],
+            clickedInterpreterUsername:'',
+
         }
     }
+
     componentWillMount() {
         console.log(this.props.match.params.username);
         axios.get("http://localhost:8888/CardinalCC/public/user/Interpreters").then((response) => {
@@ -76,10 +83,7 @@ export default class Map extends Component{
             console.log(response.data);
     });
     }
-    static defaultProps = {
-        center: {lat: 60, lng: 22},
-        zoom: 11
-    };
+
     addressTest(){
         interpreters.interpreters.map((interpreter)=>{
             var address = (this.convertAddress(interpreter.interpreterAddress));
@@ -87,8 +91,36 @@ export default class Map extends Component{
             }
         )
     }
+    clickedUserInfo(value){
+        this.setState({clickedInterpreterUsername:value});
+        document.getElementById('username').value = this.state.clickedInterpreterUsername
+        console.log(this.state.clickedInterpreterUsername);
+    }
+
+    static defaultProps = {
+        center: [59.838043, 30.337157],
+        zoom: 9,
+        greatPlaces: [
+            {id: 'A', lat: 59.955413, lng: 30.337844},
+            {id: 'B', lat: 59.724, lng: 30.080}
+        ]
+    };
     render() {
-        return (
+            // const places = this.props.greatPlaces
+            //     .map(place => {
+            //         const {id, ...coords} = place;
+            //
+            //         return (
+            //             <InterpreterMarker
+            //                 key={id}
+            //                 {...coords}
+            //                 text={id}
+            //                 // use your hover state (from store, react-controllables etc...)
+            //               />
+            //         );
+            //     });
+
+            return (
             <div style={{display:"flex", justifyContent:'center', flexDirection:'column',  alignItems:'center'}}>
             <div style={{width:'50vw', height:'50vh'}}>
                 <h1 style={{textAlign:'center'}}>map</h1>
@@ -96,6 +128,10 @@ export default class Map extends Component{
                 bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY}}
                 defaultCenter={this.props.center}
                 defaultZoom={this.props.zoom}
+                onChildMouseEnter={this._onChildMouseEnter}
+                onChildMouseLeave={this._onChildMouseLeave}
+
+                hoverDistance={K_SIZE / 2}
             >
                 {/*{interpreters.interpreters.map((interpreter)=>{*/}
                     {/*this.convertAddress(interpreter.interpreterAddress)}).then((response)=>{*/}
@@ -105,7 +141,10 @@ export default class Map extends Component{
                 {/*})}*/}
                 <InterpreterMarker
                     lat={60}
-                    lng={22}/>
+                    lng={22}
+                    getUserInfo = {this.clickedUserInfo.bind(this)}
+                    userName={'bob'}
+               />
                 <ClientMarker
                     lat={60}
                     lng={22}/>
@@ -113,7 +152,7 @@ export default class Map extends Component{
             </div>
                 <form onSubmit={(e)=>this.onSubmit(e)}>
                     <h1 style={{textAlign:'center', marginTop:'200px'}}>Search Interpreter</h1>
-                    <input id="username"  style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({interpreterInformation: e.target.value})}} />
+                    <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({interpreterUsername: e.target.value})}} />
                     <input className="button" type="submit" value="submit" style={{marginTop:"40px"}}/>
                 </form>
 
@@ -121,6 +160,7 @@ export default class Map extends Component{
                     this.state.userInfo &&
                         this.testUserLength()
                 }
+                <button onClick={this.onClick}>test</button>
 
 
 
@@ -128,5 +168,4 @@ export default class Map extends Component{
         );
     }
 }
-
 
