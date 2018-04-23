@@ -40,6 +40,7 @@ class Database
         Database::getConnection();
         $sqlQuery = self::$_phpDatabaseObject->prepare($sql);
         $sqlQuery->execute($args);
+
         return $sqlQuery;
     }
 

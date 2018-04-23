@@ -38,6 +38,28 @@ class EndPointsTest extends TestCase
         $this->assertEquals('1', $responseArray->id);
     }
 
+    public function testEndpoint_addEvent()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/add-event', array('form_params'=>array(
+                                                                                                    'eventName' => 'Event4',
+                                                                                                    'eventDescription' => 'TestDescription',
+                                                                                                    'eventVenueName'=> 'Test',
+                                                                                                    'eventAddress1' => 'TestTEst',
+                                                                                                    'eventCity' => 'eventCity',
+                                                                                                    'eventState' => 'TS',
+                                                                                                    'eventZip' => '44444',
+                                                                                                    'eventDate' => '07/31/2018',
+                                                                                                    'eventStartTime' => '3:30 PM',
+                                                                                                    'eventEndTime' => '5:00 PM',
+                                                                                                    'eventStatus' => 'Approved',
+                                                                                                    'eventClientId' => '1',
+                                                                                                    'eventInterpreterId' => '1',
+        )));
+        $eventCreationStatus = json_decode($response->getBody());
+        $this->assertEquals("00000", $eventCreationStatus);
+    }
+
     //TODO Write endpoint test for /Interpreters
     //getInterpreterMappingData
 }

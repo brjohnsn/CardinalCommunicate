@@ -73,7 +73,6 @@ class Client
 
     public static function findInterpretersByCriteria($criteria)
     {
-        var_dump($criteria);
         $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE (certification LIKE ?) AND (gender LIKE ?) AND (state LIKE ?)";
         $args = [];
 

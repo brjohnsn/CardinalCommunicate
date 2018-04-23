@@ -217,7 +217,6 @@ class ModelTest extends TestCase
 
         $actualSearchResults = Client::findInterpretersByCriteria($criteria);
 
-        var_dump($actualSearchResults);
         $this->assertEquals($actualSearchResults[0]['username'], "InitialInterpreter");
     }
 

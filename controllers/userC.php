@@ -2,6 +2,7 @@
 use cc\models\User;
 use cc\models\Database;
 use cc\models\Client;
+use cc\models\Event;
 
 class userC
 {
@@ -56,5 +57,14 @@ class userC
         $jsonSearchResults = json_encode($searchResults);
         return $jsonSearchResults;
     }
+
+    public static function addEvent($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventCreationStatus = Event::addNewEvent($body)->errorCode();
+        $jsonEventCreationStatus = json_encode($eventCreationStatus);
+        return $jsonEventCreationStatus;
+    }
+
 }
 ?>
