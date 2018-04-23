@@ -40,7 +40,6 @@ class userC
 
     public static function getInterpreterMappingData($request, $response)
     {
-
         $interpreterMappingData = \cc\models\Interpreter::getAllInterpreterMappingData();
         $jsonInterpreterMappingData = json_encode($interpreterMappingData);
         return $jsonInterpreterMappingData;

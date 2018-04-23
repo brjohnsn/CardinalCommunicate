@@ -13,6 +13,16 @@ class Event
 {
     public static function addNewEvent($eventAttributes)
     {
+        $eventDate = $eventAttributes['eventDate'];
+        $eventStartTime = $eventAttributes['eventStartTime'];
+        $eventEndTime = $eventAttributes['eventEndTime'];
+
+        $eventStartDateAndTime = $eventDate . ' ' . $eventStartTime;
+        $eventEndDateAndTime = $eventDate . ' ' . $eventEndTime;
+
+        $eventStartUnixTimestamp = strtotime($eventStartDateAndTime);
+        $eventEndUnixTimestamp = strtotime($eventEndDateAndTime);
+
         $sql = "INSERT INTO events (eventName,
                                     eventDescription,
                                     eventVenueName, 
@@ -35,17 +45,11 @@ class Event
             $eventAttributes['eventCity'],
             $eventAttributes['eventState'],
             $eventAttributes['eventZip'],
-            $eventAttributes['eventStartUnixTimestamp'],
-            $eventAttributes['eventEndUnixTimestamp'],
+            $eventStartUnixTimestamp,
+            $eventEndUnixTimestamp,
             $eventAttributes['eventStatus'],
             $eventAttributes['eventClientId'],
             $eventAttributes['eventInterpreterId'],
-
-
-
-
-
-
         ];
         $result = Database::getSQLQueryResult($sql, $values);
         return $result;

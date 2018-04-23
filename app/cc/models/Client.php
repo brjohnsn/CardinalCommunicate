@@ -100,7 +100,7 @@ class Client
         if($criteria['state'] != "")
         {
             //$sql .= "  (state = ?)";
-            array_push($args, "*");
+            array_push($args, $criteria['state']);
         }
         else
         {

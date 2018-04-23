@@ -184,8 +184,9 @@ class ModelTest extends TestCase
             'eventCity' => 'eventCity',
             'eventState' => 'TS',
             'eventZip' => '44444',
-            'eventStartUnixTimestamp' => '1',
-            'eventEndUnixTimestamp' => '1',
+            'eventDate' => '07/31/2018',
+            'eventStartTime' => '3:30 PM',
+            'eventEndTime' => '5:00 PM',
             'eventStatus' => 'Approved',
             'eventClientId' => '1',
             'eventInterpreterId' => '1',
@@ -216,7 +217,7 @@ class ModelTest extends TestCase
 
         $actualSearchResults = Client::findInterpretersByCriteria($criteria);
 
-
+        var_dump($actualSearchResults);
         $this->assertEquals($actualSearchResults[0]['username'], "InitialInterpreter");
     }
 
@@ -232,8 +233,5 @@ class ModelTest extends TestCase
         $actualAddressString = User::createAddressStringFromAddressAttributes($addressAttributes);
         $expectedAddressString ="address1,city,state,zip";
         $this->assertEquals($expectedAddressString, $actualAddressString);
-
     }
-
-
 }
