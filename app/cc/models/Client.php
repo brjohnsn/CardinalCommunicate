@@ -73,7 +73,7 @@ class Client
 
     public static function findInterpretersByCriteria($criteria)
     {
-        $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE (certification LIKE ?) AND (gender LIKE ?) AND (state LIKE ?)";
+        $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE (certification LIKE ?) AND (gender LIKE ?) AND (state LIKE ?) AND (username LIKE ?)";
         $args = [];
 
         if($criteria['certification'] != "")
@@ -100,6 +100,15 @@ class Client
         {
             //$sql .= "  (state = ?)";
             array_push($args, $criteria['state']);
+        }
+        else
+        {
+            array_push($args, "%");
+        }
+
+        if($criteria['username'] != "")
+        {
+            array_push($args, $criteria['username']);
         }
         else
         {

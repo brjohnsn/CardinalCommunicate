@@ -35,21 +35,22 @@ export default class Map extends Component{
 
         );
     }
-    // onSubmit(e){
-    //     e.preventDefault();
-    //     axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username}).then
-    //     ((response)=> {
-    //             this.setState({interpreterSearchResults: response.data})
-    //         }
-    //     )
-    // }
+    onSubmit(e){
+        e.preventDefault();
+        axios.post("http://localhost:8888/CardinalCC/public/user/Search",{username:this.state.username, certification:'', gender:'', certification:''}).then
+        ((response)=> {
+                this.setState({interpreterSearchResults: response.data})
+            }
+        ).then(()=> console.log(this.state.interpreterSearchResults)
+        )
+    }
 //will be the onclick callback for the buttons by the interpreters names 
-    // requestInterpreter(userName){
-    //     axios.post('#',{userName: userName}).then((response)=> {
-    //             console.log('sup');
-    //         }
-    //     )
-    // }
+//     requestInterpreter(userName){
+//         axios.post('#',{userName: userName}).then((response)=> {
+//                 console.log('sup');
+//             }
+//         )
+//     }
 
     // testUserLength(){
     //     if(this.state.userInfo > 0){
@@ -84,16 +85,6 @@ export default class Map extends Component{
     //     }
     // }
      async convertAddress(address){
-
-        // var converted = axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY).then((response) => {
-        //
-        //     if(response.data.results.length > 0) {
-        //         return response.data.results[0].geometry.location
-        //     }
-        //
-        //
-        // });
-        // return converted
 
         var latLong =  await axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY);
         console.log("waited for", latLong);
@@ -144,16 +135,8 @@ export default class Map extends Component{
                 bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY}}
                 defaultCenter={this.props.center}
                 defaultZoom={this.props.zoom}
+                hoverDistance={K_SIZE / 2}>
 
-
-                hoverDistance={K_SIZE / 2}
-            >
-                {/*{interpreters.interpreters.map((interpreter)=>{*/}
-                    {/*this.convertAddress(interpreter.interpreterAddress)}).then((response)=>{*/}
-                    {/*<InterpreterMarker*/}
-                        {/*lat={response.results[0].geometry.location.lat}*/}
-                        {/*lng={response.results[0].geometry.location.lng}/>*/}
-                {/*/!*})}*!/*/}
                 {
                     this.state.userCordinates.map((marker)=>{
                         console.log(marker.username);
@@ -163,8 +146,7 @@ export default class Map extends Component{
                                 lat={marker.coordinates.lat}
                                 lng={marker.coordinates.lng}
                                 getUserInfo = {this.clickedUserInfo.bind(this)}
-                                username = {marker.username}
-                            />
+                                username = {marker.username}/>
                         )}
                     })
                 }
