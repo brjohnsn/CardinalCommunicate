@@ -91,7 +91,6 @@ class EndPointsTest extends TestCase
         $this->assertEquals("00000", $eventCreationErrorCode);
     }
 
-    //TODO Write endpoint test for /Interpreters
     public function testEndPoint_getAllInterpreterMappingData()
     {
         $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
