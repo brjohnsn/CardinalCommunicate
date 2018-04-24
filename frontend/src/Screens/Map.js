@@ -16,20 +16,20 @@ export default class Map extends Component{
         this.state={
             interpreterInfo:[],
             interpreterSearchResults:[],
-            clickedInterpreterUsername:''
+            clickedInterpreterUsername:'',
+            userCordinates:[]
 
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         axios.post("http://localhost:8888/CardinalCC/public/user/Interpreters")
             .then((response) => {
             //change zipcode to zip
-            var stuff = response.data
-            this.setState({interpreterInfo: stuff})
+            this.setState({interpreterInfo: response.data})
         }).then(async()=>{
             var test = await this.generateLatLong(this.state.interpreterInfo);
-            console.log(test)
+            this.setState({userCordinates: test})
 
             }
 
@@ -135,6 +135,7 @@ export default class Map extends Component{
         ]
     };
     render() {
+        console.log(this.state.userCordinates)
             return (
             <div style={{display:"flex", justifyContent:'center', flexDirection:'column',  alignItems:'center'}}>
             <div style={{width:'50vw', height:'50vh'}}>
@@ -153,24 +154,20 @@ export default class Map extends Component{
                         {/*lat={response.results[0].geometry.location.lat}*/}
                         {/*lng={response.results[0].geometry.location.lng}/>*/}
                 {/*/!*})}*!/*/}
-                {/*{*/}
-                    {/*cordinates.map((marker)=>{*/}
-                        {/*return(*/}
-                            {/*<InterpreterMarker*/}
-                                {/*lat={marker.cordinates[0]}*/}
-                                {/*long={marker.cordinates[1]}*/}
-                                {/*getUserInfo = {this.clickedUserInfo.bind(this)}*/}
-                                {/*username = {marker.username}*/}
-                            {/*/>*/}
-                        {/*)*/}
-                    {/*})*/}
-                {/*}*/}
-                <InterpreterMarker
-                    lat={60}
-                    lng={22}
-                    getUserInfo = {this.clickedUserInfo.bind(this)}
-                    userName={'bob'}
-               />
+                {
+                    this.state.userCordinates.map((marker)=>{
+                        console.log(marker.username);
+                        if(marker.coordinates != null){
+                        return(
+                            <InterpreterMarker
+                                lat={marker.coordinates.lat}
+                                lng={marker.coordinates.lng}
+                                getUserInfo = {this.clickedUserInfo.bind(this)}
+                                username = {marker.username}
+                            />
+                        )}
+                    })
+                }
                 <ClientMarker
                     lat={60}
                     lng={22}/>

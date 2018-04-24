@@ -16,7 +16,7 @@ export default class InterpreterMarker extends Component {
             <div style={{width:40, height:40, backgroundColor:'white', cursor:'pointer', borderRadius:40, textAlign:'center'}}
                  onClick={(e)=>{
                      e.preventDefault();
-                     this.props.getUserInfo(this.props.userName)}}>
+                     this.props.getUserInfo(this.props.username)}}>
                 <div>
                     <img src="http://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-Picture.png" style={{height:'30px', width:'30px'}}/>
                 </div>
