@@ -53,6 +53,7 @@ class userC
         $searchCriteria=['certification' => $body['certification'],
                          'gender' => $body['gender'],
                          'state' => $body['state'],
+                         'username' => $body['username'],
         ];
         $searchResults = Client::findInterpretersByCriteria($searchCriteria);
         $jsonSearchResults = json_encode($searchResults);
