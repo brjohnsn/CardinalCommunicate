@@ -17,7 +17,8 @@ export default class Map extends Component{
             interpreterInfo:[],
             interpreterSearchResults:[],
             clickedInterpreterUsername:'',
-            userCordinates:[]
+            userCordinates:[],
+            eventId:''
 
         }
     }
@@ -37,7 +38,7 @@ export default class Map extends Component{
     }
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/CardinalCC/public/user/Search",{username:this.state.username, certification:'', gender:'', certification:''}).then
+        axios.post("http://localhost:8888/CardinalCC/public/user/Search",{ gender:'', state:'', certification:'', username:this.state.clickedInterpreterUsername}).then
         ((response)=> {
                 this.setState({interpreterSearchResults: response.data})
             }
@@ -45,45 +46,24 @@ export default class Map extends Component{
         )
     }
 //will be the onclick callback for the buttons by the interpreters names 
-//     requestInterpreter(userName){
-//         axios.post('#',{userName: userName}).then((response)=> {
-//                 console.log('sup');
-//             }
-//         )
-//     }
+    requestInterpreter(username){
+        axios.post('http://localhost:8888/CardinalCC/public/user/request-interpreter',{username: username}).then((response)=> {
+                console.log('sup');
+            }
+        )
+    }
 
-    // testUserLength(){
-    //     if(this.state.userInfo > 0){
-    //         var idValue = 0;
-    //         return(
-    //             <div>
-    //                 <h1>Your search yeilded multiple results. Please select the appropriate choice or click the advanced search link bellow.</h1>
-    //                 <ul>
-    //                     {this.state.interpreterInfo.map((interpreter) => {
-    //                        return( <li>
-    //                             <h1>{interpreter.userName}</h1>
-    //                             <button id={idValue} value={this.state.userName} onClick={this.requestInterpreter(document.getElementById(idValue).value)}>
-    //                                 Request This Interpreter
-    //                             </button>
-    //                         </li>
-    //                        );
-    //                        idValue+=1;
-    //                     })
-    //                     }
-    //                 </ul>
-    //             </div>
-    //         );
-    //     }
-    //     else{
-    //         var value=this.state.userName;
-    //         return(
-    //             <div>
-    //                 <h1>{this.state.userInfo.userName}</h1>
-    //                 <button onClick={this.requestInterpreter(value)}>Request This Interpreter</button>
-    //             </div>
-    //         );
-    //     }
-    // }
+    testUserLength(){
+        return(
+                <div>
+                    <h1>{this.state.interpreterSearchResults[0].username}</h1>
+                    <h2>Please type your event id below</h2>
+                    <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
+                    <button onClick={this.requestInterpreter(this.state.clickedInterpreterUsername)}>Request This Interpreter</button>
+                </div>
+            );
+        }
+
      async convertAddress(address){
 
         var latLong =  await axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY);
@@ -157,12 +137,12 @@ export default class Map extends Component{
             </div>
                 <form onSubmit={(e)=>this.onSubmit(e)}>
                     <h1 style={{textAlign:'center', marginTop:'200px'}}>Search Interpreter</h1>
-                    <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({interpreterUsername: e.target.value})}} />
+                    <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({clickedInterpreterUsername: e.target.value})}} />
                     <input className="button" type="submit" value="submit" style={{marginTop:"40px"}}/>
                 </form>
 
                 {
-                    this.state.userInfo &&
+                    this.state.interpreterSearchResults.length > 0 &&
                     this.testUserLength()
                 }
                 {/*<button onClick={this.generateLatLong(this.state.interpreterInfo)}>Id love it if you clicked me</button>*/}

@@ -25,6 +25,7 @@ export default class Client extends Component {
                                 <th>Interpreter</th>
                                 <th>Event Name</th>
                                 <th>Status</th>
+                                <th>Event ID</th>
                                 <th>Description</th>
                             </tr>
                             
@@ -35,9 +36,10 @@ export default class Client extends Component {
                                     <tr style={{border:'1px solid black'}}>
                                         <th>{event.eventDate}</th>
                                         <th>{event.eventVenueName}</th>
-                                        <th>{event.interpreterFirstName + event.interpreterLastName}</th>
+                                        <th>{event.eventInterpreterFirstName + event.eventInterpreterLastName}</th>
                                         <th>{event.name}</th>
                                         <th>{event.eventStatus}</th>
+                                        <th>{event.id}</th>
                                         <th>{event.eventDescription}</th>
                                     </tr>
                                 );
