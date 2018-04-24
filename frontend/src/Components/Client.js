@@ -15,17 +15,18 @@ export default class Client extends Component {
                 <div style={{display:'flex', justifyContent:'space-between'}}>
 
                     <div style={{height:'200px'}}>I am  where the picture will go</div>
-                    <div style={{textAlign:'center', width:'25%', margin: 'auto', backgroundColor: 'rgb(200,200,200)', height: '400px', width: '450px', borderRadius: '40px'}}>
-                        <h1>Events:</h1>
-                        <table>
+                    <div style={{textAlign:'left', width:'25%', margin: 'auto', backgroundColor: 'rgb(200,200,200)', height: '400px', width: '900px', borderRadius: '40px'}}>
+                        <h1 style = {{textAlign: 'center'}}>Events:</h1>
+                        <table style = {{border: '1px solid black'}}>
                             <tr>
-                                <th>Date</th>
-                                <th>Location</th>
-                                <th>Interpreter</th>
-                                <th>Event Name</th>
-                                <th>Status</th>
-                                <th>Description</th>
+                                <th style = {{columnWidth: '250px'}}>Date</th>
+                                <th style = {{columnWidth: '250px'}}>Location</th>
+                                <th style = {{columnWidth: '200px'}}>Interpreter</th>
+                                <th style = {{columnWidth: '250px'}}>Event Name</th>
+                                <th style = {{columnWidth: '150px'}}>Status</th>
+                                <th style = {{columnWidth: '250px'}}>Description</th>
                             </tr>
+                            <p></p>
                             
                             {/*{this.props.userInfo.events.map((event)=>{*/}
                                 {/*return(*/}
@@ -54,7 +55,6 @@ export default class Client extends Component {
                                 );
                             })
                             }
-
 
                         </table>
                     </div>
