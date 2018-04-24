@@ -231,9 +231,12 @@ class ModelTest extends TestCase
         $criteria=['certification' => 'CDI',
                  'gender' => 'male',
                  'state' => 'CA',
+                 'username' => 'ebentley',
                  ];
 
         $actualSearchResults = Client::findInterpretersByCriteria($criteria);
+
+        var_dump($actualSearchResults);
 
         $this->assertEquals($actualSearchResults[0]['username'], "ebentley");
     }
