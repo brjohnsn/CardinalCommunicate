@@ -14,29 +14,35 @@ export default class Map extends Component{
     constructor(props){
         super(props);
         this.state={
-            interpreterInfo: [],
+            interpreterInfo:[],
             interpreterSearchResults:[],
-            clickedInterpreterUsername:'',
+            clickedInterpreterUsername:''
 
         }
     }
 
-    componentWillMount() {
-        console.log(this.props.match.params.username);
-        axios.get("http://localhost:8888/CardinalCC/public/user/Interpreters").then((response) => {
+    componentDidMount() {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Interpreters")
+            .then((response) => {
             //change zipcode to zip
-            console.log(response.data);
-            this.setState({interpreterInfo: response.data});
-        });
-    }
-    onSubmit(e){
-        e.preventDefault();
-        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username}).then
-        ((response)=> {
-                this.setState({interpreterSearchResults: response.data})
+            var stuff = response.data
+            this.setState({interpreterInfo: stuff})
+        }).then(async()=>{
+            var test = await this.generateLatLong(this.state.interpreterInfo);
+            console.log(test)
+
             }
-        )
+
+        );
     }
+    // onSubmit(e){
+    //     e.preventDefault();
+    //     axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username}).then
+    //     ((response)=> {
+    //             this.setState({interpreterSearchResults: response.data})
+    //         }
+    //     )
+    // }
 //will be the onclick callback for the buttons by the interpreters names 
     // requestInterpreter(userName){
     //     axios.post('#',{userName: userName}).then((response)=> {
@@ -45,56 +51,79 @@ export default class Map extends Component{
     //     )
     // }
 
-    testUserLength(){
-        if(this.state.userInfo > 0){
-            var idValue = 0;
-            return(
-                <div>
-                    <h1>Your search yeilded multiple results. Please select the appropriate choice or click the advanced search link bellow.</h1>
-                    <ul>
-                        {this.state.interpreterInfo.map((interpreter) => {
-                           return( <li>
-                                <h1>{interpreter.userName}</h1>
-                                <button id={idValue} value={this.state.userName} onClick={this.requestInterpreter(document.getElementById(idValue).value)}>
-                                    Request This Interpreter
-                                </button>
-                            </li>
-                           );
-                           idValue+=1;
-                        })
-                        }
-                    </ul>
-                </div>
-            );
+    // testUserLength(){
+    //     if(this.state.userInfo > 0){
+    //         var idValue = 0;
+    //         return(
+    //             <div>
+    //                 <h1>Your search yeilded multiple results. Please select the appropriate choice or click the advanced search link bellow.</h1>
+    //                 <ul>
+    //                     {this.state.interpreterInfo.map((interpreter) => {
+    //                        return( <li>
+    //                             <h1>{interpreter.userName}</h1>
+    //                             <button id={idValue} value={this.state.userName} onClick={this.requestInterpreter(document.getElementById(idValue).value)}>
+    //                                 Request This Interpreter
+    //                             </button>
+    //                         </li>
+    //                        );
+    //                        idValue+=1;
+    //                     })
+    //                     }
+    //                 </ul>
+    //             </div>
+    //         );
+    //     }
+    //     else{
+    //         var value=this.state.userName;
+    //         return(
+    //             <div>
+    //                 <h1>{this.state.userInfo.userName}</h1>
+    //                 <button onClick={this.requestInterpreter(value)}>Request This Interpreter</button>
+    //             </div>
+    //         );
+    //     }
+    // }
+     async convertAddress(address){
+
+        // var converted = axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY).then((response) => {
+        //
+        //     if(response.data.results.length > 0) {
+        //         return response.data.results[0].geometry.location
+        //     }
+        //
+        //
+        // });
+        // return converted
+
+        var latLong =  await axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY);
+        console.log("waited for", latLong);
+        try{
+            return latLong.data.results[0].geometry.location;
+        }catch(e){
+            return null;
         }
-        else{
-            var value=this.state.userName;
-            return(
-                <div>
-                    <h1>{this.state.userInfo.userName}</h1>
-                    <button onClick={this.requestInterpreter(value)}>Request This Interpreter</button>
-                </div>
-            );
-        }
-    }
-    convertAddress(address){
-        axios.get("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+GOOGLE_MAPS_API_KEY).then((response) => {
-            //change zipcode to zip
-            console.log(response.data);
-    });
+
     }
 
-    addressTest(){
-        interpreters.interpreters.map((interpreter)=>{
-            var address = (this.convertAddress(interpreter.interpreterAddress));
-            console.log(address);
+      async generateLatLong(adresses_list){
+
+            var newArray = [];
+            for(var i = 0; i < adresses_list.length; i++){
+                var coordinates =  await this.convertAddress(adresses_list[i].address)
+                console.log("coordinates", coordinates)
+                newArray.push({
+                    username: adresses_list[i].username,
+                    coordinates: coordinates
+                })
+
             }
-        )
+            return newArray;
     }
+
     clickedUserInfo(value){
         this.setState({clickedInterpreterUsername:value});
         document.getElementById('username').value = this.state.clickedInterpreterUsername
-        console.log(this.state.clickedInterpreterUsername);
+
     }
 
     static defaultProps = {
@@ -106,20 +135,6 @@ export default class Map extends Component{
         ]
     };
     render() {
-            // const places = this.props.greatPlaces
-            //     .map(place => {
-            //         const {id, ...coords} = place;
-            //
-            //         return (
-            //             <InterpreterMarker
-            //                 key={id}
-            //                 {...coords}
-            //                 text={id}
-            //                 // use your hover state (from store, react-controllables etc...)
-            //               />
-            //         );
-            //     });
-
             return (
             <div style={{display:"flex", justifyContent:'center', flexDirection:'column',  alignItems:'center'}}>
             <div style={{width:'50vw', height:'50vh'}}>
@@ -128,8 +143,7 @@ export default class Map extends Component{
                 bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY}}
                 defaultCenter={this.props.center}
                 defaultZoom={this.props.zoom}
-                onChildMouseEnter={this._onChildMouseEnter}
-                onChildMouseLeave={this._onChildMouseLeave}
+
 
                 hoverDistance={K_SIZE / 2}
             >
@@ -138,7 +152,19 @@ export default class Map extends Component{
                     {/*<InterpreterMarker*/}
                         {/*lat={response.results[0].geometry.location.lat}*/}
                         {/*lng={response.results[0].geometry.location.lng}/>*/}
-                {/*})}*/}
+                {/*/!*})}*!/*/}
+                {/*{*/}
+                    {/*cordinates.map((marker)=>{*/}
+                        {/*return(*/}
+                            {/*<InterpreterMarker*/}
+                                {/*lat={marker.cordinates[0]}*/}
+                                {/*long={marker.cordinates[1]}*/}
+                                {/*getUserInfo = {this.clickedUserInfo.bind(this)}*/}
+                                {/*username = {marker.username}*/}
+                            {/*/>*/}
+                        {/*)*/}
+                    {/*})*/}
+                {/*}*/}
                 <InterpreterMarker
                     lat={60}
                     lng={22}
@@ -158,10 +184,9 @@ export default class Map extends Component{
 
                 {
                     this.state.userInfo &&
-                        this.testUserLength()
+                    this.testUserLength()
                 }
-                <button onClick={this.onClick}>test</button>
-
+                {/*<button onClick={this.generateLatLong(this.state.interpreterInfo)}>Id love it if you clicked me</button>*/}
 
 
             </div>
