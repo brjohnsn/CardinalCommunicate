@@ -260,7 +260,7 @@ class ModelTest extends TestCase
         $requestInformation = ['eventId' => '6',
                                'interpreterUsername' => 'ewhite',
             ];
-        $eventUpdateStatus = Client::requestInterpreterForEvent($requestInformation);
+        Client::requestInterpreterForEvent($requestInformation);
 
         $sql = "SELECT * FROM events WHERE eventId=6";
         $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
@@ -272,7 +272,7 @@ class ModelTest extends TestCase
     public function testDeclineInterpreterRequest()
     {
         $requestAttributes = ['eventId' => '1'];
-        $eventUpdateStatus = Interpreter::declineInterpreterRequest($requestAttributes);
+        Interpreter::declineInterpreterRequest($requestAttributes);
 
         $sql = "SELECT * FROM events WHERE eventId=1";
         $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
@@ -285,11 +285,17 @@ class ModelTest extends TestCase
     {
         $requestAttributes = ['eventId' => '6'];
 
-        $eventUpdateStatus = Interpreter::acceptInterpreterRequest($requestAttributes);
+        Interpreter::acceptInterpreterRequest($requestAttributes);
 
         $sql = "SELECT * FROM events WHERE eventId=6";
         $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
 
         $this->assertEquals("Accepted", $result['eventStatus']);
+    }
+
+    public function testGetInterpreterIdbyUsername()
+    {
+        $interpreterId = Interpreter::getInterpreterIdByUsername('ewhite');
+        $this->assertEquals('10', $interpreterId);
     }
 }

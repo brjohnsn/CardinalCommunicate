@@ -119,16 +119,12 @@ class Client
         return $searchResults;
     }
 
+
     public static function requestInterpreterForEvent($requestInformation)
     {
         $eventId = $requestInformation['eventId'];
         $interpreterUsername = $requestInformation['interpreterUsername'];
-
-        //TODO break out get interpreterId into a separate method.
-        $sql = "SELECT id FROM users WHERE username = ?";
-        $args=[$interpreterUsername];
-        $result = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
-        $interpreterId = $result['id'];
+        $interpreterId = Interpreter::getInterpreterIdByUsername($interpreterUsername);
 
         $sql = "UPDATE events SET eventInterpreterId = ?, eventStatus = ? WHERE eventId LIKE ?";
         $args = [$interpreterId, "Pending", $eventId];
@@ -137,7 +133,4 @@ class Client
 
         return $eventUpdateStatus;
     }
-    
-
-
 }
