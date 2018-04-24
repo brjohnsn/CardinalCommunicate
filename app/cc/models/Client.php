@@ -41,7 +41,7 @@ class Client
         $clientEvents = [];
         foreach ($events as $event) {
 
-            $sql = "SELECT username FROM users WHERE id = ?";
+            $sql = "SELECT * FROM users WHERE id = ?";
             $values = [$event['eventInterpreterId'],
                       ];
 
@@ -62,8 +62,8 @@ class Client
                 'eventZip' => $event['eventZip'],
                 'eventClientId' => $event['eventClientId'],
                 'eventInterpreterId' => $event['eventInterpreterId'],
-                'eventInterpreterFirstName' => $interpreterUsername,
-                'eventInterpreterLastName' => $interpreterUsername,
+                'eventInterpreterFirstName' => $eventInterpreter['firstName'],
+                'eventInterpreterLastName' => $eventInterpreter['lastName'],
             ];
 
             array_push($clientEvents, $clientEvent);
