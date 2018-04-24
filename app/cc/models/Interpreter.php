@@ -57,4 +57,22 @@ class Interpreter
         }
         return $allInterpreterMappingData;
     }
+
+    public static function declineInterpreterRequest($requestAttributes)
+    {
+        $sql = "UPDATE events SET eventStatus = ?, eventInterpreterId = ? WHERE eventId LIKE ?";
+        $args = ["Declined", '', $requestAttributes['eventId']];
+
+        $result = Database::getSQLQueryResult($sql, $args)->errorCode();
+        return $result;
+    }
+
+    public static function acceptInterpreterRequest($requestAttributes)
+    {
+        $sql = "UPDATE events SET eventStatus = ?  WHERE eventId LIKE ?";
+        $args = ["Accepted", $requestAttributes['eventId']];
+
+        $result = Database::getSQLQueryResult($sql, $args)->errorCode();
+        return $result;
+    }
 }

@@ -5,6 +5,8 @@ use PHPUnit\DbUnit\TestCaseTrait;
 use cc\models\Password;
 use cc\models\User;
 use cc\models\Client;
+use cc\models\Interpreter;
+use cc\models\Database;
 
 
 class ModelTest extends TestCase
@@ -39,16 +41,16 @@ class ModelTest extends TestCase
 
     public function testAddUserToDatabase(){
         $userAttributes = [
-            'username' => 'testUsername1',
-            'password' => 'testPassword1',
+            'username' => 'testAddedUser',
+            'password' => 'InitialPassword',
             'salt' => '01234567890123456789012345678901',
-            'firstName' => 'Added',
-            'lastName' => 'Individual',
-            'address1' => '123 Main Street',
-            'address2' => 'Apartment 9',
-            'city' => 'Anywhere',
-            'state' => 'NY',
-            'zip' => '33333',
+            'firstName' => 'Test',
+            'lastName' => 'Added',
+            'address1' => 'TestAddress1',
+            'address2' => 'TestAddress2',
+            'city' => 'TestCity',
+            'state' => 'TS',
+            'zip' => '00000',
             'userType' => 'client',
             'gender' => 'male'
                           ];
@@ -60,22 +62,22 @@ class ModelTest extends TestCase
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
 
-    public function testAddInterpreterToDatabase(){
-
+    public function testAddInterpreterToDatabase()
+    {
         $userAttributes = [
-            'username' => 'testInterpreter1',
-            'password' => 'testPassword1',
+            'username' => 'testAddedUser',
+            'password' => 'InitialPassword',
             'salt' => '01234567890123456789012345678901',
-            'userType' => 'interpreter',
             'firstName' => 'Test',
-            'lastName' => 'Interpreter',
-            'address1' => '456',
-            'address2' => 'Suite 4',
-            'city' => 'Anywhere',
-            'state' => 'NY',
-            'zip' => '33333',
+            'lastName' => 'Added',
+            'address1' => 'TestAddress1',
+            'address2' => 'TestAddress2',
+            'city' => 'TestCity',
+            'state' => 'TS',
+            'zip' => '00000',
+            'userType' => 'interpreter',
             'gender' => 'male',
-            'telephone' => '7654321',
+            'telephone' => '0000000000',
             'certification' => 'CDI',
         ];
 
@@ -86,7 +88,8 @@ class ModelTest extends TestCase
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
 
-    public function testHashPassword(){
+    public function testHashPassword()
+    {
         $testSalt = '01234567890123456789012345678901';
         $hashedPassword = Password::hashPassword('testPassword1', $testSalt);
         $this->assertEquals('393afd25693c67e0c079038c31b2b4b00d2d7855fb5a88fe842b5239acb5dbe2', $hashedPassword);
@@ -94,7 +97,7 @@ class ModelTest extends TestCase
 
     public function testCheckUserCredentialsAreAuthentic()
     {
-        $username = 'InitialClient';
+        $username = 'rpainter';
         $password = 'InitialPassword';
         $authenticatedUser = User::getValidUser($username, $password);
 
@@ -104,8 +107,8 @@ class ModelTest extends TestCase
     public function testSignInUser()
     {
         $userAttributes = [
-            'username' => 'testUsername1',
-            'password' => 'testPassword1',
+            'username' => 'rpainter',
+            'password' => 'InitialPassword',
             'salt' => '01234567890123456789012345678901',
             'userType' => 'client',
             'id' => '1',
@@ -116,7 +119,6 @@ class ModelTest extends TestCase
         $testUser->signIn();
 
         $this->assertEquals('1', $_SESSION['id']);
-        session_destroy();
     }
 
 
@@ -125,34 +127,56 @@ class ModelTest extends TestCase
         $id = '2';
         $interpreterAttributes = \cc\models\Interpreter::getInterpreterAttributesByUserId($id);
 
-        $this->assertEquals('1234567', $interpreterAttributes['telephone']);
+        //$this->assertEquals("ebentley", $interpreterAttributes['username']);
+        $this->assertEquals("1", $interpreterAttributes['interpreterId']);
+        $this->assertEquals("909-405-3531", $interpreterAttributes['telephone']);
+        $this->assertEquals("95103", $interpreterAttributes['zip']);
+        $this->assertEquals("CDI", $interpreterAttributes['certification']);
+
 
     }
 
     public function testGetUserAttributesByUsername()
     {
-        $username = 'InitialInterpreter';
+        $username = 'ismith';
 
         $userAttributes = User::getUserAttributesByUsername($username);
 
-        $this->assertEquals('1234567', $userAttributes['telephone']);
+        $this->assertEquals('8', $userAttributes['id']);
+        $this->assertEquals('Ivana', $userAttributes['firstName']);
+        $this->assertEquals('Smith', $userAttributes['lastName']);
+        $this->assertEquals('1355 Clark Street', $userAttributes['address1']);
+        $this->assertEquals('', $userAttributes['address2']);
+        $this->assertEquals('New York', $userAttributes['city']);
+        $this->assertEquals('NY', $userAttributes['state']);
+        $this->assertEquals('11756', $userAttributes['zip']);
+        $this->assertEquals('interpreter', $userAttributes['userType']);
         $this->assertEquals('female', $userAttributes['gender']);
+
     }
 
     public function testGetUniversalUserAttributesByUsername()
-    {
-        $username = "InitialInterpreter";
+    {   $username = "ismith";
         $universalUserAttributes = User::getUniversalUserAttributesByUsername($username);
 
-        $this->assertEquals('2', $universalUserAttributes['id']);
+        $this->assertEquals('8', $universalUserAttributes['id']);
+        $this->assertEquals('Ivana', $universalUserAttributes['firstName']);
+        $this->assertEquals('Smith', $universalUserAttributes['lastName']);
+        $this->assertEquals('1355 Clark Street', $universalUserAttributes['address1']);
+        $this->assertEquals('', $universalUserAttributes['address2']);
+        $this->assertEquals('New York', $universalUserAttributes['city']);
+        $this->assertEquals('NY', $universalUserAttributes['state']);
+        $this->assertEquals('11756', $universalUserAttributes['zip']);
+        $this->assertEquals('interpreter', $universalUserAttributes['userType']);
+        $this->assertEquals('female', $universalUserAttributes['gender']);
 
     }
 
     public function testGetClientEventsByClientUsername()
     {
-        $clientEvents = Client::getClientEventDataByClientUsername('InitialClient');
+        $clientEvents = Client::getClientEventDataByClientUsername('aholliday');
 
-        $this->assertEquals(3, sizeof($clientEvents));
+        $this->assertEquals(4, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);
 
         //var_dump($clientEvents);
@@ -160,35 +184,30 @@ class ModelTest extends TestCase
 
     public function testGetAllInterpreterAddressInformation()
     {
-
         $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterMappingData();
 
-
-        $this->assertEquals(1, sizeOf($interpreterAddresses));
-        $this->assertEquals('InitialInterpreter', $interpreterAddresses[0]['username']);
-
+        $this->assertEquals(5, sizeOf($interpreterAddresses));
+        $this->assertEquals('ebentley', $interpreterAddresses[0]['username']);
     }
 
 
     public function testAddEventToDatabase()
     {
-        //echo mktime(13,0,0,7,2,2018);
-        // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
-        //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
-        //echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
         $eventAttributes = [
-            'eventName' => 'Event4',
-            'eventDescription' => 'TestDescription',
-            'eventVenueName'=> 'Test',
-            'eventAddress1' => 'TestTEst',
-            'eventCity' => 'eventCity',
+            'eventName' => 'Test Event',
+            'eventDescription' => 'Test Description',
+            'eventVenueName'=> 'Test Venue',
+            'eventAddress1' => 'Test Address1',
+            'eventAddress2' => "",
+            'eventCity' => 'Test City',
             'eventState' => 'TS',
-            'eventZip' => '44444',
-            'eventStartUnixTimestamp' => '1',
-            'eventEndUnixTimestamp' => '1',
-            'eventStatus' => 'Approved',
+            'eventZip' => '00000',
+            'eventDate' => '07/31/2018',
+            'eventStartTime' => '3:30 PM',
+            'eventEndTime' => '5:00 PM',
+            'eventStatus' => 'None',
             'eventClientId' => '1',
-            'eventInterpreterId' => '1',
+            'eventInterpreterId' => '',
     ];
 
         \cc\models\Event::addNewEvent($eventAttributes);
@@ -202,22 +221,21 @@ class ModelTest extends TestCase
 
     public function testGetUserIdByUsername()
     {
-        $userId = Client::getUserIdByUsername("InitialClient");
-        $this->assertEquals('1', $userId);
+        $userId = Client::getUserIdByUsername("sdressler");
+        $this->assertEquals('4', $userId);
     }
 
 
     public function testFindInterpretersByCriteria()
     {
         $criteria=['certification' => 'CDI',
-                 'gender' => 'female',
-                 'state' => 'IA',
+                 'gender' => 'male',
+                 'state' => 'CA',
                  ];
 
         $actualSearchResults = Client::findInterpretersByCriteria($criteria);
 
-
-        $this->assertEquals($actualSearchResults[0]['username'], "InitialInterpreter");
+        $this->assertEquals($actualSearchResults[0]['username'], "ebentley");
     }
 
     public function testCreateAddressStringFromAddressAttributes()
@@ -232,8 +250,43 @@ class ModelTest extends TestCase
         $actualAddressString = User::createAddressStringFromAddressAttributes($addressAttributes);
         $expectedAddressString ="address1,city,state,zip";
         $this->assertEquals($expectedAddressString, $actualAddressString);
-
     }
 
+    public function testRequestInterpreterForEvent()
+    {
+        $requestInformation = ['eventId' => '6',
+                               'interpreterUsername' => 'ewhite',
+            ];
+        $eventUpdateStatus = Client::requestInterpreterForEvent($requestInformation);
 
+        $sql = "SELECT * FROM events WHERE eventId=6";
+        $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEquals("Pending", $result['eventStatus']);
+        $this->assertEquals("10", $result['eventInterpreterId']);
+    }
+
+    public function testDeclineInterpreterRequest()
+    {
+        $requestAttributes = ['eventId' => '1'];
+        $eventUpdateStatus = Interpreter::declineInterpreterRequest($requestAttributes);
+
+        $sql = "SELECT * FROM events WHERE eventId=1";
+        $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEquals("Declined", $result['eventStatus']);
+        $this->assertEquals("0", $result['eventInterpreterId']);
+    }
+
+    public function testAcceptInterpreterRequest()
+    {
+        $requestAttributes = ['eventId' => '6'];
+
+        $eventUpdateStatus = Interpreter::acceptInterpreterRequest($requestAttributes);
+
+        $sql = "SELECT * FROM events WHERE eventId=6";
+        $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEquals("Accepted", $result['eventStatus']);
+    }
 }

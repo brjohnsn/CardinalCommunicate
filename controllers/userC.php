@@ -2,6 +2,8 @@
 use cc\models\User;
 use cc\models\Database;
 use cc\models\Client;
+use cc\models\Event;
+use cc\models\Interpreter;
 
 class userC
 {
@@ -40,7 +42,6 @@ class userC
 
     public static function getInterpreterMappingData($request, $response)
     {
-
         $interpreterMappingData = \cc\models\Interpreter::getAllInterpreterMappingData();
         $jsonInterpreterMappingData = json_encode($interpreterMappingData);
         return $jsonInterpreterMappingData;
@@ -57,5 +58,38 @@ class userC
         $jsonSearchResults = json_encode($searchResults);
         return $jsonSearchResults;
     }
+
+    public static function addEvent($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventCreationStatus = Event::addNewEvent($body)->errorCode();
+        $jsonEventCreationStatus = json_encode($eventCreationStatus);
+        return $jsonEventCreationStatus;
+    }
+
+    public static function requestInterpreter($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventUpdateStatus = Client::requestInterpreterForEvent($body);
+        $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
+        return $jsonEventUpdateStatus;
+    }
+
+    public static function declineRequest($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventUpdateStatus = Interpreter::declineInterpreterRequest($body);
+        $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
+        return $jsonEventUpdateStatus;
+    }
+
+    public static function acceptRequest($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventUpdateStatus = Interpreter::acceptInterpreterRequest($body);
+        $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
+        return $jsonEventUpdateStatus;
+    }
+
 }
 ?>
