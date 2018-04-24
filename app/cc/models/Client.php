@@ -73,7 +73,6 @@ class Client
 
     public static function findInterpretersByCriteria($criteria)
     {
-        var_dump($criteria);
         $sql = "SELECT * FROM users INNER JOIN interpreters ON users.id = interpreters.userId WHERE (certification LIKE ?) AND (gender LIKE ?) AND (state LIKE ?)";
         $args = [];
 
@@ -100,7 +99,7 @@ class Client
         if($criteria['state'] != "")
         {
             //$sql .= "  (state = ?)";
-            array_push($args, "*");
+            array_push($args, $criteria['state']);
         }
         else
         {
@@ -110,5 +109,26 @@ class Client
         $searchResults = Database::getSQLQueryResult($sql, $args)->fetchAll();
         return $searchResults;
     }
+
+    public static function requestInterpreterForEvent($requestInformation)
+    {
+        $eventId = $requestInformation['eventId'];
+        $interpreterUsername = $requestInformation['interpreterUsername'];
+
+        //TODO break out get interpreterId into a separate method.
+        $sql = "SELECT id FROM users WHERE username = ?";
+        $args=[$interpreterUsername];
+        $result = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
+        $interpreterId = $result['id'];
+
+        $sql = "UPDATE events SET eventInterpreterId = ?, eventStatus = ? WHERE eventId LIKE ?";
+        $args = [$interpreterId, "Pending", $eventId];
+
+        $eventUpdateStatus = Database::getSQLQueryResult($sql, $args)->errorCode();
+
+        return $eventUpdateStatus;
+    }
+    
+
 
 }

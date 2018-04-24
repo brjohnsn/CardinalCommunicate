@@ -17,4 +17,8 @@ $app->group('/user', function() use ($app){
    $app->post('/Profile', 'userC::getInfo');
    $app->post('/Interpreters', 'userC::getInterpreterMappingData');
    $app->post('/Search', 'userC::searchForInterpreter');
+   $app->post('/add-event', 'userC::addEvent');
+   $app->post('/request-interpreter', 'userC::requestInterpreter');
+   $app->post('/decline-request', 'userC::declineRequest');
+   $app->post('/accept-request', 'userC::acceptRequest');
 });
