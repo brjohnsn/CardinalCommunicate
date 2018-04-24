@@ -3,6 +3,7 @@ use cc\models\User;
 use cc\models\Database;
 use cc\models\Client;
 use cc\models\Event;
+use cc\models\Interpreter;
 
 class userC
 {
@@ -70,6 +71,22 @@ class userC
     {
         $body = $request->getParsedBody();
         $eventUpdateStatus = Client::requestInterpreterForEvent($body);
+        $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
+        return $jsonEventUpdateStatus;
+    }
+
+    public static function declineRequest($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventUpdateStatus = Interpreter::declineInterpreterRequest($body);
+        $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
+        return $jsonEventUpdateStatus;
+    }
+
+    public static function acceptRequest($request, $response)
+    {
+        $body = $request->getParsedBody();
+        $eventUpdateStatus = Interpreter::acceptInterpreterRequest($body);
         $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
         return $jsonEventUpdateStatus;
     }

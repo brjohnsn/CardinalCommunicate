@@ -115,6 +115,7 @@ class Client
         $eventId = $requestInformation['eventId'];
         $interpreterUsername = $requestInformation['interpreterUsername'];
 
+        //TODO break out get interpreterId into a separate method.
         $sql = "SELECT id FROM users WHERE username = ?";
         $args=[$interpreterUsername];
         $result = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);

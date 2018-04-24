@@ -62,7 +62,33 @@ class EndPointsTest extends TestCase
 
     public function testEndPoint_requestInterpreter()
     {
-        ;
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/request-interpreter', array('form_params'=>array(
+                                                                                                                'interpreterUsername' => 'InitialInterpreter',
+                                                                                                                'eventId' => '1',
+            )));
+        $requestStatus = json_decode($response->getBody());
+        $this->assertEquals("00000", $requestStatus);
+    }
+
+    public function testEndPoint_declineRequest()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/decline-request', array('form_params'=>array(
+                                                                                                                'eventId' => '1',
+            )));
+        $requestStatus = json_decode($response->getBody());
+        $this->assertEquals("00000", $requestStatus);
+    }
+
+    public function testEndPoint_acceptRequest()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/accept-request', array('form_params'=>array(
+                                                                                                                'eventId' => '1',
+            )));
+        $requestStatus = json_decode($response->getBody());
+        $this->assertEquals("00000", $requestStatus);
     }
 
     //TODO Write endpoint test for /Interpreters

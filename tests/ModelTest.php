@@ -5,6 +5,7 @@ use PHPUnit\DbUnit\TestCaseTrait;
 use cc\models\Password;
 use cc\models\User;
 use cc\models\Client;
+use cc\models\Interpreter;
 
 
 class ModelTest extends TestCase
@@ -244,5 +245,23 @@ class ModelTest extends TestCase
 
         $this->assertEquals('00000', $eventUpdateStatus);
 
+    }
+
+    public function testDeclineInterpreterRequest()
+    {
+        $requestAttributes = ['eventId' => '1'];
+
+        $eventUpdateStatus = Interpreter::declineInterpreterRequest($requestAttributes);
+
+        $this->assertEquals('00000', $eventUpdateStatus);
+    }
+
+    public function testAcceptInterpreterRequest()
+    {
+        $requestAttributes = ['eventId' => '1'];
+
+        $eventUpdateStatus = Interpreter::acceptInterpreterRequest($requestAttributes);
+
+        $this->assertEquals('00000', $eventUpdateStatus);
     }
 }
