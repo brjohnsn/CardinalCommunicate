@@ -6,6 +6,7 @@ use cc\models\Password;
 use cc\models\User;
 use cc\models\Client;
 use cc\models\Interpreter;
+use cc\models\Database;
 
 
 class ModelTest extends TestCase
@@ -61,7 +62,8 @@ class ModelTest extends TestCase
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
 
-    public function testAddInterpreterToDatabase(){
+    public function testAddInterpreterToDatabase()
+    {
         $userAttributes = [
             'username' => 'testAddedUser',
             'password' => 'InitialPassword',
@@ -86,16 +88,16 @@ class ModelTest extends TestCase
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
     }
 
-    public function testHashPassword(){
-        $this->markTestSkipped('must be revisited.');
+    public function testHashPassword()
+    {
         $testSalt = '01234567890123456789012345678901';
         $hashedPassword = Password::hashPassword('testPassword1', $testSalt);
         $this->assertEquals('393afd25693c67e0c079038c31b2b4b00d2d7855fb5a88fe842b5239acb5dbe2', $hashedPassword);
     }
 
     public function testCheckUserCredentialsAreAuthentic()
-    {$this->markTestSkipped('must be revisited.');
-        $username = 'InitialClient';
+    {
+        $username = 'rpainter';
         $password = 'InitialPassword';
         $authenticatedUser = User::getValidUser($username, $password);
 
@@ -103,10 +105,10 @@ class ModelTest extends TestCase
     }
 
     public function testSignInUser()
-    {$this->markTestSkipped('must be revisited.');
+    {
         $userAttributes = [
-            'username' => 'testUsername1',
-            'password' => 'testPassword1',
+            'username' => 'rpainter',
+            'password' => 'InitialPassword',
             'salt' => '01234567890123456789012345678901',
             'userType' => 'client',
             'id' => '1',
@@ -117,80 +119,95 @@ class ModelTest extends TestCase
         $testUser->signIn();
 
         $this->assertEquals('1', $_SESSION['id']);
-        session_destroy();
     }
 
 
     public function testGetInterpreterAttributesById()
-    {$this->markTestSkipped('must be revisited.');
+    {
         $id = '2';
         $interpreterAttributes = \cc\models\Interpreter::getInterpreterAttributesByUserId($id);
 
-        $this->assertEquals('1234567', $interpreterAttributes['telephone']);
+        //$this->assertEquals("ebentley", $interpreterAttributes['username']);
+        $this->assertEquals("1", $interpreterAttributes['interpreterId']);
+        $this->assertEquals("909-405-3531", $interpreterAttributes['telephone']);
+        $this->assertEquals("95103", $interpreterAttributes['zip']);
+        $this->assertEquals("CDI", $interpreterAttributes['certification']);
+
 
     }
 
     public function testGetUserAttributesByUsername()
-    {$this->markTestSkipped('must be revisited.');
-        $username = 'InitialInterpreter';
+    {
+        $username = 'ismith';
 
         $userAttributes = User::getUserAttributesByUsername($username);
 
-        $this->assertEquals('1234567', $userAttributes['telephone']);
+        $this->assertEquals('8', $userAttributes['id']);
+        $this->assertEquals('Ivana', $userAttributes['firstName']);
+        $this->assertEquals('Smith', $userAttributes['lastName']);
+        $this->assertEquals('1355 Clark Street', $userAttributes['address1']);
+        $this->assertEquals('', $userAttributes['address2']);
+        $this->assertEquals('New York', $userAttributes['city']);
+        $this->assertEquals('NY', $userAttributes['state']);
+        $this->assertEquals('11756', $userAttributes['zip']);
+        $this->assertEquals('interpreter', $userAttributes['userType']);
         $this->assertEquals('female', $userAttributes['gender']);
+
     }
 
     public function testGetUniversalUserAttributesByUsername()
-    {$this->markTestSkipped('must be revisited.');
-        $username = "InitialInterpreter";
+    {   $username = "ismith";
         $universalUserAttributes = User::getUniversalUserAttributesByUsername($username);
 
-        $this->assertEquals('2', $universalUserAttributes['id']);
+        $this->assertEquals('8', $universalUserAttributes['id']);
+        $this->assertEquals('Ivana', $universalUserAttributes['firstName']);
+        $this->assertEquals('Smith', $universalUserAttributes['lastName']);
+        $this->assertEquals('1355 Clark Street', $universalUserAttributes['address1']);
+        $this->assertEquals('', $universalUserAttributes['address2']);
+        $this->assertEquals('New York', $universalUserAttributes['city']);
+        $this->assertEquals('NY', $universalUserAttributes['state']);
+        $this->assertEquals('11756', $universalUserAttributes['zip']);
+        $this->assertEquals('interpreter', $universalUserAttributes['userType']);
+        $this->assertEquals('female', $universalUserAttributes['gender']);
 
     }
 
     public function testGetClientEventsByClientUsername()
-    {$this->markTestSkipped('must be revisited.');
-        $clientEvents = Client::getClientEventDataByClientUsername('InitialClient');
+    {
+        $clientEvents = Client::getClientEventDataByClientUsername('aholliday');
 
-        $this->assertEquals(3, sizeof($clientEvents));
+        $this->assertEquals(4, sizeof($clientEvents));
         $this->assertEquals('1', $clientEvents[0]['eventId']);
 
         //var_dump($clientEvents);
     }
 
     public function testGetAllInterpreterAddressInformation()
-    {$this->markTestSkipped('must be revisited.');
-
+    {
         $interpreterAddresses = \cc\models\Interpreter::getAllInterpreterMappingData();
 
-
-        $this->assertEquals(1, sizeOf($interpreterAddresses));
-        $this->assertEquals('InitialInterpreter', $interpreterAddresses[0]['username']);
-
+        $this->assertEquals(5, sizeOf($interpreterAddresses));
+        $this->assertEquals('ebentley', $interpreterAddresses[0]['username']);
     }
 
 
     public function testAddEventToDatabase()
-    {$this->markTestSkipped('must be revisited.');
-        //echo mktime(13,0,0,7,2,2018);
-        // hour -13, min - 0, sec-0, month -7, day -2, year - 2018
-        //echo date('M j Y g:i A', strtotime('2010-05-29 01:17:35'));
-        //echo date('JUL 2 2018 1:17 PM', strtotime('2018-07-02 01:17:00'));
+    {
         $eventAttributes = [
-            'eventName' => 'Event4',
-            'eventDescription' => 'TestDescription',
-            'eventVenueName'=> 'Test',
-            'eventAddress1' => 'TestTEst',
-            'eventCity' => 'eventCity',
+            'eventName' => 'Test Event',
+            'eventDescription' => 'Test Description',
+            'eventVenueName'=> 'Test Venue',
+            'eventAddress1' => 'Test Address1',
+            'eventAddress2' => "",
+            'eventCity' => 'Test City',
             'eventState' => 'TS',
-            'eventZip' => '44444',
+            'eventZip' => '00000',
             'eventDate' => '07/31/2018',
             'eventStartTime' => '3:30 PM',
             'eventEndTime' => '5:00 PM',
-            'eventStatus' => 'Approved',
+            'eventStatus' => 'None',
             'eventClientId' => '1',
-            'eventInterpreterId' => '1',
+            'eventInterpreterId' => '',
     ];
 
         \cc\models\Event::addNewEvent($eventAttributes);
@@ -203,26 +220,26 @@ class ModelTest extends TestCase
     }
 
     public function testGetUserIdByUsername()
-    {$this->markTestSkipped('must be revisited.');
-        $userId = Client::getUserIdByUsername("InitialClient");
-        $this->assertEquals('1', $userId);
+    {
+        $userId = Client::getUserIdByUsername("sdressler");
+        $this->assertEquals('4', $userId);
     }
 
 
     public function testFindInterpretersByCriteria()
-    {$this->markTestSkipped('must be revisited.');
+    {
         $criteria=['certification' => 'CDI',
-                 'gender' => 'female',
-                 'state' => 'IA',
+                 'gender' => 'male',
+                 'state' => 'CA',
                  ];
 
         $actualSearchResults = Client::findInterpretersByCriteria($criteria);
 
-        $this->assertEquals($actualSearchResults[0]['username'], "InitialInterpreter");
+        $this->assertEquals($actualSearchResults[0]['username'], "ebentley");
     }
 
     public function testCreateAddressStringFromAddressAttributes()
-    {$this->markTestSkipped('must be revisited.');
+    {
         $addressAttributes=[
             "address1" => "address1",
             "city" => "city",
@@ -236,32 +253,40 @@ class ModelTest extends TestCase
     }
 
     public function testRequestInterpreterForEvent()
-    {$this->markTestSkipped('must be revisited.');
-        $requestInformation = ['eventId' => '1',
-                               'interpreterUsername' => 'InitialInterpreter',
+    {
+        $requestInformation = ['eventId' => '6',
+                               'interpreterUsername' => 'ewhite',
             ];
-
         $eventUpdateStatus = Client::requestInterpreterForEvent($requestInformation);
 
-        $this->assertEquals('00000', $eventUpdateStatus);
+        $sql = "SELECT * FROM events WHERE eventId=6";
+        $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
 
+        $this->assertEquals("Pending", $result['eventStatus']);
+        $this->assertEquals("10", $result['eventInterpreterId']);
     }
 
     public function testDeclineInterpreterRequest()
-    {$this->markTestSkipped('must be revisited.');
+    {
         $requestAttributes = ['eventId' => '1'];
-
         $eventUpdateStatus = Interpreter::declineInterpreterRequest($requestAttributes);
 
-        $this->assertEquals('00000', $eventUpdateStatus);
+        $sql = "SELECT * FROM events WHERE eventId=1";
+        $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEquals("Declined", $result['eventStatus']);
+        $this->assertEquals("0", $result['eventInterpreterId']);
     }
 
     public function testAcceptInterpreterRequest()
     {
-        $requestAttributes = ['eventId' => '1'];
+        $requestAttributes = ['eventId' => '6'];
 
         $eventUpdateStatus = Interpreter::acceptInterpreterRequest($requestAttributes);
 
-        $this->assertEquals('00000', $eventUpdateStatus);
+        $sql = "SELECT * FROM events WHERE eventId=6";
+        $result = Database::getSQLQueryResult($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertEquals("Accepted", $result['eventStatus']);
     }
 }
