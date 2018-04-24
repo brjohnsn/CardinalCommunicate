@@ -8,7 +8,6 @@
 
 namespace Tests;
 
-//use EndPointsTest;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp;
 

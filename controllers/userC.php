@@ -1,6 +1,5 @@
 <?php
 use cc\models\User;
-use cc\models\Database;
 use cc\models\Client;
 use cc\models\Event;
 use cc\models\Interpreter;
@@ -9,6 +8,7 @@ class userC
 {
     public static function Login($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $SignInStatus = User::getValidUser($body['username'], $body['password']);
         $_SESSION['username'] = $SignInStatus['username'];
@@ -16,22 +16,18 @@ class userC
         $jsonSignInStatus = json_encode($SignInStatus);
 
         return $jsonSignInStatus;
-
-
-
-
-        return $response->withJson($jsonSignInStatus);
     }
 
     public static function Register($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         User::addNewUser($body);
     }
 
-
     public static function getInfo($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $userAttributes = User::getUserAttributesByUsername($body['username']);
 
@@ -49,6 +45,7 @@ class userC
 
     public static function searchForInterpreter($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $searchCriteria=['certification' => $body['certification'],
                          'gender' => $body['gender'],
@@ -62,6 +59,7 @@ class userC
 
     public static function addEvent($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $eventCreationStatus = Event::addNewEvent($body)->errorCode();
         $jsonEventCreationStatus = json_encode($eventCreationStatus);
@@ -70,6 +68,7 @@ class userC
 
     public static function requestInterpreter($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $eventUpdateStatus = Client::requestInterpreterForEvent($body);
         $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
@@ -78,6 +77,7 @@ class userC
 
     public static function declineRequest($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $eventUpdateStatus = Interpreter::declineInterpreterRequest($body);
         $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
@@ -86,11 +86,11 @@ class userC
 
     public static function acceptRequest($request, $response)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $eventUpdateStatus = Interpreter::acceptInterpreterRequest($body);
         $jsonEventUpdateStatus = json_encode($eventUpdateStatus);
         return $jsonEventUpdateStatus;
     }
-
 }
 ?>

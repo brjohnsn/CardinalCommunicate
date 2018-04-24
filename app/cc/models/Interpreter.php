@@ -39,11 +39,17 @@ class Interpreter
         return $interpreterAttributes;
     }
 
-    public static function getAllInterpreterMappingData(){
-        //TODO break the search for all interpreter user attributes into a separate method?
-
+    public static function getAttributesForAllInterpreters()
+    {
         $sql = "SELECT * FROM users WHERE userType = 'interpreter'";
         $allInterpreterUserAttributes = Database::getSQLQueryResult($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+        return $allInterpreterUserAttributes;
+    }
+
+    public static function getAllInterpreterMappingData(){
+
+        $allInterpreterUserAttributes = self::getAttributesForAllInterpreters();
 
         $allInterpreterMappingData=[];
         foreach($allInterpreterUserAttributes as $interpreterAttributes)
@@ -74,5 +80,16 @@ class Interpreter
 
         $result = Database::getSQLQueryResult($sql, $args)->errorCode();
         return $result;
+    }
+
+    public static function getInterpreterIdByUsername($username)
+    {
+        $sql = "SELECT id FROM users WHERE username = ?";
+        $args=[$username];
+
+        $result = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
+        $interpreterId = $result['id'];
+
+        return $interpreterId;
     }
 }
