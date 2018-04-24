@@ -25,17 +25,17 @@ class EndPointsTest extends TestCase
     public function testEndpoint_UserLogin()
     {
         $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
-        $response = $http->request('POST', 'user/login', array('form_params' => array('username'=>'InitialClient', 'password'=>'InitialPassword')));
+        $response = $http->request('POST', 'user/login', array('form_params' => array('username'=>'aholliday', 'password'=>'InitialPassword')));
         $responseArray = json_decode($response->getBody());
-        $this->assertEquals('InitialClient', $responseArray->username);
+        $this->assertEquals('aholliday', $responseArray->username);
     }
 
     public function testEndpoint_UserProfile()
     {
         $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
-        $response = $http->request('POST', 'user/Profile', array('form_params' => array('username'=>'InitialClient')));
+        $response = $http->request('POST', 'user/Profile', array('form_params' => array('username'=>'cmoua')));
         $responseArray = json_decode($response->getBody());
-        $this->assertEquals('1', $responseArray->id);
+        $this->assertEquals('5', $responseArray->id);
     }
 
     public function testEndpoint_addEvent()
@@ -56,8 +56,8 @@ class EndPointsTest extends TestCase
                                                                                                     'eventClientId' => '1',
                                                                                                     'eventInterpreterId' => '1',
         )));
-        $eventCreationStatus = json_decode($response->getBody());
-        $this->assertEquals("00000", $eventCreationStatus);
+        $eventCreationErrorCode = json_decode($response->getBody());
+        $this->assertEquals("00000", $eventCreationErrorCode);
     }
 
     public function testEndPoint_requestInterpreter()
@@ -67,8 +67,8 @@ class EndPointsTest extends TestCase
                                                                                                                 'interpreterUsername' => 'InitialInterpreter',
                                                                                                                 'eventId' => '1',
             )));
-        $requestStatus = json_decode($response->getBody());
-        $this->assertEquals("00000", $requestStatus);
+        $eventCreationErrorCode = json_decode($response->getBody());
+        $this->assertEquals("00000", $eventCreationErrorCode);
     }
 
     public function testEndPoint_declineRequest()
@@ -77,8 +77,8 @@ class EndPointsTest extends TestCase
         $response = $http->request('POST', 'user/decline-request', array('form_params'=>array(
                                                                                                                 'eventId' => '1',
             )));
-        $requestStatus = json_decode($response->getBody());
-        $this->assertEquals("00000", $requestStatus);
+        $eventCreationErrorCode = json_decode($response->getBody());
+        $this->assertEquals("00000", $eventCreationErrorCode);
     }
 
     public function testEndPoint_acceptRequest()
@@ -87,8 +87,8 @@ class EndPointsTest extends TestCase
         $response = $http->request('POST', 'user/accept-request', array('form_params'=>array(
                                                                                                                 'eventId' => '1',
             )));
-        $requestStatus = json_decode($response->getBody());
-        $this->assertEquals("00000", $requestStatus);
+        $eventCreationErrorCode = json_decode($response->getBody());
+        $this->assertEquals("00000", $eventCreationErrorCode);
     }
 
     //TODO Write endpoint test for /Interpreters
