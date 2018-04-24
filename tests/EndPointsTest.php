@@ -99,4 +99,16 @@ class EndPointsTest extends TestCase
         $interpreterMappingData = json_decode($response->getBody());
         $this->assertEquals(5, sizeof($interpreterMappingData));
     }
+
+    public function testEndPoint_searchForInterpreterByUsername()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/Search', array('form_params'=>array('username'=>'ewhite',
+                                                                                              'state' => '',
+                                                                                              'gender' => '',
+                                                                                              'certification' => '')));
+
+        $searchResults = json_decode($response->getBody());
+        $this->assertEquals(1, sizeof($searchResults));
+    }
 }
