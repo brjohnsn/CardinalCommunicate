@@ -92,5 +92,12 @@ class EndPointsTest extends TestCase
     }
 
     //TODO Write endpoint test for /Interpreters
-    //getInterpreterMappingData
+    public function testEndPoint_getAllInterpreterMappingData()
+    {
+        $http = new GuzzleHttp\Client(['base_uri' => 'localhost:8888/CardinalCC/public/']);
+        $response = $http->request('POST', 'user/Interpreters', array());
+
+        $interpreterMappingData = json_decode($response->getBody());
+        $this->assertEquals(5, sizeof($interpreterMappingData));
+    }
 }
