@@ -55,11 +55,11 @@ export default class Map extends Component{
 
     testUserLength(){
         return(
-                <div>
+                <div style = {{textAlign: 'center'}}>
                     <h1>{this.state.interpreterSearchResults[0].username}</h1>
-                    <h2>Please type your event id below</h2>
-                    <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
-                    <button onClick={this.requestInterpreter(this.state.clickedInterpreterUsername)}>Request This Interpreter</button>
+                    <input id='state' style = {{display: 'block'}} id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
+                    <label id = "state" style = {{display: 'block'}}>Please type your event id below.</label>
+                    <button style = {{height: "50px", fontSize: '15px', borderRadius: "50px", width: '200px'}} onClick={this.requestInterpreter(this.state.clickedInterpreterUsername)}>Request This Interpreter</button>
                 </div>
             );
         }
