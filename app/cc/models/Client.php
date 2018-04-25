@@ -16,15 +16,39 @@ class Client
     {
         $clientId = self::getUserIdByUsername($clientUsername);
 
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $args=[$clientUsername,];
+        $result = Database::getSQLQueryResult($sql, $args)->fetch(PDO::FETCH_ASSOC);
 
-        $sql = "SELECT * FROM events WHERE eventClientId = ?";
-        $values = [$clientId];
-        $queryResults = Database::getSQLQueryResult($sql, $values);
+        $userType = $result['userType'];
 
-        $clientEventsList = self::createListOfClientEvents($queryResults);
+        if($userType == "client")
+        {
+            $sql = "SELECT * FROM events WHERE eventClientId = ?";
+            $values = [$clientId];
+            $queryResults = Database::getSQLQueryResult($sql, $values);
+
+            $clientEventsList = self::createListOfClientEvents($queryResults);
 
 
-        return $clientEventsList;
+            return $clientEventsList;
+        }
+
+        else{
+            $sql = "SELECT * FROM events WHERE eventInterpreterId = ?";
+            $values = [$clientId];
+            $queryResults = Database::getSQLQueryResult($sql, $values);
+
+            $interpreterEventList = self::createListOfClientEvents($queryResults);
+
+
+            return $interpreterEventList;
+        }
+
+
+
+
+
     }
 
     public static function getUserIdByUsername($clientUsername)
@@ -41,7 +65,7 @@ class Client
         $clientEvents = [];
         foreach ($events as $event) {
 
-            $sql = "SELECT * FROM users WHERE id = ?";
+            $sql = "SELECT username FROM users WHERE id = ?";
             $values = [$event['eventInterpreterId'],
                       ];
 
@@ -62,8 +86,8 @@ class Client
                 'eventZip' => $event['eventZip'],
                 'eventClientId' => $event['eventClientId'],
                 'eventInterpreterId' => $event['eventInterpreterId'],
-                'eventInterpreterFirstName' => $eventInterpreter['firstName'],
-                'eventInterpreterLastName' => $eventInterpreter['lastName'],
+                'eventInterpreterFirstName' => $interpreterUsername,
+                'eventInterpreterLastName' => $interpreterUsername,
             ];
 
             array_push($clientEvents, $clientEvent);
