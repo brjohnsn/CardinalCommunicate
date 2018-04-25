@@ -7,6 +7,7 @@ import axios from "axios/index";
 import interpreters from "../assets/testJson/testInterpreters";
 import {K_SIZE} from './hoverStyles';
 import controllable from 'react-controllable'
+import {Link} from 'react-router-dom';
 
 
 
@@ -155,6 +156,7 @@ export default class Map extends Component{
                     <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({clickedInterpreterUsername: e.target.value})}} />
                     <input className="button" type="submit" value="submit" style={{marginTop:"40px"}}/>
                 </form>
+                <Link to={"/Profile"}>Back</Link>
 
                 {
                     this.state.interpreterSearchResults.length > 0 &&
