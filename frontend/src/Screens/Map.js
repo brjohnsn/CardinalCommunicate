@@ -18,12 +18,14 @@ export default class Map extends Component{
             interpreterSearchResults:[],
             clickedInterpreterUsername:'',
             userCordinates:[],
-            eventId:''
+            eventId:'',
+            clientCoordinates:[]
 
         }
     }
 
     componentWillMount() {
+        this.getClientCoordinates();
         axios.post("http://localhost:8888/CardinalCC/public/user/Interpreters")
             .then((response) => {
             //change zipcode to zip
@@ -34,7 +36,16 @@ export default class Map extends Component{
 
             }
 
-        );
+        ).then(async()=>{
+            var cords = await this.getClientCoordinates()
+            this.setState({clientCoordinates: cords[0].coordinates})
+            console.log(this.state.clientCoordinates)
+        })
+    }
+    async getClientCoordinates(){
+        var address = [this.props.match.params.userAddress]
+        var clientCords = await this.generateLatLong(address);
+        return clientCords
     }
     onSubmit(e){
         e.preventDefault();
@@ -97,14 +108,6 @@ export default class Map extends Component{
 
     }
 
-    static defaultProps = {
-        center: [59.838043, 30.337157],
-        zoom: 9,
-        greatPlaces: [
-            {id: 'A', lat: 59.955413, lng: 30.337844},
-            {id: 'B', lat: 59.724, lng: 30.080}
-        ]
-    };
     render() {
         console.log(this.state.userCordinates)
             return (

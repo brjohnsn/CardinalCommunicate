@@ -9,7 +9,7 @@ export default class Client extends Component {
     }
 
     render(){
-        console.log(this.props.userEvents);
+        console.log(this.props.userInfo.address);
         return (
             <div style = {{backgroundColor: 'rgb(230,230,230)', borderRadius: '60px'}}>
                 <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>
@@ -54,7 +54,7 @@ export default class Client extends Component {
                             <h2>Dashboard</h2>
                             <li><Link to={'/Settings'}>Edit Profile</Link></li>
                             <li><Link to={'/Search'}>Search Interpreters</Link></li>
-                            <li><Link to={{pathname: '/Map/', userInfo:this.props.userInfo}}>Find Interpreters Near Me</Link></li>
+                            <li><Link to={{pathname: '/Map/'+this.props.userInfo.address}}>Find Interpreters Near Me</Link></li>
                         </ul>
                     </div>
 
