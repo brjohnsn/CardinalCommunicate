@@ -88,6 +88,7 @@ class Client
                 'eventInterpreterId' => $event['eventInterpreterId'],
                 'eventInterpreterFirstName' => $interpreterUsername,
                 'eventInterpreterLastName' => $interpreterUsername,
+                'eventStatus' => $event['eventStatus'],
             ];
 
             array_push($clientEvents, $clientEvent);
