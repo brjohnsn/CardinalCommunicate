@@ -14,14 +14,32 @@ export default class Register extends Component{
             userType:"",
             certification:"",
             phoneNumber:"",
-            zipcode:""
+            zipcode:"",
+            address1:"",
+            address2:"",
+            city:"",
+            state:"",
+            firstName:"",
+            lastName:""
         }
     }
 
-
     onSubmit(e){
         e.preventDefault();
-        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{username:this.state.username, password:this.state.password, gender:this.state.gender, userType:this.state.userType, telephone:this.state.phoneNumber, certification: this.state.certification, zip:this.state.zipcode}).then((response)=> {
+        axios.post("http://localhost:8888/CardinalCC/public/user/Register",{
+            username:this.state.username,
+            password:this.state.password,
+            gender:this.state.gender,
+            userType:this.state.userType,
+            telephone:this.state.phoneNumber,
+            certification: this.state.certification,
+            zip:this.state.zipcode,
+            address1:this.state.address1,
+            address2:this.state.address2,
+            city:this.state.city,
+            firstName: this.state.firstName,
+            lastName:this.state.lastName,
+            state:this.state.state}).then((response)=> {
             console.log(this.state);
             this.props.history.push("/Login")
         }
@@ -40,8 +58,28 @@ export default class Register extends Component{
                     <h2>Username</h2>
                     <input onChange={(e)=>this.setState({username:e.target.value})}/>
 
-                    <h2>Email</h2>
-                    <input onChange={(e)=>this.setState({email:e.target.value})}/>
+                    <h2>First Name</h2>
+                    <input onChange={(e)=>this.setState({firstName:e.target.value})}/>
+
+                    <h2>Last Name</h2>
+                    <input onChange={(e)=>this.setState({lastName:e.target.value})}/>
+
+                    <h2>Address 1</h2>
+                    <input onChange={(e)=>this.setState({address1:e.target.value})}/>
+
+                    <h2>Address 2</h2>
+                    <input onChange={(e)=>this.setState({address2:e.target.value})}/>
+
+                    <h2>City</h2>
+                    <input onChange={(e)=>this.setState({city:e.target.value})}/>
+
+                    <h2>State</h2>
+                    <input onChange={(e)=>this.setState({state:e.target.value})}/>
+
+                    <h1>Zipcode</h1>
+                    <input id="address"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({zipcode: e.target.value})}} />
+                    <label for="adress"  style={{display: "block"}}>Enter zipcode here.</label>
+
 
                     <h2>Password</h2>
                     <input onChange={(e)=>this.setState({password:e.target.value})}/>
@@ -147,9 +185,6 @@ export default class Register extends Component{
                                     <input id="Phone"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({phoneNumber: e.target.value})}} />
                                     <label for="Phone"  style={{display: "block"}}>Enter phone number here.</label>
 
-                                    <h1>Zipcode</h1>
-                                    <input id="address"  style={{width: "200px"}} type="text" onChange={(e)=>{this.setState({zipcode: e.target.value})}} />
-                                    <label for="adress"  style={{display: "block"}}>Enter zipcode here.</label>
 
                                 </div>
                             }
@@ -165,3 +200,4 @@ export default class Register extends Component{
         );
     }
 }
+

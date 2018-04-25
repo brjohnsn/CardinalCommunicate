@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 
+
 export default class Client extends Component {
     constructor(props) {
         super(props);
     }
 
     render(){
-        console.log(this.props.userInfo);
+        console.log(this.props.userEvents);
         return (
             <div style = {{backgroundColor: 'rgb(230,230,230)', borderRadius: '60px'}}>
                 <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>
@@ -25,31 +26,21 @@ export default class Client extends Component {
                                 <th style = {{columnWidth: '250px'}}>Event Name</th>
                                 <th style = {{columnWidth: '150px'}}>Status</th>
                                 <th style = {{columnWidth: '250px'}}>Description</th>
+
                             </tr>
                             <p></p>
                             
-                            {/*{this.props.userInfo.events.map((event)=>{*/}
-                                {/*return(*/}
-                                    {/*<tr>*/}
-                                        {/*<th>{event.date}</th>*/}
-                                        {/*<th>{event.location}</th>*/}
-                                        {/*<th>{event.interpreter}</th>*/}
-                                        {/*<th>{event.name}</th>*/}
-                                        {/*<th>{event.status}</th>*/}
-                                        {/*<th>{event.description}</th>*/}
-                                    {/*</tr>*/}
-                                {/*);*/}
-                            {/*})*/}
-                            {/*}*/}
 
-                            {this.props.events.events.map((event)=>{
+
+                            {this.props.userEvents.map((event)=>{
                                 return(
                                     <tr style={{border:'1px solid black'}}>
                                         <th>{event.eventDate}</th>
                                         <th>{event.eventVenueName}</th>
-                                        <th>{event.interpreterFirstName + event.interpreterLastName}</th>
+                                        <th>{event.eventInterpreterFirstName + event.eventInterpreterLastName}</th>
                                         <th>{event.name}</th>
                                         <th>{event.eventStatus}</th>
+                                        <th>{event.id}</th>
                                         <th>{event.eventDescription}</th>
                                     </tr>
                                 );

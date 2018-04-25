@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 08, 2018 at 03:42 PM
+-- Generation Time: Apr 19, 2018 at 07:39 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -27,8 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `events`
 --
-CREATE DATABASE `cardinal_communicate`;
-USE cardinal_communicate;
+
 CREATE TABLE `events` (
   `eventId` int(32) NOT NULL,
   `eventName` varchar(64) NOT NULL,
@@ -40,6 +39,7 @@ CREATE TABLE `events` (
   `eventState` varchar(255) DEFAULT NULL,
   `eventZip` int(5) NOT NULL,
   `eventStartUnixTimestamp` int(16) NOT NULL,
+  `eventEndUnixTimestamp` int(16) DEFAULT NULL,
   `eventStatus` varchar(255) DEFAULT NULL,
   `eventClientId` int(11) NOT NULL,
   `eventInterpreterId` int(11) DEFAULT NULL
@@ -48,16 +48,18 @@ CREATE TABLE `events` (
 --
 -- Dumping data for table `events`
 --
-USE cardinal_communicate;
-INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueName`, `eventAddress1`, `eventAddress2`, `eventCity`, `eventState`, `eventZip`, `eventStartUnixTimestamp`, `eventStatus`, `eventClientId`, `eventInterpreterId`) VALUES
-(1, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1530541800, 'Test Event Status', 1, 1);
+
+INSERT INTO `events` (`eventId`, `eventName`, `eventDescription`, `eventVenueName`, `eventAddress1`, `eventAddress2`, `eventCity`, `eventState`, `eventZip`, `eventStartUnixTimestamp`, `eventEndUnixTimestamp`, `eventStatus`, `eventClientId`, `eventInterpreterId`) VALUES
+(1, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1523914200, 1530536400, 'Test Event Status', 1, 2),
+(2, 'InitialEvent', 'TestDescription', 'TestEventVenueName', 'Test Address 1', 'Test Address 2', 'Test Event City', 'TS', 55555, 1523914200, 1530536400, 'Test Event Status', 1, 2),
+(3, 'Event3', 'TestDescription', 'TestEventVenueName', 'Test Address 1', NULL, 'Test Event City', 'TS', 55555, 1523328593, 1530536400, 'Test Event Status', 1, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `interpreters`
 --
-USE cardinal_communicate;
+
 CREATE TABLE `interpreters` (
   `interpreterId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -78,12 +80,19 @@ INSERT INTO `interpreters` (`interpreterId`, `userId`, `telephone`, `zip`, `cert
 --
 -- Table structure for table `users`
 --
-USE cardinal_communicate;
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `salt` varbinary(255) DEFAULT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `address1` varchar(255) NOT NULL,
+  `address2` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `zip` varchar(255) NOT NULL,
   `userType` varchar(32) NOT NULL,
   `gender` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -92,9 +101,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `userType`, `gender`) VALUES
-(1, 'InitialClient', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'client', 'male'),
-(2, 'InitialInterpreter', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'interpreter', 'female');
+INSERT INTO `users` (`id`, `username`, `password`, `salt`, `firstName`, `lastName`, `address1`, `address2`, `city`, `state`, `zip`, `userType`, `gender`) VALUES
+(1, 'InitialClient', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'Initial', 'Client', '123 Main Street', '', 'Everywhere', 'IA', '11111', 'client', 'male'),
+(2, 'InitialInterpreter', 'b1d59c934910fa0850c52720f9e463cef1a92aa840a4be4ea0e442993b0cbf97', 0x3031323334353637383930313233343536373839303132333435363738393031, 'Initial', 'Interpreter', '123 Main Street', 'Apartment 2', 'Everywhere', 'IA', '22222', 'interpreter', 'female');
 
 --
 -- Indexes for dumped tables
@@ -127,11 +136,10 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `eventId` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eventId` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `interpreters`
 --
-
 ALTER TABLE `interpreters`
   MODIFY `interpreterId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --

@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {greatPlaceStyle, greatPlaceStyleHover} from '../Screens/hoverStyles';
+
 
 export default class ClientMarker extends Component{
     constructor(props){
