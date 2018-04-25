@@ -19,11 +19,19 @@ export default class Profile extends Component {
         axios.post("http://localhost:8888/CardinalCC/public/user/Profile", {username: sessionStorage.getItem('username')}).then((response) => {
             //change zipcode to zip
             console.log(response.data);
+            if(response.data.userEvents != null){
+                console.log('user events had stuff');
             this.setState({
-                    userInfo: response.data,
-                    userEvents: response.data.userEvents
-                },
-                );
+                userInfo: response.data,
+                userEvents: response.data.userEvents
+            });
+            }
+            else{
+                console.log('user events dont have stuff');
+                this.setState({
+                    userInfo: response.data
+                });
+            }
         });
     }
 

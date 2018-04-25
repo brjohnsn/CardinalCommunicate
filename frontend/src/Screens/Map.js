@@ -58,8 +58,8 @@ export default class Map extends Component{
     }
 //will be the onclick callback for the buttons by the interpreters names 
     requestInterpreter(username){
-        axios.post('http://localhost:8888/CardinalCC/public/user/request-interpreter',{username: username}).then((response)=> {
-                console.log('sup');
+        axios.post('http://localhost:8888/CardinalCC/public/user/request-interpreter',{interpreterUsername: username, eventId: this.state.eventId}).then((response)=> {
+                console.log(response);
             }
         )
     }
@@ -107,9 +107,19 @@ export default class Map extends Component{
         document.getElementById('username').value = this.state.clickedInterpreterUsername
 
     }
+    static defaultProps = {
+        center: [39.7701723, -94.8397698],
+        zoom: 3,
+        greatPlaces: [
+            {id: 'A', lat: 59.955413, lng: 30.337844},
+            {id: 'B', lat: 59.724, lng: 30.080}
+        ]
+    }
+
 
     render() {
-        console.log(this.state.userCordinates)
+        console.log(this.state.clientCoordinates.lat)
+
             return (
             <div style={{display:"flex", justifyContent:'center', flexDirection:'column',  alignItems:'center'}}>
             <div style={{width:'50vw', height:'50vh'}}>
@@ -121,6 +131,7 @@ export default class Map extends Component{
                 hoverDistance={K_SIZE / 2}>
 
                 {
+                    this.state.userCordinates &&
                     this.state.userCordinates.map((marker)=>{
                         console.log(marker.username);
                         if(marker.coordinates != null){
@@ -134,8 +145,9 @@ export default class Map extends Component{
                     })
                 }
                 <ClientMarker
-                    lat={60}
-                    lng={22}/>
+                    lat={this.state.clientCoordinates.lat}
+                    lng={this.state.clientCoordinates.lng}
+                />
             </GoogleMapReact>
             </div>
                 <form onSubmit={(e)=>this.onSubmit(e)}>
