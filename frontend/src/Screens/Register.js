@@ -40,7 +40,6 @@ export default class Register extends Component{
             firstName: this.state.firstName,
             lastName:this.state.lastName,
             state:this.state.state}).then((response)=> {
-            console.log(this.state);
             this.props.history.push("/Login")
         }
         )

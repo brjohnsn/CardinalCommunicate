@@ -30,7 +30,7 @@ class userC
         /** @noinspection PhpUndefinedMethodInspection */
         $body = $request->getParsedBody();
         $userAttributes = User::getUserAttributesByUsername($body['username']);
-
+        unset($userAttributes['salt']);
         $userAttributes['userEvents']=Client::getClientEventDataByClientUsername($body['username']);
         $jsonUserAttributes = json_encode($userAttributes);
         return $jsonUserAttributes;

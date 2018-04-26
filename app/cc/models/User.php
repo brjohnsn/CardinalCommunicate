@@ -93,7 +93,8 @@ class User
     public static function getUserAttributesByUsername($username)
     {
         $userAttributes = User::getUniversalUserAttributesByUsername($username);
-        if ($userAttributes['userType'] == 'interpreter')
+        $usertype = $userAttributes['userType'];
+        if ($usertype == 'interpreter')
         {
             $interpreterAttributes = Interpreter::getInterpreterAttributesByUserId($userAttributes['id']);
             $userAttributes = array_merge($userAttributes, $interpreterAttributes);
