@@ -37,7 +37,7 @@ export default class Login extends Component{
                     <h3>Username</h3>
                     <input onChange={(e)=>this.setState({userName:e.target.value})} />
                     <h3>Password</h3>
-                    <input onChange={(e)=>this.setState({password:e.target.value})} />
+                    <input type='password' onChange={(e)=>this.setState({password:e.target.value})} />
                     <p></p>
                     <input className="button" type="submit" value="submit"/>
                 </form>

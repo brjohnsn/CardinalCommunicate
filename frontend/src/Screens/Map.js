@@ -68,7 +68,7 @@ export default class Map extends Component{
     testUserLength(){
             return(
                 <div style = {{textAlign: 'center'}}>
-                    <h1>Username+{this.state.interpreterSearchResults[0].username}</h1>
+                    <h1>Username: {this.state.interpreterSearchResults[0].username}</h1>
                     <input id='state' style = {{display: 'block'}} id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
                     <p></p>
                     <label id = "state" style = {{display: 'bl'}}>Please type your event id above.</label>
@@ -168,15 +168,7 @@ export default class Map extends Component{
                     this.testUserLength()
                 }
                 {/*<button onClick={this.generateLatLong(this.state.interpreterInfo)}>Id love it if you clicked me</button>*/}
-                <div style = {{textAlign: 'center'}}>
-                    <h1>Username+{/*this.state.interpreterSearchResults[0].username*/}</h1>
-                    <input id='state' style = {{display: 'block'}} id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
-                    <p></p>
-                    <label id = "state" style = {{display: 'bl'}}>Please type your event id above.</label>
-                    <p></p>
-                    <button style = {{height: "50px", fontSize: '15px', borderRadius: "50px", width: '200px'}} onClick={this.requestInterpreter(this.state.clickedInterpreterUsername)}>Request This Interpreter</button>
-                    <p></p>
-                </div>
+
             </div>
         );
     }
