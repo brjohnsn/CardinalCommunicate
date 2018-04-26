@@ -28,7 +28,7 @@ export default class App extends Component{
                     <Route exact path="/Profile" component={Profile}/>
                     <Route exact path ="/Search" component={Search}/>
                     <Route exact path ="/Map/:userAddress" component={Map}/>
-                    <Route exact path ="/Event" component={Event}/>
+                    <Route exact path ="/Event/:userId" component={Event}/>
             </Switch>
             </div>
         );
