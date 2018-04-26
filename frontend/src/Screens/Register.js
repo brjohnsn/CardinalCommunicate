@@ -82,7 +82,7 @@ export default class Register extends Component{
 
 
                     <h2>Password</h2>
-                    <input onChange={(e)=>this.setState({password:e.target.value})}/>
+                    <input type='password' onChange={(e)=>this.setState({password:e.target.value})}/>
 
                     <h1>What is your gender?</h1>
                     <div className={"radioButtonWrapper"} style = {radioButtonStyle}>
