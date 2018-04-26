@@ -66,13 +66,17 @@ export default class Map extends Component{
     }
 
     testUserLength(){
-        return(
+            return(
                 <div style = {{textAlign: 'center'}}>
-                    <h1>{this.state.interpreterSearchResults[0].username}</h1>
+                    <h1>Username+{this.state.interpreterSearchResults[0].username}</h1>
                     <input id='state' style = {{display: 'block'}} id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
-                    <label id = "state" style = {{display: 'block'}}>Please type your event id below.</label>
+                    <p></p>
+                    <label id = "state" style = {{display: 'bl'}}>Please type your event id above.</label>
+                    <p></p>
                     <button style = {{height: "50px", fontSize: '15px', borderRadius: "50px", width: '200px'}} onClick={this.requestInterpreter(this.state.clickedInterpreterUsername)}>Request This Interpreter</button>
+                    <p></p>
                 </div>
+
             );
         }
 
@@ -151,20 +155,28 @@ export default class Map extends Component{
                 />
             </GoogleMapReact>
             </div>
-                <form onSubmit={(e)=>this.onSubmit(e)}>
+                <form onSubmit={(e)=>this.onSubmit(e)} style = {{textAlign:'center'}}>
                     <h1 style={{textAlign:'center', marginTop:'200px'}}>Search Interpreter</h1>
-                    <input id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({clickedInterpreterUsername: e.target.value})}} />
-                    <input className="button" type="submit" value="submit" style={{marginTop:"40px"}}/>
+                    <input id="username" style={{width: "200px", textAlign: 'center'}} type="text" onChange={(e)=>{this.setState({clickedInterpreterUsername: e.target.value})}} />
+                    <p></p>
+                    <input className="button" type="submit" value="submit" style={{}}/>
                 </form>
-                <Link to={"/Profile"}>Back</Link>
+                <Link to={"/Profile"} style = {{paddingBottom: '3%', paddingTop: '3%'}}>Back to Profile</Link>
 
                 {
                     this.state.interpreterSearchResults.length > 0 &&
                     this.testUserLength()
                 }
                 {/*<button onClick={this.generateLatLong(this.state.interpreterInfo)}>Id love it if you clicked me</button>*/}
-
-
+                <div style = {{textAlign: 'center'}}>
+                    <h1>Username+{/*this.state.interpreterSearchResults[0].username*/}</h1>
+                    <input id='state' style = {{display: 'block'}} id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
+                    <p></p>
+                    <label id = "state" style = {{display: 'bl'}}>Please type your event id above.</label>
+                    <p></p>
+                    <button style = {{height: "50px", fontSize: '15px', borderRadius: "50px", width: '200px'}} onClick={this.requestInterpreter(this.state.clickedInterpreterUsername)}>Request This Interpreter</button>
+                    <p></p>
+                </div>
             </div>
         );
     }

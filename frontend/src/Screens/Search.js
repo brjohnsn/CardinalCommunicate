@@ -60,7 +60,7 @@ export default class Search extends Component{
                         <input type = "radio" id = "none" value = "none" onChange={(e)=>{this.setState({gender:e.target.value})}}/>
                         <label id = "none">Does not matter</label>
                     </div>
-                        <input style={{searchButtonStyle}} className="button" type="submit" value="submit" />
+                        <input style={{searchButtonStyle}} className="button" type="submit" value="submit"   />
                 </form>
                <div style={{display:'flex', flexDirection:'row'}}>
                 {this.state.interpreterSearchResults.length>0 &&
@@ -101,7 +101,9 @@ export default class Search extends Component{
                     })
                 }
                </div>
-                <Link to={"/Profile"}>Back</Link>
+
+                <Link to={"/Profile"} style = {{paddingTop: '10%'}}>Back</Link>
+
             </div>
 
         );
