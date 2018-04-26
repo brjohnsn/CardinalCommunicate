@@ -20,10 +20,12 @@ export default class Interpreter extends Component {
     acceptEvent(e, eventId) {
             console.log('hey')
             axios.post("http://localhost:8888/CardinalCC/public/user/accept-request", {eventId: eventId}).then((response)=>console.log(response));
+            window.location.reload();
         }
     declineEvent(e, eventId) {
         e.preventDefault();
         axios.post("http://localhost:8888/CardinalCC/public/user/accept-request", {eventId: eventId});
+        window.location.reload();
     }
     checkEvents(events) {
         console.log(events)

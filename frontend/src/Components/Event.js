@@ -19,14 +19,15 @@ export default class Event extends Component{
             eventStatus:'',
             eventClientId:'',
             eventInterpreterId: '',
-            interpreterUsername:''
+            // interpreterUsername:''
 
         }
     }
 
     onSubmit(e){
         e.preventDefault();
-        this.getInterpreterIdByUsername(this.state.interpreterUsername);
+        // var interpreterId = this.getInterpreterIdByUsername(this.state.interpreterUsername);
+        // console.log(interpreterId)
         axios.post('http://localhost:8888/CardinalCC/public/user/add-event',{
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
@@ -43,10 +44,13 @@ export default class Event extends Component{
             eventInterpreterId: this.state.eventInterpreterId
         }).then((response)=>console.log(response))
     }
-    getInterpreterIdByUsername(userName){
-        axios.post("http://localhost:8888/CardinalCC/public/user/Search",{ gender:'', state:'', certification:'', username:userName}).then(
-            (response)=>{ this.setState({eventInterpreterId:response.data.id});})
-    }
+
+    // async getInterpreterIdByUsername(userName){
+    //     console.log(userName)
+    //     var interpreterId = await axios.post("http://localhost:8888/CardinalCC/public/user/Search",{ gender:'', state:'', certification:'', username:userName}).then(
+    //         (response)=>{return response.data.id})
+    //     return interpreterId;
+    // }
 
     render(){
         return(
@@ -75,8 +79,8 @@ export default class Event extends Component{
                 <input onChange={(e)=>this.setState({eventEndTime:e.target.value})}/>
                 <h2>Event Status</h2>
                 <input onChange={(e)=>this.setState({eventStatus:e.target.value})}/>
-                <h2>Interpreter Username </h2>
-                <input onChange={(e)=>this.setState({interpreterUsername:e.target.value})}/>
+                <h2>Interpreter Id </h2>
+                <input onChange={(e)=>this.setState({eventInterpreterId:e.target.value})}/>
                 <input className="button" type="submit" value="submit" style={{marginTop:"40px"}}/>
                 <Link to={'/Profile'}>go back</Link>
 
