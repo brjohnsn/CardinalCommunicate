@@ -17,7 +17,7 @@ export default class Client extends Component {
         ((response)=> {
                 this.setState({interpreterSearchResults: response.data})
             }
-        ).then(()=> console.log(this.state.interpreterSearchResults)
+        ).then(()=> {console.log(this.state.interpreterSearchResults)}
         )
     }
     onClick(e){
@@ -33,7 +33,7 @@ export default class Client extends Component {
                 <h1>{this.state.interpreterSearchResults[0].username}</h1>
                 <input id='state' style = {{display: 'block'}} id="username" style={{width: "200px", marginTop: '30px'}} type="text" onChange={(e)=>{this.setState({eventId: e.target.value})}}></input>
                 <label id = "state" style = {{display: 'block'}}>Please type your event id below.</label>
-                <button style = {{height: "50px", fontSize: '15px', borderRadius: "50px", width: '200px'}} onClick={this.requestInterpreter(this.state.interpreterSearchResults[0].username)}>Request This Interpreter</button>
+                <button style = {{height: "50px", fontSize: '15px', borderRadius: "50px", width: '200px'}} onClick={()=>{this.requestInterpreter(this.state.interpreterSearchResults[0].username)}}>Request This Interpreter</button>
             </div>
         );
     }
@@ -42,7 +42,7 @@ export default class Client extends Component {
         axios.post('http://localhost:8888/CardinalCC/public/user/request-interpreter',{interpreterUsername: username, eventId: this.state.eventId}).then((response)=> {
                 console.log(response);
             }
-        )
+        ).then(window.location.reload())
     }
 
     render(){
@@ -76,8 +76,12 @@ export default class Client extends Component {
                                     <tr style={{border:'1px solid black'}}>
                                         <th>{event.eventDate}</th>
                                         <th>{event.eventVenueName}</th>
-                                        <th>{event.eventInterpreterFirstName + event.eventInterpreterLastName}</th>
-                                        <th>{event.name}</th>
+                                        {event.eventInterpreterFirstName == null ?
+                                            <th>0</th>
+                                            :
+                                            <th>{event.eventInterpreterFirstName + "" + event.eventInterpreterLastName}</th>
+                                        }
+                                        <th>{event.eventName}</th>
                                         <th>{event.eventStatus}</th>
                                         <th>{event.eventId}</th>
                                         <th>{event.eventDescription}</th>
