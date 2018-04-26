@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="cardinal_communicate@localhost" uuid="85dc2e15-e24a-4035-b5a9-3b556caae4eb">
+    <data-source name="@localhost" uuid="0a6af4da-a7b5-43db-a5e4-2a8d6bac6b79">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
+    <data-source name="cardinal_communicate@localhost" uuid="548dbb6a-5710-4ac7-8a0a-f8699d034e41">
+      <database-info product="MySQL" version="5.6.34-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.45 ( Revision: 9131eefa398531c7dc98776e8a3fe839e544c5b2 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <introspection-schemas>*:cardinal_communicate</introspection-schemas>
     </data-source>
   </component>
 </project>
