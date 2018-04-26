@@ -42,7 +42,7 @@ export default class Client extends Component {
         axios.post('http://localhost:8888/CardinalCC/public/user/request-interpreter',{interpreterUsername: username, eventId: this.state.eventId}).then((response)=> {
                 console.log(response);
             }
-        ).then(window.location.reload())
+        ).then(()=>{window.location.reload()})
     }
 
     render(){
@@ -107,7 +107,7 @@ export default class Client extends Component {
                     <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh', borderRadius: '20px'}}>
                         <ul>
                             <h2>Dashboard</h2>
-                            <li><Link to={'/Settings'}>Edit Profile</Link></li>
+                            <li><Link to={'/Event'}>Create Evente</Link></li>
                             <li><Link to={'/Search'}>Search Interpreters</Link></li>
                             <li><Link to={{pathname: '/Map/'+this.props.userInfo.address}}>Find Interpreters Near Me</Link></li>
                         </ul>
