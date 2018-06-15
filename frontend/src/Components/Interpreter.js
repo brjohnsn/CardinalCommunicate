@@ -18,14 +18,11 @@ export default class Interpreter extends Component {
     }
 
     acceptEvent(e, eventId) {
-            console.log('hey')
             axios.post("http://localhost:8888/CardinalCC/public/user/accept-request", {eventId: eventId}).then((response)=>console.log(response));
-            window.location.reload();
         }
     declineEvent(e, eventId) {
         e.preventDefault();
         axios.post("http://localhost:8888/CardinalCC/public/user/accept-request", {eventId: eventId});
-        window.location.reload();
     }
     checkEvents(events) {
         console.log(events)
@@ -47,10 +44,9 @@ export default class Interpreter extends Component {
                 <h1 style={{textAlign:'center'}}>Welcome back {this.props.userInfo.username}</h1>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
 
-                    <div style={{height:'200px'}}>I am  where the picture will go</div>
                     <div style={{textAlign:'center', width:'25%', margin: 'auto'}}>
                         <h1>Events:</h1>
-                        <table style = {{border: '1px solid black'}}>
+                        <table style = {{border: '1px solid black', float:'left'}}>
                             <tr>
                                 <th style = {{columnWidth: '250px'}}>Date</th>
                                 <th style = {{columnWidth: '250px'}}>Location</th>
@@ -93,20 +89,6 @@ export default class Interpreter extends Component {
                             }
                         </table>
 
-                    </div>
-                    <div className="sidebar" style={{backgroundColor:"grey", width:'20%', height:'100vh'}}>
-                        <ul>
-                            <h2>Dashboard</h2>
-                            <li>Edit Profile</li>
-                            <li>View Event Requests</li>
-                            {/*{*/}
-                                {/*this.state.pendingEvents != null &&*/}
-                                {/*<li>*/}
-                                    {/*<p>You have event requests pending!</p>*/}
-                                    {/*<div style={{height:'20px', width:'20px', borderRadius:'50%', backgroundColor: 'red'}}></div>*/}
-                                {/*</li>*/}
-                            {/*}*/}
-                        </ul>
                     </div>
 
                 </div>

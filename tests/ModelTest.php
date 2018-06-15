@@ -191,7 +191,7 @@ class ModelTest extends TestCase
     }
 
 
-    public function testAddEventToDatabase()
+   /* public function testAddEventToDatabase()
     {
         $eventAttributes = [
             'eventName' => 'Test Event',
@@ -217,7 +217,7 @@ class ModelTest extends TestCase
         $actualResultTable = $this->getConnection()->createQueryTable('events', 'SELECT * FROM events');
         $this->assertTablesEqual($expectedResultTable,$actualResultTable);
 
-    }
+    }*/
 
     public function testGetUserIdByUsername()
     {
